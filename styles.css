@@ -1,0 +1,299 @@
+/*General styling*/
+body {
+	font-size: 16px;
+  	font-family: 'Karla', sans-serif;
+ 	line-height: 20px;
+ 	background-color: white;
+ 	color: rgb(45, 47, 50);
+}
+
+h1 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 4rem;
+	font-style: normal;
+	font-weight: bold;
+	letter-spacing: -2px;
+	line-height: 4.02rem;
+	text-transform: none;
+	margin-bottom: 0;
+}
+
+h2{
+	font-size: 1.8rem;
+}
+
+h3 {
+	font-family: 'Montserrat', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	letter-spacing: -1px;
+	text-transform: none;
+	color: black;
+}
+
+/*section title and styling*/
+.x-margin {
+	margin-bottom: 50px;
+}
+
+.xl-margin {
+	margin-bottom: 80px;
+	position: relative;
+    position: relative;
+  }
+  
+.xl-margin:before {
+    content: "";
+    border-top: solid 3px rgb(45, 47, 50);
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+}
+  
+.xl-margin span {
+    background: #fff;
+    padding-right: 20px;
+    position: relative;
+    z-index: 5;
+}
+
+.container {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.yellow {
+	background-color: rgb(246, 230, 10);
+	width: 100%;
+}
+
+.hundred {
+	height: 100px;
+}
+
+/*navigation bar*/
+.nav-custom {
+	position: absolute;
+	right: 2em;
+	top: 1.5em;
+	text-transform: none;
+}
+
+.item-custom {
+	color: black;
+	font-size: 18px;
+	padding: 0.5em;
+	border: 2px solid transparent;
+}
+
+.item-custom:hover {
+	border: 2px solid black;
+	text-decoration: none;
+	color: black;
+}
+
+.placeholder {
+	height: 0;
+}
+
+@media(max-width: 760px){
+	.placeholder{
+		height: 25px;
+		background-color: rgb(246, 230, 10);
+	}
+}
+
+/*header with the picture and the name*/
+.animation {
+	height: 80vh;
+	min-height: 500px;
+	width: 100%;
+	text-align: center;
+}
+
+.vertical {
+	height: 55%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-60%);
+}
+
+.nametag {
+	height: inherit;
+	width: inherit;
+	position: absolute;
+}
+
+.head {
+	max-height: 70%;
+	min-height: 170px;
+	width: auto;
+	margin-bottom: 5px;
+}
+
+canvas {
+	height: 100%;
+}
+/*to ensure responsiveness of the header*/
+@media(max-height: 750px){
+	h1 {
+		font-size: 3.5rem;
+	}
+	h2 {
+		font-size: 1.5rem;
+	}
+	.vertical {
+		top: 80px;
+		transform: translateY(0%);
+	}
+}
+@media(max-width: 340px){
+	h1 {
+		font-size: 2.5rem;
+	}
+	h2 {
+		font-size: 1em;
+	}
+	.item-custom {
+		font-size: 14px;
+	}
+}
+
+/*links to github and linkedin...*/
+.contacts {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+.verticallogo {
+    float:none;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:-4px;
+    -webkit-transition:all .1s;
+}
+
+.verticallogo:hover {
+	filter: none;
+	transform: translateZ(0);
+	-ms-transform:scale(1.2);
+	-webkit-transform:scale(1.2);
+	transform:scale(1.2);
+}
+
+.small-image {
+	min-width: 140px;
+}
+
+@media(min-width: 768px) {
+	.link {
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+.img-responsive {
+	max-width: 50%;
+	min-width: 200px;
+}
+/*resume link*/
+.center-text {
+	font-family: 'Montserrat', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	letter-spacing: -1px;
+	text-transform: none;
+	color: black;
+	text-align: center;
+	text-decoration: none;
+}
+
+.center-text:hover {
+	text-decoration: none;
+}
+
+@media(max-width: 543px) {
+	.center-text{
+		width: 100%;
+	}
+}
+
+/*The experience picture stuff and text*/
+.card {
+	border: 0px solid white;
+}
+
+.block {
+	float: none;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.xp-img {
+	display: inline-block;
+	vertical-align: middle;
+	-webkit-transition: transform 1s ease;
+	-moz-transition: transform 1s ease;
+	-o-transition: transform 1s ease;
+	transition: transform 1s ease; 
+}
+
+.xp:hover .xp-img {
+	transform: scale3d(1.05,1.05,1.05);
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.wrapper {
+	overflow: hidden;
+}
+
+.left-align {
+	text-align: left;
+}
+
+.right-align {
+	text-align: right;
+}
+
+@media(max-width: 991px) {
+	.left-align, .right-align {
+		text-align: center;
+		padding: 25px;
+		padding-bottom: 40px;
+	}
+	.wrapper {
+		padding-left: 130px; 
+		padding-right: 130px;
+	}
+}
+
+/*skill set*/
+.one{
+	font-size: 2.5rem;
+	text-align: center; 
+}
+.two{
+	font-size: 2rem;
+	text-align: center;
+}
+.three{
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+/*footer*/
+.footer {
+	text-align: center;
+}
+
+
+
+
+
+
+
+ 
