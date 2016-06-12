@@ -93,7 +93,7 @@ currentColorIndex = 0,
 totalColors = colors.length;
 
 header.addEventListener('click', function() {
-    currentColorIndex = (currentColorIndex == totalColors - 1) ? 0 : currentColorIndex + 1;
+    currentColorIndex = (currentColorIndex + 1)%totalColors;
     currentColor = colors[currentColorIndex];
     renderer.setClearColor( currentColor, 1);
     $('.yellow')
