@@ -12,6 +12,8 @@
     <link href='http://fonts.googleapis.com/css?family=Karla:400' rel='stylesheet' type='text/css'>   
     
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="favicon.ico" />
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -26,62 +28,57 @@
     <div class="placeholder"></div>
 
     <header>
-      <div class="animation" id="animation">
-        <div class="nametag">
-          <div class="vertical">
-            <img class="center-block img-circle head" src="img/head.jpg" alt="Icon">
+      <div id="anim" class="color full-width">
+          <div class="centered">
+            <img class="img-circle head" src="img/head.jpg" alt="Icon">
             <h1>Gabor Csapo</h1>
             <h2>Software & Web Developer</h2>
           </div>
-        </div>
       </div>
     </header>
 
-    <div class="container no-padding">
+    <nav>
       <ul class="list-inline nav-custom">
         <li class="list-inline-item"><a class="item-custom" href="#aboutme">About Me</a></li>
-        <li class="list-inline-item"><a class="item-custom" href="#portfolio">Portfolio</a></li>
-        <li class="list-inline-item"><a class="item-custom" href="#contacts">Contact</a></li>
+        <li class="list-inline-item"><a class="item-custom" href="#experience">Experience</a></li>
+        <li class="list-inline-item"><a class="item-custom" href="#projects">Projects</a></li>
       </ul>    
-    </div>
+    </nav>
 
     <div id="aboutme" class="container">
       <div class="row">
         <section class="col-lg-5 col-md-12">
-          <h1 class="x-margin">About me</h1>
+          <h1 class="card-block">About me</h1>
         </section>
         <section class="col-lg-7 col-md-12">
           <div class="card card-block card-text">
             <p class="text-justify">Hi! I’m Gabor, a Computer Science major studying at <b>New York University Abu Dhabi</b>. I’m from Hungary, but thanks to my studies I lived for two years in the Middle East, for <b>one semester in Shanghai, China and soon I’ll be moving to New York</b>. 
-            I didn’t always know that I wanted to be a Computer Scientist, but in my freshman year I realized that my passion lies in creation and building. Since then I’ve learnt a great deal about designing efficient software in class and in my free-time. I’ve had <b>internships in Africa and in Germany</b>, while I also work as a freelancer mainly making websites. 
+            I didn’t always know that I wanted to be a Computer Scientist, but in my freshman year I realized that my passion lies in creation and building. Since then I’ve learnt a great deal about designing efficient software in class and in my free-time. I’ve had <b>internships in Africa, in Germany and in the UAE</b>, while I also work as a freelancer mainly making websites. 
             I’m always out for an adventure, I love hiking, surfing and wakeboarding. I’m grateful to NYUAD for giving me the opportunity to travel to 15+ countries in the past 3 years of which I tried to make the best use of by learning about different cultures and life in many places.  
             </p>
           </div>
         </section>
       </div>
-    </div>
-    <div id="contacts" class="yellow">
-        <div class="container contacts">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 verticallogo"><img class="img-responsive center-block link" src="img/link.png" alt="Icon"></div>
-            <a class="col-lg-3 col-md-6 col-sm-6 verticallogo" href="http://github.com/gaborcsapo" target="_blank"><img class="img-responsive center-block" src="img/github.png" alt="Icon"></a> 
-            <a class="col-lg-3 col-md-6 col-sm-6 verticallogo" href="https://ae.linkedin.com/in/gabor-csapo-134a7ab8" target="_blank"><img class="img-responsive center-block small-image" src="img/linkedin.png" alt="Icon"></a>
-            <a class="col-lg-3 col-md-6 col-sm-6 verticallogo center-text" href="img/resume.pdf" target="_blank"><h2 class="center-text">Resume</h2></a>
-          </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 verticallogo"><img class="img-responsive center-block link" src="img/link.png" alt="Icon"></div>
+        <a class="col-lg-3 col-md-6 col-sm-6 verticallogo" href="http://github.com/gaborcsapo" target="_blank"><img class="img-responsive center-block" src="img/github.png" alt="Icon"></a> 
+        <a class="col-lg-3 col-md-6 col-sm-6 verticallogo" href="https://ae.linkedin.com/in/gabor-csapo-134a7ab8" target="_blank"><img class="img-responsive center-block small-image" src="img/linkedin.png" alt="Icon"></a>
+        <a class="col-lg-3 col-md-6 col-sm-6 verticallogo center-text" href="img/resume.pdf" target="_blank"><h2 class="center-text">Resume</h2></a>
       </div>
-      
+    </div>
+
+    <div id="experience" class="color full-width">
+        <h1 class="title"><span class="color">Work Experience</span></h1>      
     </div>
 
     <div id="portfolio" class="container">
-      <h1 class="xl-margin"><span>Work Experience</span></h1>
-
       <div class="row xp"> 
         <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
         <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/CTED.jpg" alt="Icon"></div><!--
         --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
-          <h3>Software Engineer at CTED, Ghana</h3>
-          <h6 class="text-muted ">Summer 2016 - 3 months</h6>
-          <p>Wellness and senior exams, ultrasound, x-ray, and dental cleanings are just a few of our general health services.We offer specialized care for reptiles, rodents, birds, and other exotic pets.Some extra stuff t have the same heightWe offer specialized care for reptiles, rodents, </p>
+          <h3>Software Engineer at CTED</h3>
+          <h6 class="text-muted ">Ghana and Abu Dhabi - Summer 2016 - 3 months</h6>
+          <p>The Center for Technology and Economic Development is a research center in Ghana, New York and the UAE that focuses on the development of novel tech that can impact economic development in under-developed regions. My task was to <b>extend their web apps built with Node.js and Socket.io</b>. While interning with them I developed the <b>prototype of an SMS-based taxi application</b> that will likely be continued by the team. The app runs on <b>Android</b>. I was invited to their center <b>in Africa for the summer</b>, but I also worked with them in the UAE.</p>
         </div>
       </div>
 
@@ -90,25 +87,27 @@
         <div class="wrapper col-lg-6 col-lg-offset-0 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/blitz.jpg" alt="Icon"></div><!--
         --><div class="block col-lg-6 col-lg-offset-0 col-md-12 left-align">
           <h3>Webdesigner at BlitzBringer</h3>
-          <h6 class="text-muted ">Summer 2015 - 2 months</h6>
-          <p>Blitzbringer is a startup in Frankfurt, Germany working on releasing a crowdsourced delivery service. I worked there as an intern in a <b>team of 5 people</b>. My main task was to build a new website for them, which unfortunately they changed this summer. I certainly learnt a lot about <b>web design, business, marketing</b>, but the real learning outcomes were about life. I moved to a completely new city with zero help, zero people I knew and zero money and I had find a way to make the most out of what I had, which was a pleasant challenge.</p>
+          <h6 class="text-muted ">Frankfurt - Summer 2015 - 2 months</h6>
+          <p>Blitzbringer is a startup in Frankfurt, Germany working on a crowdsourced delivery service. I worked as an intern in a <b>team of 5 people</b>. My main task was to build a new website for the company, which unfortunately they changed this summer. I certainly learnt a lot about <b>web design, business, marketing</b>, but the real learning outcomes were about life. I moved to a completely new city with zero help, zero people I knew and zero money and I had find a way to make the most out of what I had, which was a pleasant challenge.</p>
         </div>
       </div>
 
       <div class="row xp">
         <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
-        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/travel.gif" alt="Icon"></div><!--
+        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/freelance.jpg" alt="Icon"></div><!--
         --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
           <h3>Freelance</h3>
           <h6 class="text-muted ">Since Fall 2014</h6>
-          <p>Many people need websites to showcase their works or to market themselves online. However, many of them don’t know how to make a good website, and that’s what I’m trying to help with. I created <b>two archives</b> for art professors where they can upload and store their works and I also designed an <b>internal news website</b> for a department at NYUAD. Working on these projects taught me how to deal with clients with no knowledge about tech, and helped me develop my project management habits. </p>
+          <p>Many people need websites to showcase their works or to market themselves online. However, many of them don’t know how to make a good website, and that’s what I’m trying to help with. I created <b>two archives</b> for art professors where they can upload and store their works and I also designed an <b>internal news portal</b> for a department at NYUAD. Working on these projects taught me how to deal with clients with no knowledge about tech, and helped me develop my project management habits. </p>
         </div>
       </div>
     </div>
 
-    <div class="container">      
-      <h1 class="xl-margin"><span>Side Projects</span></h1>
+    <div id="projects" class="color full-width">
+        <h1 class="title"><span class="color">Side Projects</span></h1>      
+    </div>
 
+    <div class="container">      
       <div class="row xp">
         <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
         <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/DIYD.jpg" alt="Icon"></div><!--
@@ -132,7 +131,7 @@
         <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/visual.jpg" alt="Icon"></div><!--
         --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
           <h3>Visual Design</h3>
-          <p>Graphic design is a crucial part of Software Development. People judge in 3 seconds whether to download an app, or whether to look at that blog post or not. We have to acknowledge that humans are visual mammals judging by the looks. It is important to have an eye for pretty design s to please every audience. I contributed to <b>logo designs, printout designs and a marketing campaign for the Burj Khalifa in Dubai</b>. My style for the web is the trendy <b>minimalist design</b> but I always want to spice it up with some unique ideas, which is true for most of the things I do. I often get my inspiration from the great artists of Bauhaus like Laszlo Moholy-Nagy.</p>
+          <p>Graphic design is a crucial part of development. People decide whether to buy/use/watch a product in 3 seconds. We have to acknowledge that humans are visual mammals who judge by the looks. It is important to have an eye for good design to please every audience. I contributed to <b>logo, printout, website designs and a marketing campaign for the Burj Khalifa in Dubai</b>. My style for the web is <b>minimalist</b> but I always want to spice it up with some unique ideas, which is true for most of the things I do. I often get inspiration from the great artists of Bauhaus like Laszlo Moholy-Nagy.</p>
         </div>
       </div>
 
@@ -148,18 +147,20 @@
 
       <div class="row xp">
         <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
-        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/travel.gif" alt="Icon"></div><!--
+        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/travel.jpg" alt="Icon"></div><!--
         --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
           <h3>Amateur Travel Photography</h3>
           <p>I LOVE travelling and I never want to forget the beautiful places I have seen with my eyes. That is why I took up photography recently and my dream is to hang a thousand pictures above my fireplace by the time I get old. For now I’m mostly using my humble phone since I like travelling super light, but as the saying goes: not the camera makes the good photographer… If you’re interested, I put together <a href="https://goo.gl/photos/p3Rjq9RH8nSQYmpz8" target="_blank"><b>an album with some of my pictures</b>.</a>
           </p>
         </div>
       </div>
+    </div>
 
+    <div class="color full-width">
+        <h1 class="title"><span class="color">Skillset</span></h1>      
     </div>
 
     <div class="container">
-      <h1 class="xl-margin"><span>My skills at a glance</span></h1>
       <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
           <p class="one">Javascript</p>
@@ -193,9 +194,9 @@
       </div>
     </div>
 
-    <div class="yellow">
-      <div class="container contacts">
-        <h3 style="text-align: center">Check out my projects on:<a class="verticallogo" href="http://github.com/gaborcsapo" target="_blank"><img class="img-responsive center-block" src="img/github.png" alt="Icon"></a></h3>
+    <div class="color full-width">
+      <div class="footer container">
+        <h3 style="text-align: center">Check out my projects on:<a class="" href="http://github.com/gaborcsapo" target="_blank"><img class="img-responsive github" src="img/github.png" alt="Icon"></a></h3>
       </div>
     </div>
 

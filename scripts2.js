@@ -12,7 +12,7 @@ init();
 animate();
 
 function init() {
-	var container = document.getElementById('animation');
+	var container = document.getElementById('anim');
 	camera = new THREE.PerspectiveCamera( 75, container.offsetWidth / container.offsetHeight, 1, 10000 );
 	camera.position.z = 8;
 	scene = new THREE.Scene();
@@ -38,7 +38,7 @@ function init() {
 
 
 //if I hover over the vertical div, then the circle should do the global big move
-$( "div.vertical" )
+$( "div.centered" )
   .mouseenter(function() {
     globalmove = 1;
     targetM = 0.5;
@@ -49,7 +49,7 @@ $( "div.vertical" )
 });
 
 function onWindowResize() {
-	var container = document.getElementById('animation');
+	var container = document.getElementById('anim');
 	windowHalfX = window.innerWidth / 2;
 	windowHalfY = window.innerHeight / 2;
 	camera.aspect = container.offsetWidth / container.offsetHeight;
@@ -88,15 +88,25 @@ function animate() {
 
 //Color changing header
 colors = ['#f6e60a', '#2ecc71', '#1abc9c', '#3498db',  '#9b59b6', '#27ae60', '#f1c40f', '#e67e22', '#e74c3c', '#4ed486', '#dc3d66', '#A88FA2', '#a2c5bf', '#e8846b', '#72BDC2'];
-header = document.querySelectorAll('header')[0],
+var items = document.querySelectorAll('.color'),
 currentColorIndex = 0,
 totalColors = colors.length;
 
-header.addEventListener('click', function() {
+for (var i = 0; i < items.length; i++) {
+	items[i].addEventListener('click', function() {
     currentColorIndex = (currentColorIndex + 1)%totalColors;
     currentColor = colors[currentColorIndex];
     renderer.setClearColor( currentColor, 1);
-    $('.yellow')
+    $('.color')
     	.css('background-color', '')
 	    .css('background-color', currentColor);
+	});
+}
+
+var $root = $('html, body');
+$('a').click(function() {
+    $root.animate({
+        scrollTop: $( $.attr(this, 'href') ).offset().top
+    }, 500);
+    return false;
 });
