@@ -103,6 +103,7 @@ for (var i = 0; i < items.length; i++) {
 	});
 }
 
+//Smooth sroll
 var $root = $('html, body');
 $('a').click(function() {
     $root.animate({
