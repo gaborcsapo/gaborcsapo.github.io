@@ -57,12 +57,13 @@ function onWindowResize() {
 	renderer.setSize( container.offsetWidth, container.offsetHeight );
 }
 
+//animation of the circles
 function animate() {
-	//framerate setting
+	//lower framerate
 	setTimeout( function() {
         requestAnimationFrame( animate );
     }, 1000 / 26);
-	//moving the circles either in by a lot or by small random amounts
+	//moving the circles either in by a large or by small random amounts
 	if (globalmove !== 0) {
 		globalpos += ( targetM -  globalpos) * 0.05;
 		if (Math.abs(targetM -  globalpos) < 0.005) {
@@ -86,7 +87,7 @@ function animate() {
 }
 
 
-//Color changing header
+//Color changing header and titles
 colors = ['#f6e60a', '#2ecc71', '#1abc9c', '#3498db',  '#9b59b6', '#27ae60', '#f1c40f', '#e67e22', '#e74c3c', '#4ed486', '#dc3d66', '#A88FA2', '#a2c5bf', '#e8846b', '#72BDC2'];
 var items = document.querySelectorAll('.color'),
 currentColorIndex = 0,
