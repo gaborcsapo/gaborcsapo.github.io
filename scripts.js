@@ -88,19 +88,19 @@ function animate() {
 
 
 //Color changing header and titles
-colors = ['#f6e60a', '#2ecc71', '#1abc9c', '#3498db',  '#9b59b6', '#27ae60', '#f1c40f', '#e67e22', '#e74c3c', '#4ed486', '#dc3d66', '#A88FA2', '#a2c5bf', '#e8846b', '#72BDC2'];
+colors = ['#FFE82C','#F1C40F', '#8DC85E', '#27AE60', '#1ABC9C', '#A6DBD6', '#93AED4', '#00669F', '#9B59B6', '#EB4E32', '#F47B6C', '#FBCBC5', '#AC8B67'];
 var items = document.querySelectorAll('.color'),
 currentColorIndex = 0,
 totalColors = colors.length;
 
 for (var i = 0; i < items.length; i++) {
 	items[i].addEventListener('click', function() {
-    currentColorIndex = (currentColorIndex + 1)%totalColors;
-    currentColor = colors[currentColorIndex];
-    renderer.setClearColor( currentColor, 1);
-    $('.color')
-    	.css('background-color', '')
-	    .css('background-color', currentColor);
+	    currentColorIndex = (currentColorIndex + 1)%totalColors;
+	    currentColor = colors[currentColorIndex];
+	    renderer.setClearColor( currentColor, 1);
+	    $('.color')
+	    	.css('background-color', '')
+		    .css('background-color', currentColor);
 	});
 }
 
