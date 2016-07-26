@@ -40,7 +40,7 @@ a {
 	margin-bottom: 8rem;
 }
 
-.no-pad {
+.no-pad-mar {
 	padding: 0;
 	margin-top: 0;
 	margin-bottom: 0;
@@ -196,8 +196,9 @@ a {
 	transform:scale(1.2);
 }
 
-.small-image {
-	min-width: 140px;
+.linkedin {
+	max-width: 50%;
+	min-width: 150px;
 }
 
 @media(min-width: 768px) {
