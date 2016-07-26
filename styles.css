@@ -25,7 +25,6 @@ h3 {
 	font-family: 'Montserrat', sans-serif;
 	font-style: normal;
 	font-weight: bold;
-	letter-spacing: -1px;
 	text-transform: none;
 	color: black;
 }
@@ -35,7 +34,7 @@ a {
 	text-transform: none !important;
 }
 
-/*section title and styling*/
+/*section title*/
 .container {
 	margin-top: 4rem;
 	margin-bottom: 8rem;
@@ -177,6 +176,10 @@ a {
 }
 
 /*links to github and linkedin...*/
+#aboutme {
+	margin-bottom: 3rem;
+}
+
 .verticallogo {
     float:none;
     display:inline-block;
@@ -234,6 +237,9 @@ a {
 	float: none;
 	display: inline-block;
 	vertical-align: middle;
+}
+.block p {
+	margin-bottom: 0;
 }
 
 .xp-img {
