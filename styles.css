@@ -123,8 +123,6 @@ a {
 .head {
 	max-width: 40%;
 	max-height: 40%;
-	-webkit-filter: grayscale(100%);
-	filter: grayscale(100%);
 }
 
 .centered {
