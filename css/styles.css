@@ -1,8 +1,8 @@
 /*General styling*/
 body {
-	font-size: 16px;
-  	font-family: 'Karla', sans-serif;
- 	line-height: 20px;
+	font-size: 18px;
+  	font-family: 'Roboto Mono', monospace;
+ 	line-height: 1.6;
  	background-color: white;
  	color: rgb(45, 47, 50);
 }
@@ -92,6 +92,7 @@ canvas {
 
 .color {
 	background-color: rgb(246, 230, 10);
+	cursor:pointer;
 }
 
 /*navigation bar*/
@@ -100,16 +101,26 @@ canvas {
 	right: 2em;
 	top: 1.5em;
 }
+@media (min-aspect-ratio: 6/5) {
+  .nav-custom {
+    left: 2em;
+    top: 50%;
+    transform:translate(0,-50%);
+    width: 150px;
+  }
+  .item-custom {
+  	margin-top: 30px;
+  }
+}
 
 .item-custom {
 	color: black !important;
 	font-size: 18px;
-	padding: 0.5em;
 	border: 2px solid transparent;
 }
 
 .item-custom:hover {
-	border: 2px solid black;
+	border-bottom: 2px solid black;
 }
 
 .placeholder {
@@ -138,7 +149,7 @@ canvas {
 
 .centered {
 	position: absolute;
-	top: 25%;
+	top: 35%;
 	left: 50%;
 	transform: translate(-50%, 0%);
 	width: 70vmin;
@@ -153,7 +164,7 @@ canvas {
 @media (max-width: 464px) {
 	h1 {font-size: 2.5rem;}
 	h2 {font-size: 1.3rem;}
-	.centered {top: 20%;}
+	.centered {top: 40%;}
 }
 @media (max-height: 464px) {
 	h1 {font-size: 2.5rem;}
@@ -170,7 +181,7 @@ canvas {
 	.centered {
 		width: 50%;
 		height: 90%;
-		top: 50px;
+		top: 45%;
 		transform: translate(-50%, 0%);
 	}
 }
@@ -178,7 +189,7 @@ canvas {
 	#anim {height: 100vh;}
 	.centered {
 		position: absolute;
-		top: 45%;
+		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
@@ -190,11 +201,12 @@ canvas {
 }
 
 .verticallogo {
-    float:none;
-    display:inline-block;
-    vertical-align:middle;
-    margin-right:-4px;
-    -webkit-transition:all .1s;
+	float: none;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: -7px;
+    -webkit-transition: all .1s;
+    margin-bottom: 10px;
 }
 
 .verticallogo:hover {
@@ -252,6 +264,10 @@ canvas {
 	margin-bottom: 0;
 }
 
+.xp, #aboutme{
+	line-height: 1.4;
+}
+
 .xp-img {
 	-webkit-backface-visibility: hidden;
 	-webkit-transform: translateZ(0) scale(1.0, 1.0);
@@ -297,12 +313,9 @@ canvas {
 }
 
 /*skill set*/
-.one{
-	font-size: 2.5rem;
-	text-align: center; 
-}
+
 .two{
-	font-size: 2rem;
+	font-size: 1.6rem;
 	text-align: center;
 }
 .three{

@@ -5,6 +5,9 @@ mouseY = 0,
 targetM = 0,
 globalmove = -1,
 globalpos = 10,
+offsets = [],
+order = 0,
+count,
 random = [0,0,0],
 local = [0,0,0],
 camera, scene, renderer;
@@ -26,12 +29,13 @@ function init() {
 	var segments = 100;
 	var material = new THREE.LineBasicMaterial( { color: 0x000000 } );
 	var geometry = new THREE.CircleGeometry( radius, segments );
+	var position = [];
 	geometry.vertices.shift();
 	for (var i = 9; i > 0; i--) {
 	  	circle = new THREE.Line(geometry, material);
-		circle.position.x = (Math.random()-0.5)/1.5;
-		circle.position.y = (Math.random()-0.5)/1.5;	  	
-	  	scene.add(circle);
+	  	circle.position.x = (Math.random()-0.5)/1.5;
+		circle.position.y = (Math.random()-0.5)/1.5;
+		scene.add(circle);
 	}
 	window.addEventListener( 'resize', onWindowResize, false );	
 }
@@ -40,12 +44,19 @@ function init() {
 //if I hover over the vertical div, then the circle should do the global big move
 $( "div.centered" )
   .mouseenter(function() {
-    globalmove = 1;
-    targetM = 0.5;
+  	if (order == 0){
+  		count = 0
+  		order = 1
+  	}
   })
   .mouseleave(function() {
-    globalmove = -1;
-    targetM = 0;
+	if (order == 0){  	
+	  	count = 0
+	  	order = -1
+		for (var l = 8; l >= 0; l--) {
+			offsets[l] = [(Math.random()-0.5)/1.5, (Math.random()-0.5)/1.5]
+		}
+	}
 });
 
 function onWindowResize() {
@@ -81,6 +92,30 @@ function animate() {
 		scene.children[l].position.z = globalpos + local[l];
 		scene.children[l+3].position.z = globalpos*(l+3) - 0.7 * local[l];
 		scene.children[l+6].position.z = globalpos*(l+6) + 0.5 * local[l];
+	}
+
+
+	//centering the circle
+	if (order == 1) {
+		if (count < 4){
+			count++;
+			for (var l = 8; l >= 0; l--) {
+				scene.children[l].position.x -= scene.children[l].position.x * 0.25;
+				scene.children[l].position.y -= scene.children[l].position.y * 0.25;
+			}
+		} else {
+			order = 0;
+		}
+	} else if (order == -1) {
+		if (count < 4){
+			count++;
+			for (var l = 8; l >= 0; l--) {
+				scene.children[l].position.x += offsets[l][0] * 0.25;
+				scene.children[l].position.y += offsets[l][1] * 0.25;
+			}
+		} else {
+			order = 0;
+		}
 	}
 
 	renderer.render( scene, camera );

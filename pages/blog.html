@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Portfolio of Gabor Csapo showcasing his projects, experiences." />
+
+    <title>Gabor Csapo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/blog.css">
+    <link rel="icon" href="../img/favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="../img/favicon.ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-79181593-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+
+  <body class="bg-faded">
+
+    <!-- sticky header at the top-->
+    <nav class="navbar navbar-sticky-top">
+      <a class="navbar-brand" href="../#">Gabor Csapo</a>
+      <ul class="nav navbar-nav">
+        <li class="nav-item pull-xs-right">
+          <a class="nav-link" href="../index.html">Portfolio</a>
+        </li>
+      </ul>
+    </nav>
+    
+    <!-- complex header text with o being replaced with a P5js sketch-->
+    <div class="container" >
+      <div class="header">
+        <div class="header-text">
+          <div class="header-blg" style="transform: translate(4px, 0);">BL</div>
+        </div>
+        <div id="header-sketch"></div>
+        <div class="header-text">
+          <div class="header-blg" style="transform: translate(-30px, 0);">G</div>
+        </div>
+      </div>
+    </div>
+
+<!--
+
+    ##########
+    #MODIFY THIS WHEN ADDING NEW POSTS
+    ##########
+    TODO:
+    - add header image, make sure the extansion matches
+    - add title
+    - add info about class, author, time
+    - write abstract that appears before expanding the post
+    - add text after expanding post
+    - change data-target of the button and change ID of expanded area!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+
+
+
+    <div class="container">
+      <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+      <div class="card col col-lg-10 col-xl-8">
+        <div class="card-block">
+          <div class="row">
+            <img class="card-img col col-md-3 col-xs-12" src="../img/blog/XZ.jpg" alt="Card image cap">
+            <h1 col col-md-8 col-xs-12 text-center">title</h1>
+            <p class="info">info</p>
+          </div>
+          <p>abstract</p>
+          <div class="button raised" type="button" data-toggle="collapse" data-target="#CHANGE THIS" aria-expanded="false" aria-controls="collapseExample">
+            <div fit>Expand post</div>
+            <paper-ripple fit></paper-ripple>
+          </div>
+          <div class="collapse" id="CHANGE THIS TOO">
+            <p>body</p>
+          </div>         
+        </div>
+      </div>
+    </div>
+
+
+-->
+    
+    <!--contentsWrapper is where new contents are added when infinite scrolling
+    MAKE SURE EVERY HTML PAGE START WITH contentsWrapper and inside a div with class contents-->
+    <div id="contentsWrapper">
+      <div class="contents">
+
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/reading1.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Abstraction from the Machine</h1>
+                <p class="info">Politics of Code - Gabor Csapo - Sept. 2017</p>
+              </div>
+              <p><i>On Software, or the persistence of visual knowledge</i>, by Wendy Hui Kyong Chun tackles the questions posed by the increasing abstraction of software from the machine. As Friedrich Kittler argued earlier “there is no software” because everything reduces to voltage differences as signifiers. Nonetheless we can drag windows from one side of the screen to the other as if they were real physical objects. To enable this level of abstraction from the physical machine, the computer had to learn how to manage itself and the lower level processes. </p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#reading1" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+              <div class="collapse" id="reading1">
+                <p>Today’s automatic programming arose from the desire to reuse code and to use the computer to write its own code. I was always curious who invented symbolic programming, where we simply write variables that represent numbers in the way everybody understands them. The history of automatic programming seems like an fascinating journey pushed by two world wrecking wars, where women have interesting symbolic role.
+                </p>
+                <p>
+                In the 50s programming was a feminine, clerical job (not yet a profession) where scientists would command women to input computations to the huge computers they had at that time. As Wendy says “One could say that programming and software became software when commands shifted from commanding a “girl” to commanding a machine.” Assembly was invented, so instructions could be written by the men in a human readable way. That is how women were eliminated from the industry for a long time and programming became culturally a masculine industry.  
+                </p>
+                <p>
+                As Wendy discusses, software engineering’s purpose is to speed up the process of abstraction, to hide the machine and secure it from the programmer itself. You no longer needed black magic to understand the computer, as it became a black box, ultimately democratizing programming for the masses. Today we arrived to an age where most users have no idea how computers work. Even people creating software no longer understand the computer, because each software builds upon an older one, which builds upon another, etc... Creating an endless chain distancing humans from the computer, but freeing the user and the programmer from “suffering through the mastering of computing” (Rob Kitchin, Nature of Software). 
+                </p>
+                <p>
+                As the writer explains, software becomes identical to an ideology: an imaginary description of reality, giving an idealistic explanation for the nature of the machine.
+                </p>
+                <p>
+                My favorite quote from the reading is a funny irony about the contradictory development of software:
+                "As Our machines increasingly read and write without us, as our machines become more and more unreadable, so that seeing no longer guarantees knowing (if it ever did), we the so-called users are offered more to see, more to read. The computer - that most nonvisual and nontransparent device - has paradoxically fostered “visual culture” and “transparency.”"
+                </p>
+              </div>         
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/campusideas.jpg" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Apps for a better Campus</h1>
+                <p class="info">Politics of Code - Gabor Csapo - Sept. 2017</p>
+              </div>
+              <p><b>App ideas to improve life on campus:</b></p>
+              <p>1: Music Request System for Dining Hall and Gym: an online queue and voting system to request music to be played in public spaces instead of the current generic music. Students would see the current song on a web app, could up or down vote it, or request a new songs. Users are banned if they submit explicit songs. Potential issue: copyrights, getting dining hall and the gym on board.
+              </p>
+              <p>
+              2: Using a sensor or transaction data, we should figure out when are the popular times in the dining hall to prevent people from queuing.
+              </p>
+              <p>
+              3: Meal swipe market place: offer meal swipes for sale to people without stipend or people who eat a lot.
+              </p>      
+            </div>
+          </div>
+        </div>
+        
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/seal.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Seal Project</h1>
+                <p class="info">Information Visualization - Gabor Csapo - 2016/2017</p>
+              </div>              
+              <p>Seal-Project - Visualizing Multivariate Ocean Data with Multiple Views.
+              Approached the Center for Sea Level Change looking for project ideas for a class. The head of CSLC asked for help to create a visual analysis system for salinity, depth, temperature data collected by tags put on seals in two fjords in Greenland. The project will help scientists better understand fjords and the melting of glaciers through novel visualization techniques for the temporal and spatial aspects of CTD data. I built the visualization using D3 JS.<br></p>
+              
+              <p class="text-center">How to use:</p>
+              <p class="text-center"><a href="http://sealproject.herokuapp.com" target="_blank">The prototype of the project is available by clicking on this link</a></p>
+              <p class="text-center"><a href="https://www.youtube.com/watch?v=aJQq8xtyHqA" target="_blank">See how an earlier version worked here</a></p>
+              <p class="text-center"><a href="http://sealproject.herokuapp.com/instruction" target="_blank">Or check out the detailed description of how it works</a></p>
+              <p class="text-center"><a href="http://sealproject.herokuapp.com/paper" target="_blank">Or read an academic paper on the project</a></p>         
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/ctexi.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">CTEXI - taxi by SMS</h1>
+                <p class="info">Software Engineering - Gabor Csapo - 22. May 2016</p>
+              </div>
+              <p>Transportation poses a huge issue in developing countries. Due to the lack of road infrastructure, efficient communication channels and reliable providers getting around in these countries can become a hassle. Our project aims to improve a specific segment of transportation: taxis. Following Professor Nyarko’s recommendation, we set as our short term goal to create a prototype of an Android app, which allows users to book cabs through text messages (SMS). The system allocates the closest available cab driver to the user and shares essential information to provide a faster and more efficient service. The service has the potential of becoming the dominant player in the taxi industry in Ghana.</p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#ctexi" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+              <div class="collapse" id="ctexi">
+                <h3 id="theteam">The team</h3>
+                <ul>
+                <li>commits made by gc1569 and STUDENT are Gabor</li>
+                <li>wld224 Leigthon</li>
+                <li>ma3585 Muaz</li>
+                </ul>
+                <h3 id="releases">Releases</h3>
+                <p>First </p>
+                <ul>
+                <li>Has the basic UI implementation, with buttons leading to the correct pages</li>
+                <li>Displays a static response when driver is requested</li>
+                </ul>
+                <p>Second </p>
+                <ul>
+                <li>Along with a slightly improved app, we also have a basic NODEjs server</li>
+                </ul>
+                <p>Third </p>
+                <ul>
+                <li>The app was heavily improved to accomodate request and responses from the server </li>
+                <li>The server is not up to serve data to the app yet</li>
+                </ul>
+                <p>Fourth </p>
+                <ul>
+                <li>The app has access to location data, and sends and receives SMSs</li>
+                <li>The server accomodates requests, but doesn't store and match participants</li>
+                </ul>
+                <h3 id="howdoesitwork">How does it work?</h3>
+                <p>The problem with the current taxi booking system lies in its decentralized and inefficient nature. As explained by Prof. Yaw, taxis usually wait for their passengers at taxi ranks and the only way to request a pickup is through a human operated dispatcher center. In the current system people have to go to the city center and wait for a long time for their cabs. The application solves this problem by providing an automated central allocation system, which matches each customer with the closest taxi driver, who can pick up the person at any desired location. We have the following functionality requirements for the prototype:</p>
+
+                <h3 id="therider">The Rider</h3>
+                <ul>
+                <li>Downloads app, inputs his/her contact information into local database</li>
+                <li>Clicks on “Book taxi”</li>
+                <li>Writes a short message to specify location (i.e. opposite of the school…)</li>
+                <li>“Requesting cab” sends the GPS coordinates and the message to the server via SMS</li>
+                <li>Server allocates driver and sends back driver’s name and phone number via SMS</li>
+                <li>If further specifications are needed the two parties can call each other</li>
+                <li>Taxi arrives to the set location and takes the user to the destination</li>
+                <li>Mobile or cash payment</li>
+                </ul>
+
+                <h3 id="thedriver">The Driver</h3>
+                <ul>
+                <li>Downloads app and registers as a driver</li>
+                <li>Sets availability to yes</li>
+                <li>Waits for a request to arrive</li>
+                <li>Request comes in with the pickup location shown on an offline map</li>
+                <li>Sends estimated time of arrival and confirmation via SMS</li>
+                <li>Picks up the customer and drops off at desired location</li>
+                <li>Receives payment via mobile transfer or cash </li>
+                <li>Waits for the next request</li>
+                </ul>
+                <p>These two sets of functionality will be implemented in two separate apps using the same back-end to communicate with a central server by SMS.
+                Initially we intend to develop the "rider" app interface for Android phones, and then implement the "driver" interface other aspects of the project if time permits it.</p>
+
+                <h3 id="modifyingtheapp">Modifying the app</h3>
+                <p>If you would like to edit our code, you need to install Android Studio along with the Android SDK and the Java SDK. 
+                Once you have these, clone the project and go to --> Select File | New | Project from Existing Sources from the main menu.
+                Browse to the project that you'd like to import and click next
+                Choose to "import the project from external model"
+                Android Studio walks you through all the steps to successfully import the project e.g. importing external libraries, dependencies...
+                Then you have to download "Volley" 
+                Next, you have to comment out from volley build.gradle the line "apply from: 'bintray.gradle'"
+                And go to File --> New --> Import Module --> [select location] and name the module "VolleyX"</p>
+                <p>Details on what each class and function does can be seenin the code. I don't want to create an object diagram, because the purpose, functionality and number of objects change frequently.</p>
+
+                <h3 id="theserver">The Server</h3>
+                <p>The server runs on node.js. Currently it takes data over IP, but eventually it will be switched over to SMS.</p>
+                <p>It takes in data in the following format, where the message could be the name, or the message, depending on the request type.:
+                [type]|[latitude]|[longitude]|[phone#]|[message]|[name]</p>
+
+                <h3 id="typesofrequest">Types of request:</h3>
+                <ul>
+                <li>S : Driver sends GET request to ask for a rider, response should be the rider he was matched with</li>
+                <li>U : Driver sends POST request to update his location in the database</li>
+                <li>D : Driver sends POST request to let the server know he accepted or declines the deal. The info of the driver shoudl be sent to the rider</li>
+                <li>R : Rider sends GET request to request a driver</li>
+                </ul>
+                <p>While its functionality is being developed, the server will send a reply with information about the request, but once it is fully functional the responses will be limited to riders' requests.</p>
+              </div>         
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/islam.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Islamic Terrorism</h1>
+                <p class="info">Islamic Terrorism - Gabor Csapo - January 2017</p>
+              </div>
+              <p>Over the course of January 2017 I had the chance to take part in a class on Islamic terrorism. The class was full of intense discussion, heavy topics and the result of the class was a number of papers that try to grasp the problems of the Middle-East as of 2017.</p>
+              <p class="text-center"><a target="_blank" href="../img/blog/Paper3.pdf">Was Obama's decision to not intervene wrong?</a></p>
+              <p class="text-center"><a target="_blank" href="../img/blog/Final Paper.pdf">Is there a way out for Lybia?</a></p>
+              <p class="text-center"><a target="_blank" href="../img/blog/Paper2.pdf">Is ISIS redefining terrorism?</a></p>            
+            </div>         
+          </div>
+        </div>
+        
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/nepal.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Nepal & Revolutions</h1>
+                <p class="info">Revolutions and Social Change - Gabor Csapo - January 2015</p>
+              </div>
+              <p>Nepal is a little known country in South Asia. What's even less known is that the bloody revolution wrecking the country has just ended a decade ago. After taking a class that took its students to Nepal to interview the former PM there and soldiers, and taking a class on revolutions, I wrote two papers. One is on the causes of the revolution and the other on whether one man can create a revolution in the context of Soviet revolution.</p>
+              <p class="text-center"><a target="_blank" href="../img/blog/Myths of revolutions.pdf">A Brief History of the People’s War in Nepal</a></p>
+              <p class="text-center"><a target="_blank" href="../img/blog/Essay 2 Stalin.pdf">Forging the Man of Steel</a></p>            
+            </div>         
+          </div>
+        </div>
+       
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/diydj.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">DIYDJ</h1>
+                <p class="info">Interaction Lab - Gabor Csapo - 6. Dec. 2016</p>
+              </div>
+              <p>DIYDJ is a human computer interaction experiment, where the user interacts with a website through 3 separate interfaces to twist songs in fun ways. check out my project from my Github!!</p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#diydj" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+              <div class="collapse" id="diydj">
+              
+                <h3>The project is made up of three parts:</h3>
+                <p>1. The website grabs and plays songs from Soundcloud, using Tone JS manipulates them, using P5.dom tracks colors, which is used as one of the inputs for the sound manipulation, using P5.speech recognizes if the user says “reverse” and reverses the song. I spent a significant amount of time on designing a pretty interface.</p>
+                <p>2. The arduino yun controller is a box with a battery that sends signal over wifi to the server to change the sound being played on the website</p>
+                <p> 3. The server is set up using Node JS, hosted on Heroku, so it is publically available.</p>
+                
+                <h3>Ideation</h3>
+                <p>The project is inspired by my midterm project but it is upgraded in every sense. In the midterm project I was looking for fun ways to manipulate sound, which turned out to be harder than I thought. I consulted with Luisa and in the end we agreed that playbackrate, pitch and filters are the best ways that are still manageably hard. This time I wanted to create fun interfaces to manipulate the sound with. I was thinking a lot about meaningful, fun and novel interfaces and I concluded computer vision, speech recognition and a wifi enabled controller is the best.
+                Research and Development</p>
+                <p>I started my research with looking up technologies that are capable of achieving my goal. Last time I made the mistake of spending too much time on the wrong library. I didn’t want to make the same mistake. I’m still using Soundcloud as my source of songs, the layout is achieved using Bootstrap, Jquery. The server is built using Node JS and is connected to the website using Socket IO. The new technologies are:</p>
+                <p>P5 (Processing part): My original plan was to use the OpenCV Processing library to capture and use facial expressions as input for the website. However, I realised that it would create a cluttered platform with a website that is publicly available but only working with a program that one has to download, which didn’t make sense to me. Since the class is all about meaningful interactions between humans, the physical and the digital world, I thought it would be great to take a step forward from computer programming to web programming so that I can easily share my creation with others. I did sketches in Processing and they worked fine, but for the above mentioned reasons I decided to switch to the web version of Processing, P5 JS. It is technically the same thing as Processing, so as I discussed with Prof. Moon, it fulfills the processing part of the final assignment. I’m using P5.dom for capturing video and color tracking and P5.speech (created by NYU) for speech recognition. They are fairly straight forward libraries, so I only had to fix some minor bugs. Although the speech recognition doesn’t produce the best results. With the color tracking the biggest problem was that objects change their colors in different light scenarios. As a solution I included a control panel, where one can dynamically set the color being tracked.</p>
+                <p>Arduino Yun: I wanted to create something more technical for the arduino part than what I had before. Creating a battery powered Wifi enabled Arduino sounded like a good challenge and a useful skill since in the real world we would never connect an embedded device to a computer. I built a simple cardboard box for the parts to make it less messy. I big lesson I learnt is to learn to read emails, because I didn’t know the laser cutting is shut down after Dec. 7. And I made an appointment for Dec. 9 so even though I made a crazy cool box with an interesting pattern, I couldn’t laser cut it…</p>
+
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/8JDf6wljpNI" frameborder="0" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/OpHKdsMWk6c" frameborder="0" allowfullscreen></iframe>
+
+                <h3>Lessons learnt:</h3>
+                <p>My biggest take away from the project is that computer vision and speech recognition isn’t necessarily as hard as I thought. There are high level libraries available that make everything fairly easy, but once I want to alter something I have to dig really deep into the topic.</p>
+              </div>         
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/makerfest.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Makerfest in Shanghai</h1>
+                <p class="info">Interaction Lab - Gabor Csapo - 6. Oct. 2016</p>
+              </div>
+              <p style="color: white">.</p><p style="color: white">.</p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#makerfest" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+              <div class="collapse" id="makerfest">
+                <img src="../img/blog/makerfest2.jpg" class="img-fluid">
+                <img src="../img/blog/makerfest3.jpg" class="img-fluid">
+                <img src="../img/blog/makerfest4.jpg" class="img-fluid">
+                <img src="../img/blog/makerfest5.jpg" class="img-fluid">
+                <img src="../img/blog/makerfest6.jpg" class="img-fluid">
+                <img src="../img/blog/makerfest7.jpg" class="img-fluid">
+                <img src="../img/blog/makerfest8.jpg" class="img-fluid">
+                <img src="../img/blog/makerfest9.jpg" class="img-fluid">
+                <img src="../img/blog/makerfest10.jpg" class="img-fluid">
+                <img src="../img/blog/makerfest1.jpg" style="height: 350px">
+              </div>         
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+
+    <!-- Pagination purely for SEO purposes. SE crawlers need connections to the next pages-->
+    <nav class='page-navigation' aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li id='0-page' title='already loaded' class="page-item disabled"><a class="page-link" href="blog.html">1</a></li>
+        <li id='2-page' class="page-item"><a class="page-link" href="blog2.html">2</a></li>
+        <li id='1-page' class="page-item"><a class="page-link" href="blog1.html">3</a></li>
+      </ul>
+    </nav>   
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script src="../js/blog.js"></script>
+    
+  </body>
+</html>

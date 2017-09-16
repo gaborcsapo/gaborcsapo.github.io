@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Portfolio of Gabor Csapo showcasing his projects, experiences." />
+
+    <title>Gabor Csapo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/blog.css">
+    <link rel="icon" href="../img/favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="../img/favicon.ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-79181593-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+
+  <body class="bg-faded">
+
+    <!-- sticky header at the top-->
+    <nav class="navbar navbar-sticky-top">
+      <a class="navbar-brand" href="../#">Gabor Csapo</a>
+      <ul class="nav navbar-nav">
+        <li class="nav-item pull-xs-right">
+          <a class="nav-link" href="../index.html">Portfolio</a>
+        </li>
+      </ul>
+    </nav>
+    
+    <!-- complex header text with o being replaced with a P5js sketch-->
+    <div class="container" >
+      <div class="header">
+        <div class="header-text">
+          <div class="header-blg" style="transform: translate(4px, 0);">BL</div>
+        </div>
+        <div id="header-sketch"></div>
+        <div class="header-text">
+          <div class="header-blg" style="transform: translate(-30px, 0);">G</div>
+        </div>
+      </div>
+    </div>
+
+<!--
+
+    ##########
+    #MODIFY THIS WHEN ADDING NEW POSTS
+    ##########
+    TODO:
+    - add header image, make sure the extansion matches
+    - add title
+    - add info about class, author, time
+    - write abstract that appears before expanding the post
+    - add text after expanding post
+    - change data-target of the button and change ID of expanded area!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+
+
+
+    <div class="container">
+      <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+      <div class="card col col-lg-10 col-xl-8">
+        <div class="card-block">
+          <div class="row">
+            <img class="card-img col col-md-3 col-xs-12" src="../img/blog/XZ.jpg" alt="Card image cap">
+            <h1 col col-md-8 col-xs-12 text-center">title</h1>
+            <p class="info">info</p>
+          </div>
+          <p>abstract</p>
+          <div class="button raised" type="button" data-toggle="collapse" data-target="#diyd" aria-expanded="false" aria-controls="collapseExample">
+            <div fit>Expand post</div>
+            <paper-ripple fit></paper-ripple>
+          </div>
+          <div class="collapse" id="goaround">
+            <p>body</p>
+          </div>         
+        </div>
+      </div>
+    </div>
+
+
+-->
+    
+    <!--contentsWrapper is where new contents are added when infinite scrolling
+    MAKE SURE EVERY HTML PAGE START WITH contentsWrapper and inside a div with class contents-->
+    <div id="contentsWrapper">
+      <div class="contents">
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/facedetection.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Lab8: Face detection + Creativity</h1>
+                <p class="info">Interaction Lab - Gabor Csapo - 8. Nov. 2016</p>
+              </div>
+              <p>This recitation we received an open ended prompt again. I had to download all the libraries before I could do anything, because when I tried yesterday I got an Error code. Luckily today it worked for the first try. My goal was to create a Snapchat filter like effect. After reading through the which face example, I added code to draw an image over the webcam stream. First I added a glasses over my face then I added some funny moustache. This time I didn't face weird errors and code worked for the first try.</p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#moustache" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+              <div class="collapse" id="moustache">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/jUUtD0pn3bE" frameborder="0" allowfullscreen></iframe>
+                <script src="https://gist.github.com/gaborcsapo/3792e4b657c6c9a382859051e96750e0.js"></script>
+              </div>         
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">  
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/diyd.jpg" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">DIYDictionary - Documentation</h1>
+                <p class="info">Mashups - Gabor Csapo - 16. Dec. 2015</p>
+              </div>
+              <p>The app I created for this assignment, was a project I wanted to make for a long time. In this assignment I combined the need I felt for learning how to develop for smartphones and my need for a dictionary app to make it easier to expand my vocabulary.</p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#diyd" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+
+              <div class="collapse" id="diyd">
+                <p>The purpose of the app is to enable people living in a foreign language environment to make use of the countless new words they meet every day. If the user encounters a new word that he wants to remember, he can type in the word and its meaning, then create or a choose a group where he wants to put the word and save it. On the list tab, he can also choose to display individual groups. The data is stored for offline use locally and is also uploaded to a database for back up and to serve the words to anyone through the DIYDictionary API.</p>
+
+                <p>The app is a hybrid application based on the Ionic Framework. Hybrid apps have quite a history, but to sum up they act like browser loading data from a local server, but much faster though. Therefore you can develop web apps using popular JS frameworks that will look like native applications. Of course the platform has its limitations, since it cannot handle super complex large applications fast. However, the Facebook app is also built on a similar platform, which shows the enormous potential in hybrid application.</p>
+
+                <p>Learning how to work with the framework took some time, but it also has a little bit of story behind it. Until a couple of months ago, I did not know anything about hybrid apps, when in my graphic design class, my other professor from Mashups mentioned Phonegap as a way to develop native looking apps with HTML, JavaScript and CSS. I immediately got interested in the topic and I looked up what it was, but due to the serious time deficiency I’m suffering from, I did not even try to start a project. But then one day I got a ticket to Shanghai for a weekend to attend a hackathon there. Me and my team set as our goals first of all to spread our CVs, then eat good food, explore the city and also lastly to learn something new. I came up with the idea of creating an app using Phonegap. After nearly 12 hours of work, we had a functioning demo that we presented after which unfortunately we had to come back to Abu Dhabi. Following my great experience in China I knew this is what I wanted to do for my Mashups project combined with my idea of creating a dictionary app for my own needs.</p>
+
+                <p>I started my project with some research on the different platforms available and I came to the conclusion that Ionic is currently the most stable and mature of all platforms. I learnt developing for Ionic by googling 3 things: “angular js Lynda”, “ionic framework tutorial”, “ionic framework example work flow”. I found three websites that were particularly useful:</p>
+                <ul>
+                  <li>http://ionicframework.com/docs/</li>
+                  <li>https://blog.nraboy.com/2015/03/create-todo-list-mobile-app-using-ionic-framework/</li>
+                  <li>http://www.lynda.com/AngularJS-tutorials/Up-Running-AngularJS/154414-2.html</li>
+                </ul>
+                <p>After finishing the app, I also had to fulfil the requirements of the assignment by creating an Express app with an API route serving some data. This was fairly easy after figuring out how hybrid apps work. The API documentation can be found <a href="http://wp.nyu.edu/abu_dhabi-mandatoryblogs/diydictionary/">here</a>.</p>
+
+                <p>After going home, I would like to finish off the project by adding a “Quiz” tab, where you can test your knowledge, by creating an Icon, loading screen, and settings page. After that I also want to find a way to import all the words that I previously noted down in another app and then I’ll be ready to use my newly created app every day.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">  
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/diyd.jpg" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">DIYDictionary - API</h1>
+                <p class="info">Mashups - Gabor Csapo - 16. Dec. 2015</p>
+              </div>
+              <p>The app I created for this assignment, was a project I wanted to make for a long time. In this assignment I combined the need I felt for learning how to develop for smartphones and my need for a dictionary app to make it easier to expand my vocabulary.</p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#diydapi" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+
+              <div class="collapse" id="diydapi">
+                <p>The API is built to serve the data users input. This document explains how the data is structured and how the API works. If you want to read more about the project itself, click here.</p>
+                <p>diyd.herokuapp.com has an example of data requests through the API.</p>
+                <p>http://diyd.herokuapp.com/api/all returns all the data stored in the database</p>
+                <p>http://diyd.herokuapp.com/api/{ID code} returns all the data related to the user with the ID code specified in the URL.</p>
+                <img src="../img/blog/diyd1.png" class="img-fluid">
+                <p>The ID property is the ID number of the user. It is stored 3 times which is not efficient, but I couldn’t find an easy way to get rid of them.</p>
+                <p>The rev property is needed when updating the database, so you shouldn’t worry about that too much.</p>
+                <p>The real content is stored in the content property. There is a list of Groups with all the words in it and a property called “langs”, where I store the names of all the groups.</p>
+                <p>When requesting all data, you receive a list of similar objects with the data for all users.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">  
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/goaround.jpg" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Money Makes the World Go Around!</h1>
+                <p class="info">Mashups - Gabor Csapo - 1. Nov. 2015</p>
+              </div>
+              <p>For the second assignment I created a website with no actual use, but it’s a good showcase how to connect information and display it in a creative way. Check it out here!!</p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#goaround" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+
+              <div class="collapse" id="goaround">
+                <h3>What, How, Why?</h3>
+                <p>The website makes constantly requests to Instagram trough its API, looking for the most recent images with #money. It send the newest pictures across the screen. Whenever there is a new one, it also spins the globe, which stands for the metaphor “money makes the world go round”. I created the globe with THREE JS. I thought this little metaphor would be a small joke around which the project could be based.</p>
+                <p>Staying with the theme of money, the globe also present data on wealth distribution and population distribution by continents, which is always interesting to look at. A lot of people have misconceptions about the size and importance of Asia and think that it is unfair that it is becoming the most dominant region of the globe. But when you look at it, it is simply far larger than any other continent.</p>
+
+                <h3>How does it work?</h3>
+                <p>The Instagram part:
+                After document load I send Ajax requests to the Instagram API every four seconds. In this request I ask for the most recent Instagram pictures with #money. Following that, I check if it is new or not. If yes it puts them in the not new list, I’ll put the image in a div that goes across the screen, and updates a variable that will spin the globe.</p>
+
+                <p>THREE JS part:
+                First, I have to set up the scene, camera, renderer. Then I continue adding lights, the sphere, with the correct texture. Then I manually calculated the coordinates where I should put the bars on the globe and their sizes to correspond with the data I want to present. I store this information in an array. Then in a for loop I create all the bars. Following that I have a function for window re-size, which just helps me make the website more responsive. Lastly, I have the animation function where the globe is rendered and rotated.</p>
+
+                <h3>Design</h3>
+                <p>After the feedback in class, I tried to go for a much cleaner look. I tried the black background, but I didn’t think it fit well with the theme, so I went with white. I kept the map legend as short as possible and made the explanation about the images going across only “New #money”, again to keep it simple and self explanatory.</p>         
+
+                <h3>Challenges and the future</h3>
+                <p>It was a constant challenge to look up how to do something, because there aren’t as many resources as I imagined and the documentation was not easy to navigate in. The other challenge is the design. As I mentioned earlier, the feedback in class was really useful and I tried to act upon it.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">  
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/perfect.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">PerfectWeather</h1>
+                <p class="info">Mashups - Gabor Csapo - 2. Oct. 2015</p>
+              </div>
+              <p>You can find my PerfectWeather project here. It has been a challenging but also rewarding project during which I learnt a lot.</p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#perfect" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+              <div class="collapse" id="perfect">
+                
+                <h3>What, How, Why?</h3>
+                <p>I started brainstorming about ideas and possible projects early on and I had many projects in my head with the Indian Railway API, but I could not connect them in a meaningful way with another API. I also had some projects about flights in my mind but I could not find a reliable API for this task. I also had an idea about an app telling you where is the weather perfect based on your own preferences. That idea ended up being my Perfect Weather project.</p>
+                <p>The rationale behind the project is that we have many websites that tell you the weather at any point of the Earth but we don’t really care about the places with bad weather. We want to see the places with the perfect weather (at least when planning to travel somewhere). So in my opinion if the website was further developed it could serve some actual purpose in the world of the internet.</p>
+                <p>First, I wanted to really overcomplicate the project. I wanted to filter a weather map layer for the perfect weather and then display the layer on top of google maps, which is definitely possible I just have absolutely no clue where to start and I didn’t understand a single line of code in the examples related to the topic. So I went with the easier solution, which is just putting markers on the map.</p>
+
+                <h3>How does it work?</h3>
+                <p>In short:
+                I get weather data for a list of cities then based on the user input I grab the ones that have a perfect weather. Following that, I display them as markers on a google map.</p>
+                <p>In detail:
+                The program flow starts after everything is loaded. However, for some reason the document.ready method doesn’t care about the google libraries that I load for the maps, which required a little bit of work around, because google maps wanted to initialise itself before it was loaded.</p>
+                <p>I use two APIs for the project. One is the OpenWeather API, which I use to get weather information about the top 150 tourist destinations. I hard-coded the list of cities and in a loop I send out request for data for each city, which I then store in the listofCities array. Once that’s done I’m waiting for the user to provide an input and to click the button.</p>
+                <p>As soon as this event happens, I check what values he provided for the program. A common mistake people make is that they set accidentally the minimum value to a larger number than the maximum, which results obviously in no results. Therefore I check whether the input is valid and if it’s not, I send an alert about the mistake. If it’s valid I pass the weather preference information into checkWeather function, which I wrap into the putMarkers method.</p>
+                <p>The checkWeather method simply loops through all the cities’ weather data looking for matches, which then it stores and passes on to the putMarkers method. In the following step I put the marker on the map, which I create using Google Maps API. First of all, I clear the list of markers to make sure there are no markers left over from the previous search. Then I run a loop over the list of Matches and create a marker and info window for each one of the cities. And finally I center the map so that all the markers are visible.</p>             
+
+                <h3>Design</h3>
+                <p>Since it’s a very simple website I wanted to keep the design clear. Since it’s all about the perfect weather I was thinking about a beach. I had an idea about a logo for the site, with a minimal depiction of a beach and with a stick figure lying on a towel. In the end, I kept the minimal beach design, made it the background of the website and discarded the stick figure because it did not really fit into the picture and it just caused a lot of problems in terms of the layout.</p>             
+
+                <h3>Challenges and the future</h3>
+                <p>One challenge was the event driven nature of Javascript and managing the time it took to load some of the libraries. It took some time to wrap my mind around the concept but I think I have a good understanding of how JS actually works. Other than that it is just the usual hardship one faces when using an API with all the missing documentation for certain topics. Fortunately, I chose APIs that are well documented and are popular so I could google most of my problems. In the future I want to keep using the Google Maps API since it’s widely used and it might come in handy later in my career and since it’s easy to work with.</p></p>
+                <p>One huge improvement I could make is to incorporate a database (which we haven’t learnt though). In that case, I would call a bulk data package once a day from OpenWeatherMap, which include thousands of cities, so I wouldn’t be limited by the number of calls I can make per minute and the map could be more detailed.</p>
+              </div>         
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/blog.jpg" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">24 classes. Did I learn something?</h1>
+                <p class="info">Graphic Design - Gabor Csapo - 6. Dec. 2015</p>
+              </div>
+              <p>It’s been more than 3 months and 24 classes of Graphic Design Studio. The class was a very different experience to what I expected it to be, but it was rather a pleasant surprise. I agree that barely having lectures and rather focusing on making is the way to teach a class about design, which made the experience much more valuable and made me realize many lessons I have never met in other classrooms. Here are the most memorable lessons I learned.</p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#takeaway" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+
+              <div class="collapse" id="takeaway">
+                <h3>#1 What is graphic design?</h3>
+                <p>“Graphic Design is a visual language, a language of cues and puns and symbols and allusions, of cultural references and perceptual inferences that challenge both intellect and the eye.” Helfand summed up nicely in this quote what graphic design means on the outer level, but deep down it is much more than that. It is being aware of cultures and news, being a master of time management, being creative, being a painter, a technical guy, a writer, an amazing communicator and the list does not end there. Graphic design is a many folded area somewhere between art and science.</p>
+                <h3>#2 Create a timeline for everything</h3>
+                <p>If you don’t plan ahead, you lost already. Often success depends merely on the time you dedicate to a project, but sometimes that is not enough. You might get stuck on the brainstorming process for days not realizing that the deadline is in two days. This is why a clear timeline helps. You know how much time you have to dedicate to each step in order to finish everything and also have time for other things.</p>
+                <h3>#3 Always cover yourself</h3>
+                <p>Do you have to print for the class in the morning? Print the day before! Nobody is interested in why the printer didn’t work that morning and your other excuses. If somebody asks you to come up with something, make sure you always have a backup plan and something to deliver. In real life a lot of things go wrong and you have to be prepared to deal with that.</p>
+                <h3>#4 Creativity takes time and effort</h3>
+                <p>I always tried adding an extra step, a creative twist to my assignments, like designing my own website for the blog, adding music to my blog posts, making blog posts out of inDesign files, creating a Google Chrome theme for an assignment instead of just a picture, creating interactive websites for demonstration… Sometimes it just clicks immediately and I have the perfect idea, but sometimes I have to spend hours brainstorming to make the ideas start flowing. It only works though if I’m actually thinking, using creative techniques and sketching. So it’s good to start thinking about the projects weeks before its due date.</p>
+                <h3>#5 Ask!!!</h3>
+                <p>Maybe this is the most important lesson I learnt. Until now I was always told what is expected exactly, but that is not how it goes in real life. You have to ask questions to get to know the needs of the client, to identify the problem. As my professor said, sometimes by talking about the problem, even the solution is revealed.</p>
+                <h3>#6 Simplicity</h3>
+                <p>I tend to overthink my concepts, trying to cramp several ideas into one picture. However, I learnt that this does not result in a good design. Your ideas don’t matter if people don’t get it. Which is easily the case as people do not read everything and they do not think too much when they look at an advertisement, so you have to adapt by making the concept behind your project clear and understandable. You might think this dumbs down the concept, but I think it makes the message more powerful.</p>
+                <h3>#7 You are the doctor</h3>
+                <p>For a long time I did not quite understand why did my professor only want one design per presentation. I thought having more means that you’re creative and you give the choice in the hands of the client so that they can choose what they like. But it doesn’t work like that! The graphic designer is the doctor and the client is the patient. The patient goes to the doctor because he has a sickness, a problem that needs to be solved. The doctor’s task is to cure the disease, and to solve the problem. His job is not to make suggestions, but to identify the symptoms and the needs of the client and adapt the solution to it.</p>
+                <h3>#8 Always the strongest presentation wins</h3>
+                <p>This is probably the most important lesson I learned and maybe the one that I will use the most in the future. During the class I realized always the presentation wins, not the idea. As my professor would say “We are visual mammals” and we decide quite often irrationally based on the visuals instead of the content behind it. Therefore you always have to present your project in the best possible way to persuade the audience about your expertise. This lesson is important to keep in mind when in the future I have to present my ideas to my boss or my sponsor. After taking this class, I would probably not walk in with an ugly black and white A5 presentation in comic sans.</p>
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/manual.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Designing Manuals</h1>
+                <p class="info">Graphic Design - Gabor Csapo - 23. Nov. 2015</p>
+              </div>
+              <p>Manuals are one of the most ignored objects that constantly surround us. Every packaging includes one, but people don’t realize its presence until something seriously goes wrong, then they takes the booklet out of the trash, quickly skim it and throw it back into the trashcan. The user doesn’t want anything else from the manual guide than the necessary information and the technical writers shouldn’t forget that. Unfortunately, this nature of use led to the current state of ugliness of most manuals.</p>    
+              
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#manual" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+
+              <div class="collapse" id="manual">      
+                <p>Manuals are essentially infographics. Their sole purpose is to get the necessary information to the user as quickly as possible in an easily understandable way. Before the 90’s manuals were of huge importance as people were expected to fix their own equipment. If your car broke down, you had to flip to the correct page in the service manual and it would tell you what to do in that situation. Manuals were therefore well designed.</p>
+                <div class="row">
+                  <figure>
+                    <img src="../img/blog/manual3.jpg" class="col-lg-6 img-fluid pull-xs-left">
+                    <img src="../img/blog/manual2.jpg" class="col-lg-6 img-fluid pull-xs-right">
+                  </figure>
+                </div>
+                <p class="text-muted">Manual for one of the cheapest cars at its time and television manual from the 80s.</p>
+                <p> </p>
+                
+                
+                <p>However, with the rise of more and more complex machines, and less and less general knowledge of how to fix things, businesses started to discourage their costumers from repairments on their own. Recently it became a norm that if something’s wrong, you simply take the product back and you get a new one. Companies still have a tick box for including a manual in the package, but the number one principle behind the design of the instructions is to make them as cheap as possible.</p>
+
+                <figure>
+                  <div><img src="../img/blog/manual4.jpg" class="col-lg-6 img-fluid pull-xs-right"></div>
+                </figure>
+                
+                <p>Most manuals are black and white, they cramp as many sentences on a single page as possible and are made of the cheapest paper. However, this does not have to be the case all the time. For example, Ikea could not exist without its iconic guide how to assemble furniture, a whole line of Lego products are based on manuals that don’t even have words on them, and Apple products come with well designed manuals to increase their premium feel. There are also some new trends that might change the scene of manuals for the better.</p>
+
+                <figure>
+                  <img src="../img/blog/manual5.jpg" class="col-lg-6 img-fluid pull-xs-left">
+                  <figcaption><p class="text-muted pull-xs-left">Lego manuals without words. Source: google.com</p></figcaption>
+                </figure>
+                <figure>
+                  <img src="../img/blog/manual6.jpg" class="col-lg-6 img-fluid pull-xs-right">
+                  <figcaption><p class="text-muted pull-xs-right">The iconic Ikea manual. Source: google.com</p></figcaption>
+                </figure>
+
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <p>
+                The internet is the new medium of manuals. While it makes perfect sense why companies use black and white bad quality print to sink their cost, on the internet designs can go wild. More digital space doesn’t cost any money, so technical writers can play around with structure or empty space without raising the costs too much. Colors don’t cost any more then black and white, so there is no constraint that would prevent the writers to create visually pleasing designs. Smartphones even allow to take the manuals with you anywhere where they’re needed.</p>
+
+                <figure>
+                  <img src="../img/blog/manual7.png" class="img-fluid">
+                  <figcaption><p class="text-muted">A good example by Google Source: docs.gogle.com</p></figcaption>
+                </figure>
+
+                <p>Another fairly new phenomenon is companies letting people create tutorials. Why would you hire a probably disengaged person to create a manual, when you can rely on your hardcore fans to do that for you on Youtube, where they get payed for their views? This phenomenon is proved by the thousands of tutorials we can find on the internet on almost any topic.</p>
+
+                <p>To sum up, what we need is the utilisation of modern technology, visuals, colours with some creativity on top. Technology enables us to create powerful, appealing templates, that can be standardized. The ultimate success would be to make people read the manuals even if nothing went wrong. They would learn more about the available features of their devices, and a well designed manual can prevent frustration, hence increases consumer satisfaction.</p>
+
+                <img src="../img/blog/manual8.jpg" class="col-lg-6 img-fluid pull-xs-left">
+                <img src="../img/blog/manual9.jpg" class="col-lg-6 img-fluid pull-xs-right">
+                <p class="text-muted">Colorful, well structured design by Ladislav Sutnar. Source: google images</p>
+                <p class="text-muted pull-xs-right">This manual could use some redesign by Ladislav Sutnar…</p>
+              </div>  
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Pagination purely for SEO purposes. SE crawlers need connections to the next pages-->
+    <nav class='page-navigation' aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li id='0-page' class="page-item"><a class="page-link" href="blog.html">1</a></li>
+        <li id='2-page' title='already loaded' class="page-item disabled"><a class="page-link" href="blog2.html">2</a></li>
+        <li id='1-page' class="page-item"><a class="page-link" href="blog1.html">3</a></li>
+      </ul>
+    </nav> 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script src="../js/blog.js"></script>
+    
+  </body>
+</html>

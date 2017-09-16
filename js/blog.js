@@ -5,7 +5,7 @@ let poly = []
 let n = 100 // feel free to play with this number :)
 
 // canvas size variables
-let w = 210
+let w = 200
 let h = 250
 
 // oscillators
@@ -18,7 +18,7 @@ let minor = [ 10, 12, 15 ]
 
 function setup() {
   var canvas = createCanvas(w, h)
-  canvas.parent('sketch-holder');
+  canvas.parent('header-sketch');
   strokeWeight(17)
   noFill()
   cursor(HAND)
@@ -28,8 +28,8 @@ function setup() {
   for (let i = 0; i < n; i++) {
     // populate regular polygon vertices given number of points n
     let a = {
-      x: (w/2)-10 + 80*sin(map(i, 0, n-1, 0, TAU)),
-      y: (h/2) + 80*cos(map(i, 0, n-1, 0, TAU))
+      x: (w/2)-10 + 64*sin(map(i, 0, n-1, 0, TAU)),
+      y: (h/2) + 64*cos(map(i, 0, n-1, 0, TAU))
     }
     poly.push(a)
   }
@@ -49,12 +49,13 @@ function setup() {
         chord[i].amp(0.0)
       chord[i].stop()
   }
+  $( ".header-text, #header-sketch" ).fadeIn( "slow")
 }
 
 function draw() {
   // use default blend mode for background
   blendMode(BLEND)
-  background(255, 255, 255)
+  background(247, 247, 249)
   
   // use additive blend mode to separate color channels
   blendMode(DIFFERENCE)
@@ -105,6 +106,43 @@ function warpOsc() {
   for (let i = 0; i < n; i++)
     bias = max(bias, dist(mouseX, mouseY, poly[i].x, poly[i].y))
   
-  for (let i = 0; i < chord.length; i++)
-    chord[i].freq(map(bias, w, 0, major[i], minor[i]) * root)
+  for (let i = 0; i < chord.length; i++){
+    var frequencyCalc = map(bias, w, 0, major[i], minor[i]) * root;
+    if (frequencyCalc < 22000 && frequencyCalc > -22000){
+      chord[i].freq(frequencyCalc)
+    }
+  }
+    
 }
+
+//Infinte scrolling:
+$(document).ready(function() {
+  var win = $(window);
+  var count = 2
+  if (window.location.pathname.split("/").pop().match(/\d+/g) != null) {
+      count = 0;
+  }
+  var timeout;
+
+  // Each time the user scrolls
+  win.scroll(function() {
+    // End of the document reached?
+    clearTimeout(timeout);  
+    timeout = setTimeout(function() {
+        if ($(document).height() - win.height() - 200 < win.scrollTop()) {
+          if (count > 0){
+            $.ajax({
+              url: "/pages/blog"+count+".html",
+              dataType: 'html',
+              success: function (data) {
+                newcontent=$(data).find('.contents'); 
+                $('#contentsWrapper').append(newcontent);
+                $('#'+count+'-page').addClass('disabled').attr('title', 'already loaded');
+                count--;
+              },
+            });
+          } 
+        }
+      }, 50);
+    });
+});
