@@ -99,6 +99,34 @@
           <div class="card col col-lg-10 col-xl-8">
             <div class="card-block">
               <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/campusideas.jpg" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Mytorch.tech</h1>
+                <p class="info">Politics of Code - Gabor Csapo - Sept. 28. 2017</p>
+              </div>
+              <a href="http://mytorch.tech">Link to the project</a>
+              
+              <p>Our team created mytorch.tech to resolve issues arising in the legal gray area of alcohol and other types of misconduct at NYU Abu Dhabi. The UAE being a Muslim country forbids residents including NYUAD student the consumption of alcohol with rare exceptions. Some students regardless choose to abuse substances, which puts them and the university’s reputation in danger.  Residential education trusts students to be smart about their personal decision, but there are always people who don’t know their limits or can’t control themselves. Most years went by with a few incidents, but last year oblivious freshmen called the ambulance without notifying the school, which resulted in a legally difficult situation. The administration’s solution was to crack down on any dangerous behaviour. Mytorch.tech offers an alternative conflict resolution method, by opening communication channels to resolve conflicts by contacting the person in charge appropriate to the situation in order to avoid unnecessary trouble.</p>
+              
+                <p>Mytorch.tech offers a web-based application streamlined to put the user in touch with the appropriate person in charge. For instance, a potentially escalating situation does not necessarily require the same level of intervention as alcohol poisoning or sexual assault. The app helps one make this decision by providing easy to read instructions, and making clear the consequences of each help option. The app avoids asking or storing information that could potentially get the user into trouble. By avoiding avoiding direct mention also prevents the service from any legal obligation to report the users for their behaviour. We don’t store incriminating information and if we were to continue the project, we would turn all data transfer encrypted and ephemeral. 
+                </p>
+                <p>
+                My main contribution to the project was in the development steps. After we conceptualized the app together, we decided on the technologies we would use and starting materializing the app in just two weeks. Mytorch.tech is a node js application that renders the UI with pug. The app has the ability to contact people using the Twilio SMS API, look up addresses using the Google Location API and one can log in using the Google Oauth passport js module. My tasks were to build the login feature and the SMS capability, while also debugging issues encountered with heroku. Initially, I planned to use the official NYU login API, but after several hours of various attempts, I found an alternative way to login. My workaround was to login into the NYU provided google account and authenticate the user through that. Although it seems like a straightforward feature, it was not an easy process. I attempted to use directly the Google API and then Firebase with little success. In the end, passport js seemed the only working solution. To set it up,  I had to learn about sessions, secure cookies, passport js and Google Oauth2. Setting up the SMS capability using Twilio was an easier task, as I used their service before. The project also required me to familiarize myself with Pug. 
+                </p>
+                <p>
+                Mytorch.tech is an app that resolves accidental conflicts by opening up communication channels and informing user about their behaviour while dodging any legal trouble. While I expanded my web development skills, I also learnt more about the alcohol related topics on campus and every mention of this app to my friends received approval from them. Unfortunately, there are some issues we could not resolve due to our time constraint. The Google Oauth does not allow cross-domain origin login, which prevent us from masking the mytorchtech.herokuapp.com url into mytorch.tech. We will have to develop our own NYUAD specific location API, as Google does not provide information about our campus. Our current design is, however, a perfect demo to show officials to win support. After creating this prototype the next step would be to start a campus wide conversation about the usability of our app. We need to win the support of public safety, RAs and residential education. After receiving approval, we would extend the app with additional features such as encrypted ephemeral messaging and data transfers, further streamlining the interface, and ensuring the reliability of the app, so that it can always service the people in need. With every startup timing is the number one issue and based on the recent campus wide concern about alcohol related issues, this semester is the perfect time to launch our service.
+
+                </p>
+              </div>         
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
                 <img class="card-img col col-md-3 col-xs-12" src="../img/blog/games.jpg" alt="Card image cap">
                 <h1 col col-md-8 col-xs-12 text-center">Video Games for Learning</h1>
                 <p class="info">Politics of Code - Gabor Csapo - Sept. 25. 2017</p>
