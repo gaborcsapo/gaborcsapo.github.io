@@ -42,7 +42,7 @@ function init() {
 
 
 //if I hover over the vertical div, then the circle should do the global big move
-$( "div.centered" )
+$( ".mouseover" )
   .mouseenter(function() {
   	if (order == 0){
   		count = 0

@@ -304,10 +304,12 @@ canvas {
 .two{
 	font-size: 1.6rem;
 	text-align: center;
+	line-height: 1;
 }
 .three{
 	font-size: 1.5rem;
 	text-align: center;
+	line-height: 1;
 }
 
 /*footer*/
