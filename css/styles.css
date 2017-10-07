@@ -266,6 +266,12 @@ canvas {
 	transition: transform 1s ease; 
 }
 
+@media only screen and (max-width: 1200px) and (min-width: 992px)  {
+	.xp-img {
+		max-width: 115%;
+	}
+}
+
 .xp:hover .xp-img {
 	transform: scale3d(1.05,1.05,1.05);
 }
