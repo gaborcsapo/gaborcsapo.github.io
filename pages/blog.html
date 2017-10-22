@@ -99,6 +99,79 @@
           <div class="card col col-lg-10 col-xl-8">
             <div class="card-block">
               <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/whitemale.jpg" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Browsing Bias</h1>
+                <p class="info">Politics of Code - Gabor Csapo - 22. Oct. 2017</p>
+              </div>
+              <p>Figures in traditional media are mostly white and male, and the internet seems to abide by the same rules. In this project, I would like to create a tool that measures what portion of faces encountered during a regular browsing is male/female, and what the ethnic background of them is. To achieve that I will create a Chrome extension, that will collect links to every single image that a user encounters while browsing the internet. The extension will then send the list of links to a server that has a trained model on pictures of people, their ethnicity, and gender, and would be able to classify the people (if there are) on those images. This latter part of the project would use part of my capstone project. The project would give a sense of to what extent is the internet gender and ethnicity biased.</p>       
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/mytorch.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Mytorch.tech Sprint 2</h1>
+                <p class="info">Politics of Code - Gabor Csapo - 22. Oct. 2017</p>
+              </div>
+              <p>In the previous prototyping stage Jihyun and I managed to get a grip of the problem and successfully materialized our idea into a functioning app. However, the devil lies in the details. Creating the outlines of an app nowadays is made really easy by frameworks, that do the bulk of the work, but perfecting the details and streamlining the UI is what usually takes up most of the time. We received some great feedback in class on how to improve and set our goal to increase the usability of our app to match our use case scenarios.
+              </p>
+              <p class="text-center"><a href="https://github.com/gaborcsapo/mytorch.tech" target="_blank">Github repository for code</a></p>
+              <p class="text-center"><a href="http://mytorchtech.herokuapp.com/login" target="_blank">The live app</a></p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#torchsprint2" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+              <div class="collapse" id="torchsprint2">
+                <figure>
+                  <div><img src="../img/blog/screenshottorch.png" class="col-lg-6 img-fluid pull-xs-right" style="border:lightgrey solid 1px; margin-left:20px; margin-bottom:20px;"></div>
+                </figure>
+                <h3>Initial improvements</h3>
+                <p>
+                We wanted to start off by getting feedback and validating our idea, but first it made more sense to implement the feedback we received in class. We set off to create splash page for first time user where they would input their friends’ phone numbers. We also managed to set up a Mongoose database for users, their friends’ numbers and records of incidents to filter out trolling mainly.
+                </p>
+                <h3>
+                User testing</h3>
+                <p>
+                We interviewed a number of our classmates to validate and test our idea. We briefly introduced them to our project, and then we let them familiarize themselves with the app. Following that, we gave them a scenario and we watched how they navigated the UI to resolve the issue. Lastly, we asked them for direct feedback. We organized all the potential improvements on a Github board, which is a great tool that I have just heard about, but will definitely use it more in the future. We prioritized the tasks and created a sprint for the next 2 weeks.
+                </p>
+                <h3>
+
+                Tasks</h3>
+                <p>
+                <b>Tagline & rewording buttons & anonymity disclaimer</b>
+                <p>
+                We had to clarify our intents. A number of people mentioned that it wasn’t clear at first sight what the app and the individual buttons were actually for until we explained it. This was our number one task to solve. Our solution was to come up with a tagline on the login page clearly portraying the purpose of the app, and a more accurate call to action on the main form submission page. We also forgot before to make it clear that the app is completely anonymous.
+                </p>
+                <b>
+                More straightforward forms</b>
+                <p>
+                A few people were a bit confused about filling in the forms, it was a lot of typing, people forgot to fill in the location form, it wasn’t actually clear which button to click on and on mobile devices everybody expected that pressing enter would take the cursor to the next text field, but with default HTML that is not the case. As a result, we completely redesigned the main page with more drop down choices, disabled buttons until the forms are filled in, split up the location text field into a number of dropdown options to speed up the input process. We also decided to send an HTML confirm() before sending out the SMS to public safety in order to make sure people are aware of the consequences. I also found code a snippet that made forms more mobile friendly.
+                </p>
+                <b>Safety tips</b>
+                <p>
+                This section was the least refined in the initial demo, and we were looking for ways to make it more informative. We made it shorter, we have three blocks for them, we are not showing them at the same time anymore, we corrected some of the information that happened to be US specific. There are still ways to improve the contact. For example, we thought of having more visuals, but that would go into sprint 3.
+                </p>
+                <b>Debugging & extras</b>
+                <p>
+                The app had a few minor bugs, like the menu didn’t work on smartphones, or the location wouldn’t go through in the SMS, etc… We found a way to have an anchor tag open up the phone dial with a preset number, so now you can call directly public safety if you need to clarify the situation. If the user has a phone number, we are sending that along the SMS, so that public safety can also directly call the student.
+                </p>
+                <h3>Moving forward</h3>
+                <p>
+                The app is not production ready yet. Mytorchtech is a lot of responsibility, and we would need to ask for funding, talk to public safety, student life, the SIG Reach, print posters, raise awareness, which as seniors we don’t have time for. A clear solution to the problem would be getting other people on board, and open-sourcing the project. We spent a significant amount of time commenting up the code, and writing a readme, so that anybody could pick up the project, and implement any of the extra feedback we received while presenting in Mashups, such as the ability to confirm that a guard is arriving, integrating facebook messenger into the app, and the list continues.
+              </div>         
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
                 <img class="card-img col col-md-3 col-xs-12" src="../img/blog/manipulation.jpg" alt="Card image cap">
                 <h1 col col-md-8 col-xs-12 text-center">Manipulation</h1>
                 <p class="info">Politics of Code - Gabor Csapo - 9. Oct. 2017</p>
