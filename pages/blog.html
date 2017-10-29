@@ -99,6 +99,103 @@
           <div class="card col col-lg-10 col-xl-8">
             <div class="card-block">
               <div class="row">
+                <img class="card-img col col-md-3 col-xs-12" src="../img/blog/tensorflow.png" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Google's AI Masterplan</h1>
+                <p class="info">Politics of Code - Gabor Csapo - 29. Oct. 2017</p>
+              </div>
+              <p>In this longer post, I will investigate Google's decision to make Tensorflow, its machine learning framework open-source and how it affects the lives of developers. Google deliberately created an environment where it is easier to use Google Cloud, than for instance Microsoft Azure, and where it is easier for them to hire the best talent and where most cutting edge research would be native to Tensorflow. On the other hand, we see competitive market forces drive big corporations toward a model of "openness", with which everyone wins as long as it is easy to move between platforms. </p>
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#tensorflow" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+              <div class="collapse" id="tensorflow">
+                <h3>Short history</h3>
+                <p>
+                Machine learning is as old computers are. The first general, working learning algorithm for supervised, deep, feedforward, multilayer perceptrons was published by Alexey Ivakhnenko and Lapa in 1965. Since then every 20 years there was a discovery that sparked interest in machine learning methods, but after exploring the options that were opened up by the discovery, the field went back to oblivion for a decade. The Big Data boom around 2005 gave another boost to research as now scientists had enough computational power and massive labelled datasets to actually train large deep neural networks. The real breakthrough came in 2012, when a group of researchers combining all the recent developments came up with the AlexNet architecture that beat traditional machine learning algorithms in image classification. Their paper unleashed the huge wave of deep learning developments in the past 5 years.
+                </p>
+                <p>
+                Deep learning went from a niche area of mathematics into the mainstream, where companies quickly saw the commercial value in the ability to automate higher level tasks. Automatically learning features at multiple levels of abstraction allow a system to learn complex functions mapping the input to the output directly from data, without depending completely on human-crafted features. Similarly to the first industrial revolution overcoming the limitations of muscle power, deep learning has the potential of overcoming cognitive limitations in certain tasks, such as image recognition, translation, data analysis, etc… making it the future gold mine. And hence the big tech corporations started a race to dominate the market.
+                </p>
+                <h3>Early development </h3>
+                <p>
+                Machine learning is a complex field. Deep learning is done through frameworks that implement the mathematical formulas behind the different convolution, loss, optimization, classification and various other functions that a deep learning model consists of. In the early days, most frameworks were open-source and were maintained by university research groups, who shared their result along with their frameworks. Researchers’ main goal is to maximize the publicity of their research, which requires them to share their development tools so that their results can be reproduced. This meant that researchers were building on top of each other’s frameworks, which sped up the overall development through open-source contributions. These frameworks made deep learning really easy jump into and to use, but even with today's tools the forefront of machine learning is a difficult field. A smart engineer can usually implement ideas by following formulas in papers, but does not have the mathematical background to develop them (hyperbolic geometry, functional analysis, dynamical systems, random matrix theory). On top of this, very few people and companies could actually afford to run extremely large and deep networks on several GPUs. 
+                </p>
+                <h3>Corporations and Open-source</h3>
+                <p>
+                Google having several AI research teams, spent millions of dollars to develop its own deep learning framework. Soon Google started rolling out results of its research in products created on its custom platform such as Google+ Image search, and the enhanced Voice search, and Google translate. Facebook, Amazon, Microsoft and other companies were doing the same. However, on 9 Nov 2015 Google shocked the community by announcing the open source release of most of its Tensorflow platform. Seeing the largest tech companies go open-source is weird at first, but it makes perfect business sense. Around 2015 open-source started to boom at Facebook, Google and Microsoft but not because they suddenly felt an urge to be more communitarian, but because business has changed. Software is not the product anymore and Google does not give its users Gmail, Translate, Drive and other amazing product for free. The product is the user, its attention and all the data generated by it. The software became only a platform that lures in, captures and traps all the potential users. The revenue is generated by selling ads, using users’ data and driving traffic to other paid services of a certain company. The same has happened in the deep learning businesses, and Google was quickly followed by Facebook and Microsoft releasing the open-source version of their own software.
+                </p>
+                <h3>Results of open sourcing on Machine Learning</h3>
+                <p>
+                Google’s decision was completely rational and forward thinking. They created an open-source project, that is biased towards making developers use other Google services in a hidden ways. 
+                </p>
+                <p>
+                The company would not gain any serious advantage by keeping its technology proprietary. In reality, Tensorflow is not superior to other libraries. The open field of deep learning frameworks is already a crowded and hyper competitive market. The traditional open-source scientific libraries (Torch, Theano) perform similarly to Tensorflow, and most research was published on them. Other platforms, such as CNTK (Microsoft’s take on machine learning) is far more scalable on large servers, and MXnet supported by Amazon is much faster to train. The underlying algorithms of Tensorflow were based on open-source projects and were always well known. Even if Tensorflow becomes a superior framework, and Google gives away these training algorithms to the competition, at the end of the day speed is not always the most important thing. The real algorithmic advantage lies in the implementation of the deep learning models like the one behind Alphago, the AI, which beat the world’s best Go player. Google has not given away these implementation specific algorithms. The real value of Tensorflow is in the engineering that runs those algorithms cross-platform and at scale across a wide range of devices from a cloud server, a desktop machine to a mobile phone. That's not a trivial feat by any stretch, but it also is hard to replicate. Overall, Google did not lose much from publishing yet another deep learning library, but gained tremendously from it.
+                </p>
+                <p>
+                The framework is not valuable by itself, but the people and the service built on top of it make it valuable. Google realized it, and tried to monetize on this idea. Tensorflow has by far the best documentation, largest range of additional tools, like Tensorboard to visualize data to help debug it, a visual representation of deep learning layers, widest support for potential devices that people might run their models on. With all this Google lowered the barrier to entry to reach as many developers as possible. In a hyper competitive and fast-evolving market, like machine learning, the only way to stay afloat and get ahead of the competition is to convince the future talent to use Tensorflow. If the smartest talent already uses Tensorflow, hiring and training them becomes an easy process. Similarly, if innovative startups decide to use Tensorflow as their framework, acquiring them and integrating them into Google becomes seamless. The more people use the platform, the faster Google can get feedback on new features allowing its engineers to increase their productivity, and have a more realistic picture of what the community really needs. Open sourcing and the transparency facilitates conversation between developers and people using the products, and creates confidence in people, which motivates developers, outside researchers and potential future hires to be dedicated to this platform. Obviously, by open sourcing, they get the benefits from contributors outside the core team. Once Tensorflow gets popular, many new research ideas would be implemented in Tensorflow first, which makes it more efficient for Google to productize those ideas and have advantages over competitors.
+                </p>
+                <p>
+                By having an open-source development framework with a strong community, Google will not make any profits. The company needs its community to create products that use its other paid services. Training deep learning models requires terabytes of data being run through computation heavy functions for days at least. Perhaps not surprisingly, the cloud giants that stand to gain from an influx of data-heavy applications are the same ones open sourcing their frameworks in the first place. Microsoft, Amazon and Google are all in the business of machine learning to drive business to their respective Microsoft Azure, Amazon Web Services and Google Cloud businesses. Currently, Google is a distant third in the cloud business, but they are betting heavily on the success of Tensorflow. 
+                </p>
+                <p>
+                Open-sourcing this way does not make development distributed in any way, as most development is still made in-house. Google maximizes the number of developers using its platform, and uses its immense influence on the field and the developer tools to divert the flow of talent and traffic for other web services in its favor. They deliberately create an environment where it is easier to use Google Cloud, than for instance Microsoft Azure, and where it is easier for them to hire the best talent and where most cutting edge research would be native to Tensorflow. The bias, and open-sourcing serves Google’s best interests, but it’s not something that wouldn’t happen otherwise. If Google kept Tensorflow closed-source, they could still force people to use their cloud services even stronger, and once you learnt Tensorflow it would be hard to switch anyways. So the result is essentially very similar, but Google’s reach is extended and these actions also promote transparency.
+                </p>
+                <p>
+                While open-sourcing still serves Google’s corporate interests, the side effect is the democratization of machine learning. Through this open-source platform, everybody has access to the top machine learning algorithms for learning and research purposes. The lowering the barrier of entry, makes it incredible easy to learn deep learning as a beginner nowadays. The more people are familiar with the science of machine learning, the more people accept it and trust it as a new driver of our economy. In addition, having a high-tech platform with a great community increases scientific progress and collaboration. The only thing developers need to keep in mind is that wrapping software in the disguise of open-source, does not mean that it is a truly independent software effort. Developers need to keep in mind what package the software comes in.
+                </p>
+                <h3>Conclusion</h3>
+                <p>
+                We're effectively seeing a market where the rational behaviour is to spend lots of time and effort building something incredibly useful, and then giving it away for free. This was probably unthinkable just a decade ago, but business has changed quickly.  When competitive market forces drive big corporations toward a model of "openness", everyone wins as long as it is easy to move between platforms. 
+                </p>
+                <br>
+                <br>
+                <h3>
+                Sources:
+                </h3>
+                <p style="text-align:left;">
+                Ivakhnenko, A. G. (1973). Cybernetic Predicting Devices. CCM Information Corporation.
+                </p>
+                <p style="text-align:left;">
+                ImageNet Classification with Deep Convolutional Neural Networks https://www.cs.toronto.edu/~kriz/
+                imagenet_classification_with_deep_convolutional.pdf
+                </p>
+                <p style="text-align:left;">
+                ​Why Microsoft is turning into an open-source company, http://www.zdnet.com/article/why-microsoft-is-turning-into-an-open-source-company/
+                </p>
+                <p style="text-align:left;">
+                Why More Companies Are Adopting Open Source Technology https://about.gitlab.com/2017/03/03/why-choose-open-source/
+                </p>
+                <p style="text-align:left;">
+                Open Source Is Going Even More Open—Because It Has To https://www.wired.com/2015/07/open-source-going-even-openbecause/
+                </p>
+                <p style="text-align:left;">
+                Google Open-Sourcing TensorFlow Shows AI’s Future Is Data https://www.wired.com/2015/11/
+                </p>
+                <p style="text-align:left;">
+                google-open-sourcing-tensorflow-shows-ais-future-is-data-not-code/
+                </p>
+                <p style="text-align:left;">
+                Top 10 Deep Learning Frameworks https://datahub.packtpub.com/deep-learning/top-10-deep-learning-frameworks/
+                </p>
+                <p style="text-align:left;">
+                A Survey of Deep Learning Frameworks https://medium.com/towards-data-science/a-survey-of-deep-learning-frameworks-43b88b11af34
+                </p>
+                <p style="text-align:left;">
+                Tensorflow, An open-source software library for Machine Intelligence https://www.tensorflow.org/
+                </p>
+                <p style="text-align:left;">
+                2017 Gartner MQ for Cloud - Compare Top BI Leaders
+                </p>
+              </div>         
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
                 <img class="card-img col col-md-3 col-xs-12" src="../img/blog/whitemale.jpg" alt="Card image cap">
                 <h1 col col-md-8 col-xs-12 text-center">Browsing Bias</h1>
                 <p class="info">Politics of Code - Gabor Csapo - 22. Oct. 2017</p>
