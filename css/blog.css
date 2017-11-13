@@ -8,7 +8,7 @@ a.nav-link:hover, a.navbar-brand:hover{border-bottom:2px solid #ef4c50;color:#ef
 a.nav-link, a.navbar-brand{color:rgb(45, 47, 50);border-bottom:2px solid #fff;}
 .header{position:relative;left:50%;top:50%;width:630px;height:260px;transform:translate(-44%, 0);}
 .header-text{position:relative;float:left;width:210px;height:240px;display:none;}
-.header-blg{font-family:'Montserrat', sans-serif;font-size:180px;color:black;position:absolute;bottom:100px;line-height:20px;}
+.header-blg{font-family:'Montserrat', sans-serif;font-size:180px;font-weight:bolder;color:black;position:absolute;bottom:100px;line-height:20px;}
 #header-sketch{float:left;display:none;}
 .card-img{border-radius:50%;padding:0 !important;margin-bottom:40px;margin-left:.9375rem;padding-left:10px;float:left;}
 .card{box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);margin-top:10px;margin-bottom:50px;box-sizing:border-box;border-radius:2px;border-top:1px solid rgba(160, 160, 160, 0.2);padding:18px;position:relative;line-height:1.5;text-align:justify;}
