@@ -296,6 +296,8 @@ canvas {
 @media only screen and (max-width: 1200px) and (min-width: 992px)  {
 	.xp-img {
 		max-width: 115%;
+		margin: 0 0 0 -31px;
+		transform: scale(0.9);
 	}
 }
 
@@ -309,6 +311,7 @@ canvas {
 
 .wrapper {
 	overflow: hidden;
+	background-color: #e6e6e6;
 }
 
 .left-align {
