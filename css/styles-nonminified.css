@@ -110,8 +110,17 @@ canvas {
 	border-bottom: 2px solid black;
 }
 
+@media(max-width: 576px){
+	.nav-custom {
+		display: none;
+	}
+}
+
 .placeholder {
 	height: 0;
+}
+.list-unstyled {
+	margin-bottom: 0;
 }
 
 @media(max-width: 760px){
@@ -119,6 +128,13 @@ canvas {
 		height: 25px;
 		background-color: rgb(246, 230, 10);
 	}
+}
+
+.click {
+	position: relative;
+    transform: translate(-70%,-160%);
+    float: right;
+    height: 35px;
 }
 
 /*header with the picture and the name*/
@@ -209,6 +225,13 @@ canvas {
 	min-width: 150px;
 }
 
+@media (min-width: 992px){
+	.col-lg-12 .linkedin {
+    	position: relative;
+    	top: -10px;
+    }
+}
+
 @media(min-width: 768px) {
 	.link {
 		max-width: 100%;
@@ -234,6 +257,10 @@ canvas {
 @media(max-width: 543px) {
 	.center-text{
 		width: 100%;
+	}
+	.linkedin {
+		position: relative;
+		top: -10px;
 	}
 }
 

@@ -1,4 +1,4 @@
-body{font-size:17px;font-family:'Roboto Mono', monospace;line-height:1.8;background-color:white;color:rgb(45, 47, 50);}
+body{min-width:525px;font-size:17px;font-family:'Roboto Mono', monospace;line-height:1.8;background-color:white;color:rgb(45, 47, 50);}
 h1{text-align:center;font-size:36px;padding-top:40px;height:50%;font-family:'Montserrat', sans-serif;font-weight:bold;}
 h2, h3{font-family:'Montserrat', sans-serif;font-weight:bold;padding-top:20px;}
 a:link, a:visited{text-decoration:none !important;text-transform:none !important;color:#ef4c50;border-bottom:2px solid #ef4c50;}
@@ -6,11 +6,12 @@ a:hover, a:active{color:#AF383B;}
 .navbar{background-color:white;color:#ef4c50;box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);font-size:18px;}
 a.nav-link:hover, a.navbar-brand:hover{border-bottom:2px solid #ef4c50;color:#ef4c50;}
 a.nav-link, a.navbar-brand{color:rgb(45, 47, 50);border-bottom:2px solid #fff;}
-.header{position:relative;left:50%;top:50%;width:630px;height:260px;transform:translate(-44%, 0);}
+.header{position:relative;left:50%;top:50%;width:630px;height:260px;transform:translate(-40%, 0);}
 .header-text{position:relative;float:left;width:210px;height:240px;display:none;}
 .header-blg{font-family:'Montserrat', sans-serif;font-size:180px;font-weight:bolder;color:black;position:absolute;bottom:100px;line-height:20px;}
 #header-sketch{float:left;display:none;}
 .card-img{border-radius:50%;padding:0 !important;margin-bottom:40px;margin-left:.9375rem;padding-left:10px;float:left;}
+@media (max-width: 768px){.col-xs-offset-3{margin-left: 25%;margin-right: 25%;}}
 .card{box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);margin-top:10px;margin-bottom:50px;box-sizing:border-box;border-radius:2px;border-top:1px solid rgba(160, 160, 160, 0.2);padding:18px;position:relative;line-height:1.5;text-align:justify;}
 .info{color:#818a91;text-align:center;font-size:14px;}
 .text-center{text-align:center;}

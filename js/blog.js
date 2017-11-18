@@ -7,7 +7,7 @@ let root=30
 let major=[4,5,6]
 let minor=[10,12,15]
 function setup(){var canvas=createCanvas(w,h)
-canvas.parent('header-sketch');strokeWeight(17)
+canvas.parent('header-sketch');strokeWeight(18)
 noFill()
 cursor(HAND)
 noStroke()

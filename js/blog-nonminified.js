@@ -19,7 +19,7 @@ let minor = [ 10, 12, 15 ]
 function setup() {
   var canvas = createCanvas(w, h)
   canvas.parent('header-sketch');
-  strokeWeight(17)
+  strokeWeight(19)
   noFill()
   cursor(HAND)
   noStroke()

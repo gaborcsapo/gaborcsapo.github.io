@@ -11,7 +11,7 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet"> 
     
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles-nonminified.css">
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="shortcut icon" href="img/favicon.ico" />
     <script>
@@ -36,13 +36,14 @@
           <nav>
             <ul class="list-unstyled nav-custom">
               <li><a class="item-custom" href="#aboutme">About Me</a></li>
-              <li><a class="item-custom" href="#experience">Experience</a></li>
               <li><a class="item-custom" href="#projects">Projects</a></li>
+              <li><a class="item-custom" href="#experience">Experience</a></li>
               <li><a class="item-custom mouseover" href="pages/blog.html">Blog</a></li>
             </ul>    
           </nav>
         </div>
       </div>
+      <img src="img/click.svg" class="click">
     </header>
 
     
@@ -54,13 +55,13 @@
             </p>
         </section>
         <section class="col-lg-4 col-md-12" style="padding-top: 20px;">
-          <div class="col-lg-12 col-xs-6 verticallogo">
+          <div class="col-lg-12 col-xs-6 verticallogo center-text">
             <img class="img-responsive center-block link" src="img/link.png" alt="Icon">
           </div>
-          <a class="col-lg-12 col-xs-6 verticallogo" href="http://github.com/gaborcsapo" target="_blank">
+          <a class="col-lg-12 col-xs-6 verticallogo center-text" href="http://github.com/gaborcsapo" target="_blank">
             <img class="img-responsive center-block" src="img/github.png" alt="Icon">
           </a> 
-          <a class="col-lg-12 col-xs-4 verticallogo" href="https://ae.linkedin.com/in/gabor-csapo-134a7ab8" target="_blank">
+          <a class="col-lg-12 col-xs-4 verticallogo center-text" href="https://ae.linkedin.com/in/gabor-csapo-134a7ab8" target="_blank">
             <img class="center-block linkedin" src="img/linkedin.png" alt="Icon">
           </a>
           <a class="col-lg-12 col-xs-4 verticallogo center-text" href="img/GaborCsapoCV.pdf" target="_blank">
@@ -71,6 +72,105 @@
           </a>
         </section>
       </div>
+    </div>
+
+    <div id="projects" class="color full-width">
+      <div class="container title-wrapper no-pad-mar">
+        <h1 class="title"><span class="color">My Projects</span></h1>
+      </div>      
+    </div>
+
+    <div class="container"> 
+      <div class="row xp">
+        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
+        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/gender.png" alt="Icon"></div><!--
+        --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
+          <h3>Gender & Ethnicity Bias </h3>
+          <p>Quantifying the glass ceiling for ethnicities and genders in corporate structures. Together with a researcher from Princeton, we are trying to determine statistically how much harder it is to climb the corporate ladder for minorities. The project applies Deep Learning to reconstruct corporate structure from job titles and to predict gender and ethnicity from noisy labels.
+          </p>
+        </div>
+      </div>
+
+      <div class="row xp"> 
+        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
+        <div class="wrapper col-lg-6 col-lg-offset-0 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/seal.png" alt="Icon"></div><!--
+        --><div class="block col-lg-6 col-lg-offset-0 col-md-12 left-align">
+          <h3>Seal Project</h3>
+          <p>Started as a class project, but after going beyond the class requirements with this D3JS visualization, it ended up as a research project with the Center for Sea Level Change. Our dataset is collected by tags put on seals, and I designed a visualization that breaks down the 3D temporal information into 3 views.
+          </p>
+        </div>
+      </div>
+
+      <div class="row xp">
+        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
+        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/drone.png" alt="Icon"></div><!--
+        --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
+          <h3>Drone Design Challenge</h3>
+          <p>Won funding on the Lockheed Martin Drone Design Challenge to realize our idea to 3D map glaciers using a lidar device put on a drone. My task was researching the lidar market, designing the data pipeline and visualizing the resulting point cloud. The project will help scientist understand the motion of glaciers.</p>
+        </div>
+      </div>
+
+      <div class="row xp"> 
+        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
+        <div class="wrapper col-lg-6 col-lg-offset-0 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/mytorch.png" alt="Icon"></div><!--
+        --><div class="block col-lg-6 col-lg-offset-0 col-md-12 left-align">
+          <h3>Mytorch.tech</h3>
+          <p>Mytorch.tech offers a conflict resolution method to the legal gray area of substance abuses in the UAE. The app opens communication channels to resolve conflicts by contacting the person in charge appropriate to the situation in order to avoid unnecessary trouble. 
+          </p>
+        </div>
+      </div>
+
+      <div class="row xp">
+        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
+        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/gender.png" alt="Icon"></div><!--
+        --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
+          <h3>Ethnicity Bubble Experiment</h3>
+          <p>Building on the results from the Gender Ethnicity project, I created a Chrome Extension to compare the number black/white/asian… faces that people are presented with during a regular browsing session. It is an experiment to see how people’s ethnic background reflect their browsing bubble.
+          </p>
+        </div>
+      </div>
+
+      <div class="row xp"> 
+        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
+        <div class="wrapper col-lg-6 col-lg-offset-0 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/interactive.png" alt="Icon"></div><!--
+        --><div class="block col-lg-6 col-lg-offset-0 col-md-12 left-align">
+          <h3>Interactive Websites</h3>
+          <p>The web holds countless opportunities to create web applications that leverage public data and digital services from a wide range of existing web products. I have played around with the <b>Angular 2, Ionic 2, Web Audio API, Instagram API, Google Maps API, Twitter API, Three.js, P5.js, CouchDB, Socket.IO, Tone.JS, Arduino, D3.JS, Twilio</b> and many more things to design some interesting web experiences.
+          </p>
+        </div>
+      </div>
+
+      <div class="row xp">
+        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
+        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/DIYD.jpg" alt="Icon"></div><!--
+        --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
+          <h3>DIYDictionary</h3>
+          <p>This is a selfish project. When I moved a foreign language environment, I met countless new words that I wanted to learn myself. First, I wrote them on pieces of papers, but I kept losing them. I wished there had been an app to store the words electronically… Then I realized I’m a CS major, why not make one for myself?!? I was introduced at a <b>Hackathon in Shanghai</b> to Hybrid Apps and I wanted to give them a try so I used the <b>Ionic Framework with AngularJS and SQLite</b> to build the app I needed.</p>
+        </div>
+      </div>
+
+      <div class="row xp"> 
+        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
+        <div class="wrapper col-lg-6 col-lg-offset-0 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/games.jpg" alt="Icon"></div><!--
+        --><div class="block col-lg-6 col-lg-offset-0 col-md-12 left-align">
+          <h3>Game Design</h3>
+          <p>I like to have fun while I’m learning and the easiest way to do so is to design games. My very first program was a copy of the <b>Snake game</b> that I used to play on my Dad’s Nokia. I also created a <b>2D Creativity Puzzle Game</b>, that requires some brain power and the demolishment of mental walls to solve. In my Software Engineering class we learnt about the Factory, Singleton, Decorator, etc patterns by creating <b>board games</b>.</p>
+        </div>
+      </div>
+
+      <div class="row xp">
+        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
+        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/visual.png" alt="Icon"></div><!--
+        --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
+          <h3>Visual & Computational Design</h3>
+          <p>People decide whether to buy/use/watch a product in 3 seconds. Coders have to acknowledge that humans are visual mammals who judge by the looks, and use that to create the best experiences. I contributed to <b>logo, printout, website designs and a marketing campaign for the Burj Khalifa in Dubai</b>. My specialty is, however, <b>computational and AI art</b>. Check out <a href="https://goo.gl/photos/p3Rjq9RH8nSQYmpz8" target="_blank" onClick="ga('send', 'event', 'Photos', 'openLink', 'Google Photos link');"><b>my favorite photographs here</b>.</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer">
+      <h3 style="text-align: center">Check out my projects on:<a class="" href="http://github.com/gaborcsapo" target="_blank"><img class="img-responsive github" style="position: relative;top: -5px;"src="img/github.png" alt="Icon"></a>,  <a class="verticallogo center-text" href="pages/blog.html" target="_blank"><h2 class="center-text" style="display: inline;">My Blog</h2></a></h3>
     </div>
 
     <div id="experience" class="color full-width">
@@ -131,64 +231,6 @@
       </div>
     </div>
 
-    <div id="projects" class="color full-width">
-      <div class="container title-wrapper no-pad-mar">
-        <h1 class="title"><span class="color">Side Projects</span></h1>
-      </div>      
-    </div>
-
-    <div class="container">      
-      <div class="row xp">
-        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
-        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/DIYD.jpg" alt="Icon"></div><!--
-        --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
-          <h3>DIYDictionary</h3>
-          <p>This is a selfish project. When I moved a foreign language environment, I met countless new words that I wanted to learn myself. First, I wrote them on pieces of papers, but I kept losing them. I wished there had been an app to store the words electronically… Then I realized I’m a CS major, why not make one for myself?!? I was introduced at a <b>Hackathon in Shanghai</b> to Hybrid Apps and I wanted to give them a try so I used the <b>Ionic Framework with AngularJS and SQLite</b> to build the app I needed.</p>
-        </div>
-      </div>
-
-      <div class="row xp"> 
-        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
-        <div class="wrapper col-lg-6 col-lg-offset-0 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/interactive.png" alt="Icon"></div><!--
-        --><div class="block col-lg-6 col-lg-offset-0 col-md-12 left-align">
-          <h3>Interactive Websites</h3>
-          <p>The web holds countless opportunities to create web applications that leverage public data and digital services from a wide range of existing web products. I have played around with the <b>Angular 2, Ionic 2, Web Audio API, Instagram API, Google Maps API, Twitter API, Three.js, P5.js, CouchDB, Socket.IO, Tone.JS, Arduino, D3.JS, Twilio</b> and many more things to design some interesting web experiences.
-          </p>
-        </div>
-      </div>
-
-      <div class="row xp">
-        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
-        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/visual.jpg" alt="Icon"></div><!--
-        --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
-          <h3>Visual Design</h3>
-          <p>People decide whether to buy/use/watch a product in 3 seconds. Coders have to acknowledge that humans are visual mammals who judge by the looks use that to create the best experiences. I contributed to <b>logo, printout, website designs and a marketing campaign for the Burj Khalifa in Dubai</b>. My style is <b>minimalist</b> spiced up with some unique ideas such interactive animations. I often get inspiration from the great artists of Bauhaus like Laszlo Moholy-Nagy.</p>
-        </div>
-      </div>
-
-      <div class="row xp"> 
-        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
-        <div class="wrapper col-lg-6 col-lg-offset-0 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/games.jpg" alt="Icon"></div><!--
-        --><div class="block col-lg-6 col-lg-offset-0 col-md-12 left-align">
-          <h3>Game Design</h3>
-          <p>I like to have fun while I’m learning and the easiest way to do so is to design games. My very first program was a copy of the <b>Snake game</b> that I used to play on my Dad’s Nokia. I also created a <b>2D Creativity Puzzle Game</b>, that requires some brain power and the demolishment of mental walls to solve. In my Software Engineering class we learnt about the Factory, Singleton, Decorator, etc patterns by creating <b>board games</b>.</p>
-        </div>
-      </div>
-
-      <div class="row xp">
-        <!--the empty comment between the divs does some kind of black magic, that is needed for the vertical centering-->
-        <div class="wrapper col-lg-6 col-lg-offset-0 col-lg-push-6 col-md-12 no-padding block"><img class="xp-img img-fluid" src="img/travel.jpg" alt="Icon"></div><!--
-        --><div class="block col-lg-6 col-lg-offset-0 col-lg-pull-6 col-md-12 right-align">
-          <h3>Amateur Travel Photography</h3>
-          <p>I LOVE travelling and I never want to forget the beautiful places I have seen with my eyes. That is why I took up photography and my dream is to hang a thousand pictures above my fireplace by the time I get old. For now I’m mostly using my phone since I like travelling super light, but as the saying goes: not the camera makes the good photographer… If you’re interested, I put together <a href="https://goo.gl/photos/p3Rjq9RH8nSQYmpz8" target="_blank" onClick="ga('send', 'event', 'Photos', 'openLink', 'Google Photos link');"><b>an album with some of my pictures</b>.</a>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="container footer">
-      <h3 style="text-align: center">Check out my projects on:<a class="" href="http://github.com/gaborcsapo" target="_blank"><img class="img-responsive github" src="img/github.png" alt="Icon"></a></h3>
-    </div>
-
     <div class="color full-width">
       <div class="container title-wrapper no-pad-mar">
         <h1 class="title"><span class="color">Skillset</span></h1>  
@@ -228,14 +270,14 @@
 
     <div class="color full-width">
       <div class="footer container">
-        <div class="row">
-          <div class="col-xl-2 col-xs-4 verticallogo">
+        <div class="row"> 
+          <div class="col-xl-2 col-xs-4 verticallogo center-text">
             <img class="img-responsive center-block link" src="img/link.png" alt="Icon">
           </div>
-          <a class="col-xl-2 col-xs-4 verticallogo" href="http://github.com/gaborcsapo" target="_blank">
+          <a class="col-xl-2 col-xs-4 verticallogo center-text" href="http://github.com/gaborcsapo" target="_blank">
             <img class="img-responsive center-block" src="img/github.png" alt="Icon">
           </a> 
-          <a class="col-xl-3 col-xs-4 verticallogo" href="https://ae.linkedin.com/in/gabor-csapo-134a7ab8" target="_blank">
+          <a class="col-xl-3 col-xs-4 verticallogo center-text" href="https://ae.linkedin.com/in/gabor-csapo-134a7ab8" target="_blank">
             <img class="center-block linkedin" src="img/linkedin.png" alt="Icon">
           </a>
           <a class="col-xl-2 col-xs-6 verticallogo center-text" href="img/GaborCsapoCV.pdf" target="_blank">
