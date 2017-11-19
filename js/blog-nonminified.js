@@ -14,6 +14,7 @@ let root = 30
 let major = [ 4, 5, 6 ]
 let minor = [ 10, 12, 15 ]
 
+var timeout = false
 // setup and draw functions ---
 
 function setup() {
@@ -127,8 +128,9 @@ $(document).ready(function() {
   // Each time the user scrolls
   win.scroll(function() {
     // End of the document reached?
-    if ($(document).height() - win.height() - 200 <= win.scrollTop()) {
+    if ($(document).height() - win.height() - 200 <= win.scrollTop() && !timeout) {
         if (count > 0){
+          timeout = true
           $.ajax({
             url: "/pages/blog"+count+".html",
             dataType: 'html',
@@ -137,6 +139,7 @@ $(document).ready(function() {
               $('#contentsWrapper').append(newcontent);
               $('#'+count+'-page').addClass('disabled').attr('title', 'already loaded');
               count--;
+              timeout = false
             },
           });
         } 
