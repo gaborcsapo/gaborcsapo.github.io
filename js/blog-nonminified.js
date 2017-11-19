@@ -127,22 +127,19 @@ $(document).ready(function() {
   // Each time the user scrolls
   win.scroll(function() {
     // End of the document reached?
-    clearTimeout(timeout);  
-    timeout = setTimeout(function() {
-        if ($(document).height() - win.height() - 200 < win.scrollTop()) {
-          if (count > 0){
-            $.ajax({
-              url: "/pages/blog"+count+".html",
-              dataType: 'html',
-              success: function (data) {
-                newcontent=$(data).find('.contents'); 
-                $('#contentsWrapper').append(newcontent);
-                $('#'+count+'-page').addClass('disabled').attr('title', 'already loaded');
-                count--;
-              },
-            });
-          } 
-        }
-      }, 50);
+    if ($(document).height() - win.height() - 200 <= win.scrollTop()) {
+        if (count > 0){
+          $.ajax({
+            url: "/pages/blog"+count+".html",
+            dataType: 'html',
+            success: function (data) {
+              newcontent=$(data).find('.contents'); 
+              $('#contentsWrapper').append(newcontent);
+              $('#'+count+'-page').addClass('disabled').attr('title', 'already loaded');
+              count--;
+            },
+          });
+        } 
+      }
     });
 });

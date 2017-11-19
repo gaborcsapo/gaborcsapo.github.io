@@ -293,16 +293,19 @@ canvas {
 	transition: transform 1s ease; 
 }
 
+.xp:hover .xp-img {
+	transform: scale(1.05);
+}
+
 @media only screen and (max-width: 1200px) and (min-width: 992px)  {
 	.xp-img {
 		max-width: 115%;
 		margin: 0 0 0 -31px;
 		transform: scale(0.9);
 	}
-}
-
-.xp:hover .xp-img {
-	transform: scale3d(1.05,1.05,1.05);
+	.xp:hover .xp-img {
+		transform: scale(0.94);
+	}
 }
 
 .no-padding {
