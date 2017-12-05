@@ -93,6 +93,7 @@ canvas {
 .color {
 	background-color: rgb(246, 230, 10);
 	cursor:pointer;
+	box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 /*navigation bar*/
@@ -131,10 +132,9 @@ canvas {
 }
 
 .click {
-	position: relative;
-    transform: translate(-70%,-160%);
+    position: relative;
+    transform: translate(-7%,-130%);
     float: right;
-    height: 35px;
 }
 
 /*header with the picture and the name*/
@@ -315,6 +315,7 @@ canvas {
 .wrapper {
 	overflow: hidden;
 	background-color: #e6e6e6;
+
 }
 
 .left-align {
