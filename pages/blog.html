@@ -99,6 +99,58 @@
           <div class="card col col-lg-10 col-xl-8">
             <div class="card-block">
               <div class="row">
+                <img class="card-img col col-xs-6 col-xs-offset-3 col-md-3" src="../img/blog/XZ.jpg" alt="Card image cap">
+                <h1 col col-md-8 col-xs-12 text-center">Gender bubbles</h1>
+                <p class="info">POlitics of Code - Gabor Csapo - 11. Dec. 2017</p>
+              </div>
+              <p>The aim of the project was to measure how many male and female faces we are presented with during browsing the internet. I wanted to discover the representation of genders and see which websites are biased towards which gender. Based on marketing, target grouping, culture and echo chambers forming on websites, I hypothesised that a lot of websites would be biased towards a single gender. To conduct this experiment, I designed a multi layered system based on a chrome extension collecting images, a node server, calling python scripts processing images, and a D3 JS front-end to visualize the results.
+              </p>
+              <p class="text-center"><a href="http://10.230.12.17:8000/stats?id=8999146875" target="_blank">Link to my results</a></p>
+              <p class="text-center"><a href="https://github.com/gaborcsapo/Gender-Bubble" target="_blank">Link to Github</a></p>
+              <p class="text-center"><a href="../img/blog/ImageCollector.zip" target="_blank">Download the chrome extension</a></p>
+
+              <div class="button raised" type="button" data-toggle="collapse" data-target="#bubble" aria-expanded="false" aria-controls="collapseExample">
+                <div fit>Expand post</div>
+                <paper-ripple fit></paper-ripple>
+              </div>
+              <div class="collapse" id="bubble">
+                <h3>Chrome extension:</h3>
+                <p>
+                Through a chrome api, the extension sees every webrequest and stores the url’s of the ones that have an image datatype. If the number of the stored urls goes above 150 it sends them to the server for evaluation. In the Popup, you can start/stop recording, request the results of your data collection, and empty the storage.
+                </p>
+                <h3>Server:</h3>
+                <p>
+                Listens to incoming urls. If received, it will download every iamge that is above 5kB, and will call a python process to evaluate the images. 
+                If a visualization is requested, it calls another python process, to create the average face and the image tile. Then it sends an html as response.
+                </p>
+                <h3>Python scripts:</h3>
+                <p>
+                Using dozens of libraries, trained face recognition models, it counts the number of males and females in each image and creates a cut out of each face for the image tiling and the average faces picture.
+                </p>
+                <h3>Front-end:</h3>
+                <p>
+                You see the count of the faces, and an interactive scatterplot for each host domain. You see both the results of your logging and a summary of every user.
+                </p>
+                <h3>Issues: </h3>
+                <p>
+                A big issue is the number of libraries needed for the python scripts. It was a pain to resolve the dependencies. I learnt a lot about concurrency in javascript in the project, but it is still not absolutely perfect. Unfortunately, cached images are not requested from the internet, so for the best result, the user should empty the cache before starting to use the system. Thirdly, the project is wildly violating privacy by downloading and storing +displaying images for anybody.
+                User testing:</h3>
+                <p>
+                </p>
+                <h3>Learning outcomes</h3>
+                <p>
+                The project gave me a lot of though days, but I learnt about JS concurrency, data processing, applying machine learning algorithms, D3, chrome extensions and image processing. Unfortunately, I will have to shut down the project eventually, as it is using too much of my virtual machine, but I hope to archive it in a video.
+                </p>
+              </div>         
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
+          <div class="card col col-lg-10 col-xl-8">
+            <div class="card-block">
+              <div class="row">
                 <img class="card-img col col-xs-6 col-xs-offset-3 col-md-3" src="../img/blog/greentech.jpg" alt="Card image cap">
                 <h1 col col-md-8 col-xs-12 text-center">My quick view on green transformation</h1>
                 <p class="info">Politics of Code - Gabor Csapo - 4. Dec. 2017</p>
