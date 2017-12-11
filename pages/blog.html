@@ -114,22 +114,26 @@
                 <paper-ripple fit></paper-ripple>
               </div>
               <div class="collapse" id="bubble-gender">
-                <h3>Chrome extension:</h3>
+                <h3>Chrome extension</h3>
                 <p>
                 Through a chrome api, the extension sees every webrequest and stores the url’s of the ones that have an image datatype. If the number of the stored urls goes above 150 it sends them to the server for evaluation. In the Popup, you can start/stop recording, request the results of your data collection, and empty the storage.
                 </p>
-                <h3>Server:</h3>
+                <h3>Server</h3>
                 <p>
                 Listens to incoming urls. If received, it will download every iamge that is above 5kB, and will call a python process to evaluate the images. 
                 If a visualization is requested, it calls another python process, to create the average face and the image tile. Then it sends an html as response.
                 </p>
-                <h3>Python scripts:</h3>
+                <h3>Python scripts</h3>
                 <p>
                 Using dozens of libraries, trained face recognition models, it counts the number of males and females in each image and creates a cut out of each face for the image tiling and the average faces picture.
                 </p>
-                <h3>Front-end:</h3>
+                <h3>Front-end</h3>
                 <p>
                 You see the count of the faces, and an interactive scatterplot for each host domain. You see both the results of your logging and a summary of every user.
+                </p>
+                <h3>User testing</h3>
+                <p>
+                Tested 5 close friends from Asian, European and American backgrounds, 3 female, 2 male. Being liberal arts students they all found the project very interesting, but they also revealed holes in my design. The installation is currently very difficult as they have to download the extension from my website. Also, the Webstore page needs to do a good job at explaining the project quickly. The user testing also made me realize that I need way more processing power. Currently on my dual core server, I don’t think I could handle more than 5 people at a time, because the machine learning and image processing is really demanding. As for the visualization, I will have to do a better job at explaining. People didn’t realize what the scatterplot meant, didn’t guess the origins of the hosts at first. The zooming on the scatterplot is good and bad at the same time, I definitely need to set a max zoom. They also asked me to put new metrics up, like comparing .com, .de, .cnn, etc… One big question was privacy, and everybody was really surprised how easily I can grab their private images and download them on my server, which created some concern in them, so I deleted all their pictures. 
                 </p>
                 <h3>Issues: </h3>
                 <p>
