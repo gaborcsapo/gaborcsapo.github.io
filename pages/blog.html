@@ -100,12 +100,12 @@
             <div class="card-block">
               <div class="row">
                 <img class="card-img col col-xs-6 col-xs-offset-3 col-md-3" src="../img/blog/bubble-gender.jpg" alt="Card image cap">
-                <h1 col col-md-8 col-xs-12 text-center">Gender bubbles</h1>
+                <h1 col col-md-8 col-xs-12 text-center">Visual Gender Bias on the Web</h1>
                 <p class="info">POlitics of Code - Gabor Csapo - 11. Dec. 2017</p>
               </div>
-              <p>The aim of the project was to measure how many male and female faces we are presented with during browsing the internet. I wanted to discover the representation of genders and see which websites are biased towards which gender. Based on marketing, target grouping, culture and echo chambers forming on websites, I hypothesised that a lot of websites would be biased towards a single gender. To conduct this experiment, I designed a multi layered system based on a chrome extension collecting images, a node server, calling python scripts processing images, and a D3 JS front-end to visualize the results.
+              <p>Only 24 percent of the people heard or read about in print, radio, and television are female, according to a 2010 Global Media Monitoring Project<sup>1</sup> . This bias in the media will impact, for example, the dominant ideals, expectations about beauty, age, gender, and what is considered normal in a society.<sup>2</sup> While the issue of representation in traditional media has been studied in the past, the issue is less understood on the new medium, the internet. To bridge this gap, I will propose a quantitative method to investigate the visual culture on the internet. While there have been manual and textual analyses <sup>3, 4</sup> , I could not find another project that attempted to analyze the gender bias on the internet from a  visual perspective, which is what gives this project its significance and novelty. The reason for this lack of visual analysis might be because it is only recently that with the new developments in convolutional neural networks (CNN), computers have the vision and power to assess female and male faces on scale with high precision. <sup>5</sup> Relying on these CNNs, I created a tool to count female and male faces on website during a browsing session.
               </p>
-              <p class="text-center"><a href="http://10.230.12.17:8000/stats?id=8999146875" target="_blank">Link to my results</a></p>
+              <p class="text-center"><a href="http://10.230.12.17:8000/stats?id=1038322614" target="_blank">Link to my results</a></p>
               <p class="text-center"><a href="https://github.com/gaborcsapo/Gender-Bubble" target="_blank">Link to Github</a></p>
               <p class="text-center"><a href="../img/blog/ImageCollector.zip" target="_blank">Download the chrome extension</a></p>
 
@@ -114,36 +114,78 @@
                 <paper-ripple fit></paper-ripple>
               </div>
               <div class="collapse" id="bubble-gender">
+                <p>I hypothesised that websites would be biased towards a single gender based on the target groups and content of the website. To measure the differences, I designed a multi layered system based on a chrome extension collecting images, a node server, calling python scripts processing images, and a D3 JS front-end to visualize the results. As an introduction I will walk through each component and what it does.</p>
                 <h3>Chrome extension</h3>
                 <p>
-                Through a chrome api, the extension sees every webrequest and stores the url’s of the ones that have an image datatype. If the number of the stored urls goes above 150 it sends them to the server for evaluation. In the Popup, you can start/stop recording, request the results of your data collection, and empty the storage.
+                Through the Webrequest Chrome API, any chrome extension can get permission to see and collect web request made to servers. My extension is listening for these requests made, and saves the ones that have an image data type. Once we have 150 urls or the user presses the “send” button on the popup, the list of urls is sent to the server to be evaluated. In the popup, you can also start/stop recording, request the results of your data collection, and empty the storage.
                 </p>
                 <h3>Server</h3>
                 <p>
-                Listens to incoming urls. If received, it will download every iamge that is above 5kB, and will call a python process to evaluate the images. 
-                If a visualization is requested, it calls another python process, to create the average face and the image tile. Then it sends an html as response.
+                The heart of the application is a node server, that listens for incoming urls. If received, it will download every image that is above 5kB (smaller than that is too small to find faces), and call a python script to evaluate whether the images contain faces and what their genders are. I don’t filter out duplicates, because even if a user opens BBC 5 times a day and sees the same male face, that face is still viewed five times. If a visualization is requested from the server, it calls another python process, to create the information visualization for the front-end component of the project. Then it sends an html as response.
                 </p>
                 <h3>Python scripts</h3>
                 <p>
-                Using dozens of libraries, trained face recognition models, it counts the number of males and females in each image and creates a cut out of each face for the image tiling and the average faces picture.
+                Using a pre trained CNN by the B-IT-BOTS robotics team <sup>6</sup>, the script first counts the number of male and female faces presented in each image. The robotics team reports accuracies of 96% in the IMDB gender dataset and their model has been used in thousands of projects. Understandably, most pictures don’t contain faces, therefore they are deleted. The second function of this script is to prepare the visualizations created from these images. Using DLIB and OPENCV, the script crops each image to the face, detects landmark points on the images and creates a distortion that corresponds to the average of these faces <sup>7</sup>. It also creates a tile of 100 images to see specific faces.
                 </p>
                 <h3>Front-end</h3>
                 <p>
-                You see the count of the faces, and an interactive scatterplot for each host domain. You see both the results of your logging and a summary of every user.
+                The user is presented the count of each gender, and an interactive scatterplot made using D3JS for each host domain. Each host domain corresponds to a website in general, but it takes a little guessing to find out which one. You see both the results of your logging and a summary of every user. Additionally, I include the average of the faces you were presented, and the image tile. The former would be more useful to see the ethnicity and average skin color, but that is currently not the aim of this project, although it would be a great extension of it in the future. The image tiles could be improved by writing on them what the computers gender guess was. That way the user would have a visual proof of how accurate the system really is.
                 </p>
                 <h3>User testing</h3>
                 <p>
-                Tested 5 close friends from Asian, European and American backgrounds, 3 female, 2 male. Being liberal arts students they all found the project very interesting, but they also revealed holes in my design. The installation is currently very difficult as they have to download the extension from my website. Also, the Webstore page needs to do a good job at explaining the project quickly. The user testing also made me realize that I need way more processing power. Currently on my dual core server, I don’t think I could handle more than 5 people at a time, because the machine learning and image processing is really demanding. As for the visualization, I will have to do a better job at explaining. People didn’t realize what the scatterplot meant, didn’t guess the origins of the hosts at first. The zooming on the scatterplot is good and bad at the same time, I definitely need to set a max zoom. They also asked me to put new metrics up, like comparing .com, .de, .cnn, etc… One big question was privacy, and everybody was really surprised how easily I can grab their private images and download them on my server, which created some concern in them, so I deleted all their pictures. 
+                Tested 5 close friends from Asian, European and American backgrounds, 3 female, 2 male. Being liberal arts students they all found the project very interesting, but they also revealed holes in my design. The installation is currently very difficult as they have to download the extension from my website, enable developer mode and load the extension. Uploading the project to the paid Chrome Webstore would ideal, but I will need to explain the goal of the project clearly through examples and effective text, because the users were not absolutely clear how the whole project worked even after I explained them. I expected them to grasp my concept quicker, but testing readjusted my expectations. The user testing also made me realize that I need way more processing power. Currently on my dual core server, I don’t think I could handle more than 5 people at a time, because the machine learning and image processing is really demanding. The biggest overhead is loading the libraries. As for the visualization, I will have to improve labelling, apply more effective text, and simply have a section just to explain the project. People didn’t realize what the scatterplot meant, didn’t guess the origins of the hosts at first. The zooming on the scatterplot is good and bad at the same time, I definitely need to set a max zoom. They also asked me to put new metrics up, like comparing .com, .de, .cnn, etc… One big question was privacy, and everybody was really surprised how easily I can grab their private images and download them on my server, which created some concern in them, so I deleted all their pictures after the testing was done. 
                 </p>
-                <h3>Issues: </h3>
+                <h3>Issues </h3>
                 <p>
-                A big issue is the number of libraries needed for the python scripts. It was a pain to resolve the dependencies. I learnt a lot about concurrency in javascript in the project, but it is still not absolutely perfect. Unfortunately, cached images are not requested from the internet, so for the best result, the user should empty the cache before starting to use the system. Thirdly, the project is wildly violating privacy by downloading and storing +displaying images for anybody.
-                User testing:</h3>
-                <p>
-                </p>
+                A big issue is the number of libraries needed for the python scripts. Every library depends on 6 other python modules, and controlling the versions and installation environments is a difficult task. In the process, I installed a lot of redundant libraries, and simply the project should be made simpler. I learnt a lot about concurrency in javascript in the project, but it is still not absolutely perfect. Unfortunately, cached images are not requested from the internet, so for the best result, the extension should empty the cache before starting to use the system. Thirdly, the project is wildly violating privacy by downloading and storing + displaying private images of anybody. Changing the platform of the project would a great way to resolve many issues. Currently the analysis part is centralized into the server and the extensions funnel data to the server. A better approach would be to package up the project and make it available for anybody to run and analyze his/her own browsing habits. Only the numbers would be sent to the central server to keep track of the global results. This distributed approach would not only resolve the privacy issue, but also the computational burden. It is not scalable to offer an expensive computation service for free for potentially hundreds of users, but if installation is sufficiently easy, the users can use their own computers. 
+                
                 <h3>Learning outcomes</h3>
                 <p>
-                The project gave me a lot of though days, but I learnt about JS concurrency, data processing, applying machine learning algorithms, D3, chrome extensions and image processing. Unfortunately, I will have to shut down the project eventually, as it is using too much of my virtual machine, but I hope to archive it in a video.
+                The project gave me a lot of though days, but I learnt about JS concurrency, data processing, applying machine learning algorithms, D3, chrome extensions and image processing. Unfortunately, I will have to shut down the project eventually, as it is using too much of my virtual machine, but I hope to develop it in the future to be able to release it open-source or at least to archive it in a video.
+                </p>
+                <h3>Discussion</h3>
+                <p>The goal of the project is measure the visual gender bias on the web, but what were the results and why do they matter? For me the most interesting subjects for analysis were 1. company website, 2. social media, 3. news. Unfortunately, I don’t have the resources for an extensive analysis of the web landscape but after using the tool for 1 week and collecting 2700 faces, I have some fascinating remarks. Companies that really care about diversity invest into their web design. Websites of Goldman Sachs, Morgan Stanley all have a pretty even, sometimes female dominant visual culture. Eastern/Central European news perform terribly with most of their images being of men, while Western news are slightly better in this respect. My instagram feed seems to be female dominant, which might arise from the facts that the platform is mainly female dominant <sup>9</sup> . However, I would be very careful with these conclusions, as the observation period was very small and during development it did not reflect my browsing habits, as well as I was the only main study subject. To create robust studies, we need more users, more metrics, and a lot of time.
+                </p>
+                <p>
+                We live in male-dominated world. Women are underrepresented at major institutions, universities, top businesses, and in government. Web design is an area, where the proper education of professionals can highly impact the image of women in society. Depicting everything with one gender is a baseless representation that exists only to serve itself, which can be interpreted through the argument of Baudrillard’s description of simulacra and a system of simulation. “Simulacra are the baseless images / signs / symbols / products that then propagate a system that demands its own worthless reproduction. Awareness of this degenerative process helps to inoculate us from being part of a simulation problem and to be good stewards of organizational processes.” <sup>11</sup> I hope that measuring and being able to compare websites’ visual culture could spur a conversation to break out of the gender simulacra and to make the internet a more inclusive visual space.
+                </p>
+                <br>
+                <br>
+                <h3>
+                Sources:
+                </h3>
+                <p style="text-align:left;">
+                1. Global Media Monitoring Project 2010, http://cdn.agilitycms.com/who-makes-the-news/Imported/images/reports_2010/global/gmmp_global_report_en.pdf
+                </p>
+                <p style="text-align:left;">
+                2. Rakow, F. & L. Wackwitz (2004). Feminist Communication Theory: Selections in Context. Routledge.
+                </p>
+                <p style="text-align:left;">
+                ​3. Global Name Data: https://github.com/OpenGenderTracking/globalnamedata
+                </p>
+                <p style="text-align:left;">
+                4. Adrienne LaFrance, I Analyzed a Year of My Reporting for Gender Bias and This Is What I Found, 2013 Medium.com
+                </p>
+                <p style="text-align:left;">
+                5. Adit Deshpande The 9 Deep Learning Papers You Need To Know About https://adeshpande3.github.io/adeshpande3.github.io/The-9-Deep-Learning-Papers-You-Need-To-Know-About.html
+                </p>
+                <p style="text-align:left;">
+                6. Arriaga, Octavio, Matias Valdenegro-Toro, and Paul Plöger. "Real-time Convolutional Neural Networks for Emotion and Gender Classification." arXiv preprint arXiv:1710.07557 (2017).
+                </p>
+                <p style="text-align:left;">
+                7. Steyvers, M. Behavior Research Methods, Instruments, & Computers (1999) 31: 359. https://doi.org/10.3758/BF03207733
+                </p>
+                <p style="text-align:left;">
+                8. http://www.diversityinc.com/diversity-management/ask-diversityinc-who-has-the-best-website-for-diversity/
+                </p>
+                <p style="text-align:left;">
+                9. http://www.pewinternet.org/2015/08/19/the-demographics-of-social-media-users/
+                </p>
+                <p style="text-align:left;">
+                10. https://www.mckinsey.com/business-functions/organization/our-insights/why-diversity-matters
+                </p>
+                <p style="text-align:left;">
+                11. Matt Strohmeyer, https://medium.com/30-pages/reading-2-2-simulacra-and-simulation-jean-baudrillard-c0f1cb5227d
                 </p>
               </div>         
             </div>
