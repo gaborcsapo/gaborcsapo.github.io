@@ -74,7 +74,7 @@ var objToday = new Date(),
     dayOfMonth = today + ( objToday.getDate() < 10) ? '0' + objToday.getDate() + domEnder : objToday.getDate() + domEnder,
     months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
     curMonth = months[objToday.getMonth()],
-    curYear = objToday.getFullYear(),
+    curYear = objToday.getFullYear()
 
 var today = dayOfMonth + " of " + curMonth + ", " + curYear;
 
