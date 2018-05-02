@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Liberal Arts</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="typeit.min.js" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <style>
+      h1 {
+        text-align: center;
+      }
+      body{
+        font-family: 'Lato', 'Helvetica', sans-serif;
+      }
+      #blur{
+        position: absolute;    /*matches #content position*/
+        bottom: 72px; left: 72px;    /*matches #content position*/
+        width: 300px;    /*matches #content width*/
+        height: 100px;    /*matches #content height*/
+        -webkit-filter: blur(10px);
+        filter: blur(10px);
+        z-index: -1;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="container">
+      <p id="header" style="padding-left: 10%;padding-top: 1em;""></p>
+      <h1 id="title"></h1>
+      <div id="contents" style="padding-left: 10%; padding-right: 10%; padding-top: 5%; margin-bottom: 10%"></div>
+    </div>
+    <h1 id="blur" style="position: fixed; bottom: 1em; right: 50%;transform: translate(50%);font-weight: 700;"></div>
+    <h1 id="count" style="position: fixed; bottom: 1em; right: 50%;transform: translate(50%);font-weight: 700;">0</h1>
+
+
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="texts.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
