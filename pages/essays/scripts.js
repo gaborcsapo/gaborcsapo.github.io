@@ -68,9 +68,19 @@ var author = new TypeIt('#header', {
     
 });
 
+
+var objToday = new Date(),
+    domEnder = function() { var a = objToday; if (/1/.test(parseInt((a + "").charAt(0)))) return "th"; a = parseInt((a + "").charAt(1)); return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th" }(),
+    dayOfMonth = today + ( objToday.getDate() < 10) ? '0' + objToday.getDate() + domEnder : objToday.getDate() + domEnder,
+    months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+    curMonth = months[objToday.getMonth()],
+    curYear = objToday.getFullYear(),
+
+var today = dayOfMonth + " of " + curMonth + ", " + curYear;
+
 author.type("Rudolf")
 author.break()
-author.type("20 Jan 2021")
+author.type(today)
 author.break()
 author.type("Class on Hitting the Word Count")
 author.pause(3000)
