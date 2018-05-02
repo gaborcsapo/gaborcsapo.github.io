@@ -1,6 +1,6 @@
 i = 1
 var typer = new TypeIt('#contents', {
-	speed: 0,
+	speed: 100,
 	autoStart: false,
     lifeLike: true,
     beforeString: function(step, queue, instance){
