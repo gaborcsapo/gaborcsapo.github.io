@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Liberal Arts</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="typeit.min.js" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <style>
       h1 {
@@ -19,18 +15,10 @@
       body{
         font-family: 'Lato', 'Helvetica', sans-serif;
       }
-      #blur{
-        position: absolute;    /*matches #content position*/
-        bottom: 72px; left: 72px;    /*matches #content position*/
-        width: 300px;    /*matches #content width*/
-        height: 100px;    /*matches #content height*/
-        -webkit-filter: blur(10px);
-        filter: blur(10px);
-        z-index: -1;
-      }
     </style>
 
   </head>
+
   <body>
     <div class="container">
       <p id="header" style="padding-left: 10%;padding-top: 1em;""></p>
@@ -39,11 +27,13 @@
     </div>
     <h1 id="blur" style="position: fixed; bottom: 1em; right: 50%;transform: translate(50%);font-weight: 700;"></div>
     <h1 id="count" style="position: fixed; bottom: 1em; right: 50%;transform: translate(50%);font-weight: 700;">0</h1>
-
-
+    <button style="position: fixed; bottom: 3em; right: 0;transform: translate(-30%);" type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="left" data-content="Wondering what you just read? Some time ago, I asked fellow students on facebook to submit academic essays and I didn’t have to wait long to receive 200 from some great people on campus. The essays were then used to train an artificial neural network (LSTM) to imitate the writing style of students.  AI isn’t very smart yet. The algorithm learns simple grammar patterns such as “you” is usually followed by a verb, which needs to be conjugated. However, it is unable to recognize the meaning of words, that is why the generated essay resambles real text but is complete gibberish. The nonsensical essays are my final project for the A.rt I.ntel class. Made by Gabor Csapo">
+      About
+    </button>
     
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="texts.js"></script>
+    <script src="typeit.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="scripts.js"></script>
   </body>
 </html>
