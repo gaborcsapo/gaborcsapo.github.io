@@ -129,12 +129,17 @@ canvas {
 		height: 25px;
 		background-color: rgb(246, 230, 10);
 	}
+
+	#anim{
+		box-shadow:0 3px 4px 0 rgba(0, 0, 0, 0.16), 0 0px 0px 0 rgba(0, 0, 0, 0);
+	}
 }
 
 .click {
     position: relative;
     transform: translate(-7%,-130%);
-    float: right;
+	float: right;
+	background-color: transparent !important;
 }
 
 /*header with the picture and the name*/
