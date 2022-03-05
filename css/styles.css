@@ -69,7 +69,7 @@ canvas{display:none;}
 .left-align{text-align:left;}
 .right-align{text-align:right;padding-left:0;}
 @media(max-width:991px){.left-align, .right-align{text-align:center;padding:25px;padding-bottom:40px;}
-.wrapper{padding-left:50px;padding-right:50px;}
+.wrapper{padding-left:50px;padding-right:50px;box-shadow: 0 1px 5px 0 rgb(0 0 0 / 5%), 0 1px 7px 0 rgb(0 0 0 / 5%);}
 }
 .two{font-size:1.6rem;text-align:center;line-height:1;}
 .three{font-size:1.5rem;text-align:center;line-height:1;}
