@@ -59,7 +59,7 @@ function grabWeather() {
 	'Beirut', 'baku', 'Tehran', 'Isfahan', 'salalah', 'Kathmandu', 'colombo', 'Hanoi', 'phomphen', 'Bali', 'palawan', 'Samarkand', 'Zanzibar', 'Accra', 'Timbuktu', 'Tunis', 'Benghazi', 'Beira',
 	'Santiago', 'lima', 'irkutsk', 'Almati', 'Luxor', 'Ljubjana', 'portdouglas', 'Fiji', 'Noumea', 'portlouis' , 'male', 'Juneau', 'jaipur', 'Udaipur', 'Calcutta' ];
 	for (var i = 0; i <= cityNames.length; i++){
-		var Url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + cityNames[i] + "&mode=json&units=metric&cnt="+7+"&APPID=bda8a449681332f32467e05a221adc2a";
+		var Url = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + cityNames[i] + "&mode=json&units=metric&cnt="+7+"&APPID=bda8a449681332f32467e05a221adc2a";
 		makeWeatherRequest(Url);
 	}
 }

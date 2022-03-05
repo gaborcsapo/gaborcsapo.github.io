@@ -1,6 +1,6 @@
 # PerfectWeather
 
-I created this simple website to learn more about Javascript and web development. You can check out the live website [here](http://gc1569.nyuad.im/perfectweather/perfectWeather.html)
+I created this simple website to learn more about Javascript and web development. You can check out the live website [here](https://gc1569.nyuad.im/perfectweather/perfectWeather.html)
 
 The rationale behind the project is that we have many websites that tell you the weather at any point of the Earth but we don’t really care about the places with bad weather. We want to see the places with the perfect weather (at least when planning to travel somewhere). So in my opinion if the website was further developed it could serve some actual purpose in the world of the internet.
 
