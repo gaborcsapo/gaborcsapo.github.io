@@ -325,10 +325,12 @@ canvas {
 
 .left-align {
 	text-align: left;
+	padding: 20px;
 }
 
 .right-align {
 	text-align: right;
+	padding: 20px;
 	padding-left: 0;
 }
 

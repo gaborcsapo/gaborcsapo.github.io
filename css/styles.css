@@ -66,8 +66,8 @@ canvas{display:none;}
 .xp:hover .xp-img{transform:scale3d(1.05,1.05,1.05);}
 .no-padding{padding:0;}
 .wrapper{overflow:hidden;}
-.left-align{text-align:left;}
-.right-align{text-align:right;padding-left:0;}
+.left-align{text-align:left;padding:20px;}
+.right-align{text-align:right; padding:20px;padding-left:0;}
 @media(max-width:991px){.left-align, .right-align{text-align:center;padding:25px;padding-bottom:40px;}
 .wrapper{padding-left:50px;padding-right:50px;box-shadow: 0 1px 5px 0 rgb(0 0 0 / 5%), 0 1px 7px 0 rgb(0 0 0 / 5%);}
 }
