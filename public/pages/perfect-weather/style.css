@@ -1,0 +1,153 @@
+body {
+    margin: 0px;
+    background-color: #eadaa8;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; 
+    text-align: center;
+}
+
+h1 {
+	margin: 0.5em;
+	font-size: 3em;
+	background-color: white;
+	border: 5px solid black;
+	text-align: center;	
+}
+
+a {
+	color: 6A634C;
+}
+
+
+
+#search {
+	display: block;
+	padding: 0.7em;
+	margin: auto;
+	background-color: white;
+	border: 5px solid black;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; 
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#search:hover{
+	border: solid 5px #969696;
+	color: #969696;
+}
+
+#Temp, #Range {
+    padding: 0.8em;
+    margin: 1em;
+    border: solid 5px black;
+    transition: border 0.3s;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; 
+    text-align: center;
+}
+#Temp:focus, #Range:focus,
+#Temp.focus, #Range.focus {
+    border: solid 5px #969696;
+}
+
+.sun {
+	width: 400px;
+	height: 400px;
+	background: yellow;
+	-moz-border-radius: 200px;
+	-webkit-border-radius: 200px;
+	border-radius: 200px;
+	position: absolute;
+	top: -250px;
+	left: -200px ;
+}
+
+.sky {
+	position: absolute;
+	top: 0;
+	bottom: 77%;
+	width: 100%;
+	background: #bbe6ef;
+	
+}
+
+.darkwater{
+	background: #50aeb6;
+	position: absolute;
+	top: 0;
+	bottom: 75%;
+	width: 100%;
+}
+
+.cleanwater{
+	background: #72cccc;
+	position: absolute;
+	top: 0;
+	bottom: 63%;
+	width: 100%;
+}
+
+.shore{
+	background: #e3f2f7;
+	position: absolute;
+	top: 0;
+	bottom: 60%;
+	width: 100%;
+}
+
+.info {
+	position: relative;
+    height: 10em;
+    width: 30em;
+    right: 20px;
+    margin: auto;
+    padding: 0;
+    text-align: center;
+}
+
+.credits {
+	padding: 0.1em;
+	display: block;
+    position: absolute;
+    text-align: left;
+    color: #AA9F7A;
+    top: 84%;
+    left: -18.7em;
+}
+
+.picture {
+	display: block;
+    position: absolute;
+    right: 0;
+    top: 35%;
+    height: 5em;
+    width: 5em;
+    padding: 3em;
+}
+#map {
+    position: absolute;
+    right: 10%;
+    top: 60%;
+    height: 70%;
+    width: 80%;
+    border: 10px solid black;
+  }
+
+.rotate {
+
+/* Safari */
+-webkit-transform: rotate(-90deg);
+
+/* Firefox */
+-moz-transform: rotate(-90deg);
+
+/* IE */
+-ms-transform: rotate(-90deg);
+
+/* Opera */
+-o-transform: rotate(-90deg);
+
+/* Internet Explorer */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
+

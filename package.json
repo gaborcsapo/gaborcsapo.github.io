@@ -1,0 +1,20 @@
+{
+  "name": "gabor-csapo-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "deploy": "npm run build && npm run copy-to-root",
+    "copy-to-root": "cp dist/index.html ./ && cp -r dist/assets ./ && echo 'Built files copied to root for GitHub Pages'",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "mustache": "^4.2.0",
+    "p5": "^1.7.0"
+  }
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Gabor Csapo showcasing his projects, experiences, and expertise in IoT, Urbanism, and Data Science.">
+  <title>Gabor Csapo - IoT | Urbanism | Data</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <link rel="icon" href="./img/favicon.png" type="image/png">
+  <link rel="shortcut icon" href="./img/favicon.ico">
+  
+  <!-- p5.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+  <script type="module" crossorigin src="./assets/index-BTGaQSMX.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-A18l2aWF.css">
+</head>
+<body>
+  <div class="color-placeholder"></div>
+  
+  <header class="hero" id="hero">
+    <div class="hero-animation" id="heroAnimation"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Gábor Csapó</h1>
+      <p class="hero-subtitle">IoT | Urbanism | Data</p>
+      <nav class="hero-nav">
+        <a href="#about" class="nav-link">About Me</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="pages/blog.html" class="nav-link">Blog</a>
+      </nav>
+    </div>
+    <div class="color-picker">
+      <img src="./img/click.svg" alt="Color picker">
+      <span>Click to pick color</span>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2><span class="highlight">Hi! I'm Gábor</span>, an urbanist, hardware hacker and data wrangler currently working at Google in Taiwan.</h2>
+            <p>The goal of my work is to understand and improve our living environment with sustainability and people's fundamental needs in mind.</p>
+          </div>
+          <div class="about-links">
+            <div class="link-icon">
+              <img src="./img/link.png" alt="Links">
+            </div>
+            <a href="https://www.linkedin.com/in/gabor-csapo" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="/img/GaborCsapoCV.pdf" target="_blank" rel="noopener" class="social-link">Resume</a>
+            <a href="https://github.com/gaborcsapo" target="_blank" rel="noopener" class="social-link">Github</a>
+            <a href="pages/blog.html" class="social-link">Blog</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+      <div class="section-header">
+        <div class="container">
+          <h2 class="section-title">My Projects</h2>
+        </div>
+      </div>
+      <div class="container">
+        <div id="projectsList" class="projects-list">
+          <!-- Projects will be rendered here via Mustache -->
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="experience-section">
+      <div class="section-header">
+        <div class="container">
+          <h2 class="section-title">Work Experience</h2>
+        </div>
+      </div>
+      <div class="container">
+        <div id="experienceList" class="experience-list">
+          <!-- Experience will be rendered here via Mustache -->
+        </div>
+      </div>
+    </section>
+
+    <section class="skills-section">
+      <div class="section-header">
+        <div class="container">
+          <h2 class="section-title">Skillset</h2>
+        </div>
+      </div>
+      <div class="container">
+        <div class="skills-grid">
+          <div class="skill-category">
+            <p>IoT</p>
+            <p>Python</p>
+            <p>C Language</p>
+            <p>Javascript</p>
+          </div>
+          <div class="skill-category">
+            <p>Fullstack WebDev</p>
+            <p>Machine Learning</p>
+            <p>Cloud (GCP)</p>
+            <p>Data Vis</p>
+          </div>
+          <div class="skill-category">
+            <p>Mapping</p>
+            <p>Manufacturing</p>
+            <p>Product Design</p>
+            <p>User Experience</p>
+          </div>
+          <div class="skill-category">
+            <p>Mandarin B1</p>
+            <p>Hungarian</p>
+            <p>English</p>
+            <p>German</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <div class="footer-icon">
+            <img src="./img/link.png" alt="Links">
+          </div>
+          <a href="pages/blog.html" class="footer-link">Blog</a>
+          <a href="https://github.com/gaborcsapo" target="_blank" rel="noopener" class="footer-link">
+            <img src="./img/github.png" alt="GitHub">
+          </a>
+          <a href="https://www.linkedin.com/in/gabor-csapo" target="_blank" rel="noopener" class="footer-link">
+            <img src="./img/linkedin.png" alt="LinkedIn">
+          </a>
+          <a href="/img/GaborCsapoCV.pdf" target="_blank" rel="noopener" class="footer-link">Resume</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mustache Templates -->
+  <script id="project-template" type="x-tmpl-mustache">
+    {{#projects}}
+    <article class="project-item {{#isReversed}}reversed{{/isReversed}}">
+      <div class="project-image">
+        <img src="{{image}}" alt="{{title}}" loading="lazy">
+      </div>
+      <div class="project-content">
+        <h3 class="project-title">{{title}}</h3>
+        <p class="project-meta">{{meta}}</p>
+        <div class="project-description">{{{description}}}</div>
+      </div>
+    </article>
+    {{/projects}}
+  </script>
+
+  <script id="experience-template" type="x-tmpl-mustache">
+    {{#experiences}}
+    <article class="experience-item {{#isReversed}}reversed{{/isReversed}}">
+      <div class="experience-image">
+        <img src="{{image}}" alt="{{title}}" loading="lazy">
+      </div>
+      <div class="experience-content">
+        <h3 class="experience-title">{{title}}</h3>
+        <p class="experience-meta">{{meta}}</p>
+        <div class="experience-description">{{{description}}}</div>
+      </div>
+    </article>
+    {{/experiences}}
+  </script>
+
+</body>
+</html>

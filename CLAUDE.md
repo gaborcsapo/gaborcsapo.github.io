@@ -59,6 +59,7 @@ Each time you want to check your work, do the following using the pupeteer MCP s
   1) Open website in chrome
   2) Stay at the top of the page and for 5 seconds take a screenshot every 300ms to see the animation at the top
   3) Scroll down and take a screenshot of each section of the website
+You have to do the above for both MOBILE and DESKTOP separately.
 
 ## Design Philosophy
 
