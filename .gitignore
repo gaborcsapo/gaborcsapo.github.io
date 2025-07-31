@@ -5,9 +5,13 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Build outputs (GitHub Pages needs dist/ to be committed)
-# dist/
+# Build outputs
+dist/
 build/
+
+# But allow root-level built files for GitHub Pages
+!index.html
+!assets/
 
 # Environment variables
 .env
