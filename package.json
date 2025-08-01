@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && mv dist/index.dev.html dist/index.html",
     "deploy": "npm run build && npm run copy-to-root",
-    "copy-to-root": "cp dist/index.html ./ && cp -r dist/assets ./ && echo 'Built files copied to root for GitHub Pages'",
+    "copy-to-root": "rm -rf ./assets ./index.html && cp dist/index.html ./ && cp -r dist/assets ./ && echo 'Built files copied to root for GitHub Pages'",
     "preview": "vite preview"
   },
   "devDependencies": {

@@ -49,45 +49,47 @@ This is a personal portfolio website for Gabor Csapo built using modern web tech
 ### Local Development
 **Important**: ES modules require HTTP protocol, not file:// protocol.
 
-1. **Development server** (recommended):
+1. **Development server** (recommended for active development):
    ```bash
    npm run dev
    ```
-   Starts Vite dev server at `http://localhost:3000`
+   Starts Vite dev server at `http://localhost:3000` with hot reload and instant updates
 
-2. **Preview built site**:
+2. **Preview production build** (for testing final output):
    ```bash
    npm run build
    npm run preview
    ```
-   Serves production build at `http://localhost:4173`
+   Serves optimized production build at `http://localhost:4173`
 
-3. **Alternative HTTP servers**:
+### Development Workflow
+
+1. **Start development** (with hot reload):
    ```bash
-   # From project root
-   python3 -m http.server 8080
-   # Or from dist/ directory after build
-   cd dist && python3 -m http.server 8080
+   npm run dev
    ```
+   - Serves at `http://localhost:3000` 
+   - Auto-reloads on file changes
+   - Use this for active development
 
-### Making Changes
-
-1. **Edit source files**:
+2. **Edit source files**:
    - `src/js/main.js`: Main application logic
-   - `src/js/data.js`: Timeline data and project information
+   - `src/js/data.js`: Timeline data and project information  
    - `src/styles/main.css`: Styling and responsive design
    - `index.dev.html`: HTML structure and templates
 
-2. **Build for production**:
+3. **Test production build**:
    ```bash
-   npm run build
+   npm run preview
    ```
+   - Serves optimized build at `http://localhost:4173`
+   - Use this to verify final output before deployment
 
-3. **Deploy to GitHub Pages**:
+4. **Deploy to GitHub Pages**:
    ```bash
    npm run deploy
    ```
-   Builds and copies files to root directory for GitHub Pages
+   Builds and copies files to root directory for GitHub Pages (cleans old assets first)
 
 ### Timeline Data Management
 - Edit `src/js/data.js` to add/modify life chapters and projects
@@ -107,12 +109,11 @@ Each demo project in `pages/` is self-contained with its own dependencies and ca
 **Critical**: Always serve via HTTP for proper ES module loading.
 
 For testing with Puppeteer MCP server:
-1. Start local server: `npm run preview` or `python3 -m http.server 8080`
-2. Navigate to `http://localhost:4173/` (or appropriate port)
-3. Use Puppeteer with no-sandbox option: `allowDangerous: true, launchOptions: {"headless": true, "args": ["--no-sandbox", "--disable-setuid-sandbox"]}`
-4. Test both desktop (1200x800) and mobile (375x800) viewports
-5. Verify timeline rendering, horizontal scrolling, and animations
-6. Animations need to be tested for 5 seconds with a screenshot every 300ms
+1. Start preview server: `npm run preview` (serves production build at `http://localhost:4173/`)
+2. Use Puppeteer with no-sandbox option: `allowDangerous: true, launchOptions: {"headless": true, "args": ["--no-sandbox", "--disable-setuid-sandbox"]}`
+3. Test both desktop (1200x800) and mobile (375x800) viewports
+4. Verify timeline rendering, horizontal scrolling, and animations
+5. Animations need to be tested for 5 seconds with a screenshot every 300ms
 
 ## Design Philosophy
 
