@@ -16,8 +16,8 @@
   
   <!-- p5.js library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-  <script type="module" crossorigin src="./assets/index-JJ0dw_u1.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-A18l2aWF.css">
+  <script type="module" src="./src/js/main.js"></script>
+  <link rel="stylesheet" href="./src/styles/main.css">
 </head>
 <body>
   <div class="color-placeholder"></div>
@@ -29,8 +29,7 @@
       <p class="hero-subtitle">IoT | Urbanism | Data</p>
       <nav class="hero-nav">
         <a href="#about" class="nav-link">About Me</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#timeline" class="nav-link">My Journey</a>
         <a href="pages/blog.html" class="nav-link">Blog</a>
       </nav>
     </div>
@@ -61,28 +60,16 @@
       </div>
     </section>
 
-    <section id="projects" class="projects-section">
+    <section id="timeline" class="timeline-section">
       <div class="section-header">
         <div class="container">
-          <h2 class="section-title">My Projects</h2>
+          <h2 class="section-title">My Journey</h2>
+          <p class="section-subtitle">A timeline of experiences, projects, and discoveries</p>
         </div>
       </div>
       <div class="container">
-        <div id="projectsList" class="projects-list">
-          <!-- Projects will be rendered here via Mustache -->
-        </div>
-      </div>
-    </section>
-
-    <section id="experience" class="experience-section">
-      <div class="section-header">
-        <div class="container">
-          <h2 class="section-title">Work Experience</h2>
-        </div>
-      </div>
-      <div class="container">
-        <div id="experienceList" class="experience-list">
-          <!-- Experience will be rendered here via Mustache -->
+        <div id="timelineContainer" class="timeline-container">
+          <!-- Timeline will be rendered here via Mustache -->
         </div>
       </div>
     </section>
@@ -145,34 +132,42 @@
   </footer>
 
   <!-- Mustache Templates -->
-  <script id="project-template" type="x-tmpl-mustache">
-    {{#projects}}
-    <article class="project-item {{#isReversed}}reversed{{/isReversed}}">
-      <div class="project-image">
-        <img src="{{image}}" alt="{{title}}" loading="lazy">
+  <script id="timeline-template" type="x-tmpl-mustache">
+    <div class="timeline-line"></div>
+    {{#chapters}}
+    <div class="timeline-chapter" data-chapter="{{id}}">
+      <div class="timeline-marker">
+        <div class="timeline-dot"></div>
       </div>
-      <div class="project-content">
-        <h3 class="project-title">{{title}}</h3>
-        <p class="project-meta">{{meta}}</p>
-        <div class="project-description">{{{description}}}</div>
+      <div class="chapter-content">
+        <div class="chapter-header">
+          <div class="chapter-years">{{years}}</div>
+          <h3 class="chapter-title">{{title}}</h3>
+          <div class="chapter-location">{{location}}</div>
+          <p class="chapter-description">{{description}}</p>
+        </div>
+        <div class="chapter-projects">
+          <div class="projects-scroll-container">
+            <div class="projects-scroll">
+              {{#projects}}
+              <div class="project-card {{type}}">
+                <div class="project-image">
+                  <img src="{{image}}" alt="{{title}}" loading="lazy">
+                </div>
+                <div class="project-content">
+                  <div class="project-type-badge">{{type}}</div>
+                  <h4 class="project-title">{{title}}</h4>
+                  <p class="project-meta">{{meta}}</p>
+                  <div class="project-description">{{{description}}}</div>
+                </div>
+              </div>
+              {{/projects}}
+            </div>
+          </div>
+        </div>
       </div>
-    </article>
-    {{/projects}}
-  </script>
-
-  <script id="experience-template" type="x-tmpl-mustache">
-    {{#experiences}}
-    <article class="experience-item {{#isReversed}}reversed{{/isReversed}}">
-      <div class="experience-image">
-        <img src="{{image}}" alt="{{title}}" loading="lazy">
-      </div>
-      <div class="experience-content">
-        <h3 class="experience-title">{{title}}</h3>
-        <p class="experience-meta">{{meta}}</p>
-        <div class="experience-description">{{{description}}}</div>
-      </div>
-    </article>
-    {{/experiences}}
+    </div>
+    {{/chapters}}
   </script>
 
 </body>

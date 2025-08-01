@@ -4,12 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal portfolio website for Gabor Csapo built as a static site using Bootstrap 4 and Three.js. The site showcases projects, experiences, and includes a blog section.
+This is a personal portfolio website for Gabor Csapo built using modern web technologies with Vite as the build system. The site features an interactive timeline showcasing life chapters with horizontally scrollable project portfolios, Three.js animated backgrounds, and a blog section.
 
 ## Architecture & Structure
 
 ### Core Components
-- **Main Portfolio (`index.html`)**: Interactive homepage with Three.js animated background, color picker functionality, and sections for about, projects, and experience
+- **Main Portfolio (`index.html`)**: Interactive homepage with Three.js animated background, color picker functionality, and a timeline-based journey section
+- **Timeline Section**: Vertical timeline of life chapters (Studies, London, Taipei, San Francisco) with horizontal scrolling project cards
 - **Blog Section (`pages/blog.html`, `pages/blog1.html`, `pages/blog2.html`)**: Multi-page blog with navigation between posts
 - **Sub-projects**: Self-contained demo applications in subdirectories:
   - `pages/gender-bias/`: D3.js data visualization project
@@ -17,34 +18,82 @@ This is a personal portfolio website for Gabor Csapo built as a static site usin
   - `pages/essays/`: TypeIt.js powered essay presentation
 
 ### File Organization
-- `css/`: Contains both minified and non-minified stylesheets
-  - `styles-nonminified.css` / `styles.css`: Main site styles
-  - `blog-nonminified.css` / `blog.css`: Blog-specific styles
-  - Bootstrap CSS files included
-- `js/`: JavaScript files including Three.js components
-  - `scripts-nonminified.js` / `scripts.js`: Main site functionality
-  - `blog-nonminified.js` / `blog.js`: Blog functionality
-  - Three.js library and renderers
-- `img/`: All images including favicons and blog assets organized in subdirectories
-- `pages/`: Secondary pages and sub-applications
+- **Source Files (`src/`)**:
+  - `src/js/main.js`: Main JavaScript entry point with ES modules
+  - `src/js/data.js`: Timeline data organized by life chapters
+  - `src/js/animation.js`: Three.js p5.js animation logic
+  - `src/styles/main.css`: Main stylesheet with timeline styling
+- **Build Files**:
+  - `dist/`: Vite build output directory
+  - `assets/`: Built and minified assets (CSS/JS bundles)
+  - `index.html`: Production build copied to root for GitHub Pages
+- **Development Files**:
+  - `index.dev.html`: Source HTML file used as Vite entry point
+  - `vite.config.js`: Vite configuration
+  - `package.json`: Dependencies and build scripts
+- **Static Assets**:
+  - `img/`: All images including favicons and blog assets organized in subdirectories
+  - `pages/`: Secondary pages and sub-applications (preserved as-is)
 
 ### Development Approach
-- **Static Site**: No build process required - files can be served directly
-- **Asset Management**: Uses both minified and non-minified versions (suggest editing non-minified versions)
-- **Styling**: Custom CSS built on Bootstrap 4 foundation with Google Fonts (Montserrat, Roboto Mono)
-- **Interactive Elements**: Three.js for 3D animations, custom color picker functionality
+- **Modern Build System**: Uses Vite for ES module bundling, hot reload, and optimization
+- **ES Modules**: Modern JavaScript with import/export statements
+- **Template Rendering**: Mustache.js for dynamic timeline content generation
+- **Responsive Design**: Mobile-first design with horizontal scrolling project cards
+- **Styling**: Custom CSS with CSS custom properties, no external framework dependencies
+- **Interactive Elements**: p5.js/Three.js for 3D animations, horizontal touch/mouse scrolling
 - **Analytics**: Google Analytics integration throughout pages
 
 ## Common Development Tasks
 
 ### Local Development
-- Serve files using any static web server (e.g., `python -m http.server` or `npx serve`)
-- No compilation or build step required
+**Important**: ES modules require HTTP protocol, not file:// protocol.
+
+1. **Development server** (recommended):
+   ```bash
+   npm run dev
+   ```
+   Starts Vite dev server at `http://localhost:3000`
+
+2. **Preview built site**:
+   ```bash
+   npm run build
+   npm run preview
+   ```
+   Serves production build at `http://localhost:4173`
+
+3. **Alternative HTTP servers**:
+   ```bash
+   # From project root
+   python3 -m http.server 8080
+   # Or from dist/ directory after build
+   cd dist && python3 -m http.server 8080
+   ```
 
 ### Making Changes
-- Edit non-minified CSS files (`css/styles-nonminified.css`, `css/blog-nonminified.css`)
-- Edit non-minified JS files (`js/scripts-nonminified.js`, `js/blog-nonminified.js`)
-- Remember to manually minify files if needed for production
+
+1. **Edit source files**:
+   - `src/js/main.js`: Main application logic
+   - `src/js/data.js`: Timeline data and project information
+   - `src/styles/main.css`: Styling and responsive design
+   - `index.dev.html`: HTML structure and templates
+
+2. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
+3. **Deploy to GitHub Pages**:
+   ```bash
+   npm run deploy
+   ```
+   Builds and copies files to root directory for GitHub Pages
+
+### Timeline Data Management
+- Edit `src/js/data.js` to add/modify life chapters and projects
+- Each chapter has: `id`, `title`, `location`, `years`, `description`, `projects[]`
+- Projects are classified as `type: "work"` or `type: "hobby"`
+- Work projects appear first, then hobby projects in descending importance
 
 ### Adding Blog Posts
 - Follow existing pattern in `pages/blog1.html`, `pages/blog2.html`
@@ -54,12 +103,16 @@ This is a personal portfolio website for Gabor Csapo built as a static site usin
 ### Sub-project Structure
 Each demo project in `pages/` is self-contained with its own dependencies and can be developed independently.
 
-### Design verification
-Each time you want to check your work, do the following using the pupeteer MCP server:
-  1) Open website in chrome
-  2) Stay at the top of the page and for 5 seconds take a screenshot every 300ms to see the animation at the top
-  3) Scroll down and take a screenshot of each section of the website
-You have to do the above for both MOBILE and DESKTOP separately.
+### Design Verification
+**Critical**: Always serve via HTTP for proper ES module loading.
+
+For testing with Puppeteer MCP server:
+1. Start local server: `npm run preview` or `python3 -m http.server 8080`
+2. Navigate to `http://localhost:4173/` (or appropriate port)
+3. Use Puppeteer with no-sandbox option: `allowDangerous: true, launchOptions: {"headless": true, "args": ["--no-sandbox", "--disable-setuid-sandbox"]}`
+4. Test both desktop (1200x800) and mobile (375x800) viewports
+5. Verify timeline rendering, horizontal scrolling, and animations
+6. Animations need to be tested for 5 seconds with a screenshot every 300ms
 
 ## Design Philosophy
 

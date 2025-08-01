@@ -1,6 +1,6 @@
 // Main JavaScript module
 import Mustache from 'mustache';
-import { portfolioData } from './data.js';
+import { timelineData } from './data.js';
 // Animation will be loaded separately since p5 needs to be in global scope
 
 // DOM Content Loaded
@@ -39,22 +39,16 @@ async function loadP5Animation() {
 }
 
 function renderTemplates() {
-  // Render projects
-  const projectTemplate = document.getElementById('project-template');
-  const projectsList = document.getElementById('projectsList');
+  // Render timeline
+  const timelineTemplate = document.getElementById('timeline-template');
+  const timelineContainer = document.getElementById('timelineContainer');
   
-  if (projectTemplate && projectsList) {
-    const projectHtml = Mustache.render(projectTemplate.innerHTML, portfolioData);
-    projectsList.innerHTML = projectHtml;
-  }
-  
-  // Render experiences
-  const experienceTemplate = document.getElementById('experience-template');
-  const experienceList = document.getElementById('experienceList');
-  
-  if (experienceTemplate && experienceList) {
-    const experienceHtml = Mustache.render(experienceTemplate.innerHTML, portfolioData);
-    experienceList.innerHTML = experienceHtml;
+  if (timelineTemplate && timelineContainer) {
+    const timelineHtml = Mustache.render(timelineTemplate.innerHTML, timelineData);
+    timelineContainer.innerHTML = timelineHtml;
+    
+    // Initialize horizontal scrolling for project cards
+    initProjectScrolling();
   }
 }
 
@@ -96,6 +90,45 @@ function initSmoothScrolling() {
   });
 }
 
+function initProjectScrolling() {
+  // Initialize horizontal scrolling for project cards
+  const scrollContainers = document.querySelectorAll('.projects-scroll-container');
+  
+  scrollContainers.forEach(container => {
+    const scrollArea = container.querySelector('.projects-scroll');
+    let isScrolling = false;
+    
+    // Add mouse wheel horizontal scroll
+    container.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        scrollArea.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+    
+    // Add touch support for mobile
+    let startX = 0;
+    let scrollLeft = 0;
+    
+    container.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].pageX - container.offsetLeft;
+      scrollLeft = scrollArea.scrollLeft;
+    });
+    
+    container.addEventListener('touchmove', (e) => {
+      if (!startX) return;
+      e.preventDefault();
+      const x = e.touches[0].pageX - container.offsetLeft;
+      const walk = (x - startX) * 2;
+      scrollArea.scrollLeft = scrollLeft - walk;
+    });
+    
+    container.addEventListener('touchend', () => {
+      startX = 0;
+    });
+  });
+}
+
 function initScrollAnimations() {
   // Intersection Observer for fade-in animations
   const observerOptions = {
@@ -112,7 +145,7 @@ function initScrollAnimations() {
   }, observerOptions);
   
   // Observe elements that should animate in
-  const animatedElements = document.querySelectorAll('.project-item, .experience-item, .skill-category');
+  const animatedElements = document.querySelectorAll('.timeline-chapter, .project-card, .skill-category');
   animatedElements.forEach(el => {
     el.classList.add('fade-in');
     observer.observe(el);
