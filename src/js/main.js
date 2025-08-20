@@ -1,6 +1,5 @@
 // Main JavaScript module
-import Mustache from 'mustache';
-import { timelineData } from './data.js';
+import { initTimelineComponent } from './timelineComponent.js';
 // Animation will be loaded separately since p5 needs to be in global scope
 
 // DOM Content Loaded
@@ -10,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initializeApp() {
   // Initialize components
-  renderTemplates();
+  initTimelineComponent();
   initColorPicker();
   initSmoothScrolling();
   initScrollAnimations();
@@ -30,33 +29,28 @@ async function loadP5Animation() {
   }
   
   try {
-    const { initAnimation, changeTheme } = await import('./animation.js');
+    const { initAnimation, changeTheme } = await import('./heroAnimation.js');
     initAnimation();
     window.changeTheme = changeTheme;
   } catch (error) {
-    console.error('Failed to load animation:', error);
+    console.error('Failed to load hero animation:', error);
   }
 }
 
-function renderTemplates() {
-  // Render timeline
-  const timelineTemplate = document.getElementById('timeline-template');
-  const timelineContainer = document.getElementById('timelineContainer');
-  
-  if (timelineTemplate && timelineContainer) {
-    const timelineHtml = Mustache.render(timelineTemplate.innerHTML, timelineData);
-    timelineContainer.innerHTML = timelineHtml;
-    
-    // Initialize horizontal scrolling for project cards
-    initProjectScrolling();
-  }
-}
 
 function initColorPicker() {
-  const colorPicker = document.querySelector('.color-picker');
+  // Hero area click handler - click anywhere on hero to change theme
+  const heroElement = document.querySelector('.hero');
+  const clickHint = document.querySelector('.click-hint');
   
-  if (colorPicker) {
-    colorPicker.addEventListener('click', (e) => {
+  if (heroElement) {
+    // Add click handler to entire hero area
+    heroElement.addEventListener('click', (e) => {
+      // Don't trigger if clicking on navigation links
+      if (e.target.matches('a, a *')) {
+        return;
+      }
+      
       e.preventDefault();
       
       // Call changeTheme if available
@@ -64,12 +58,17 @@ function initColorPicker() {
         window.changeTheme();
       }
       
-      // Add visual feedback
-      colorPicker.style.transform = 'translateY(-4px) scale(0.95)';
-      setTimeout(() => {
-        colorPicker.style.transform = 'translateY(-2px) scale(1)';
-      }, 150);
+      // Add visual feedback to click hint
+      if (clickHint) {
+        clickHint.style.transform = 'translateX(-50%) scale(0.95)';
+        setTimeout(() => {
+          clickHint.style.transform = 'translateX(-50%) scale(1)';
+        }, 150);
+      }
     });
+    
+    // Make hero area appear clickable
+    heroElement.style.cursor = 'pointer';
   }
 }
 
@@ -90,44 +89,6 @@ function initSmoothScrolling() {
   });
 }
 
-function initProjectScrolling() {
-  // Initialize horizontal scrolling for project cards
-  const scrollContainers = document.querySelectorAll('.projects-scroll-container');
-  
-  scrollContainers.forEach(container => {
-    const scrollArea = container.querySelector('.projects-scroll');
-    let isScrolling = false;
-    
-    // Add mouse wheel horizontal scroll
-    container.addEventListener('wheel', (e) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        scrollArea.scrollLeft += e.deltaY;
-      }
-    }, { passive: false });
-    
-    // Add touch support for mobile
-    let startX = 0;
-    let scrollLeft = 0;
-    
-    container.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].pageX - container.offsetLeft;
-      scrollLeft = scrollArea.scrollLeft;
-    });
-    
-    container.addEventListener('touchmove', (e) => {
-      if (!startX) return;
-      e.preventDefault();
-      const x = e.touches[0].pageX - container.offsetLeft;
-      const walk = (x - startX) * 2;
-      scrollArea.scrollLeft = scrollLeft - walk;
-    });
-    
-    container.addEventListener('touchend', () => {
-      startX = 0;
-    });
-  });
-}
 
 function initScrollAnimations() {
   // Intersection Observer for fade-in animations
@@ -145,7 +106,8 @@ function initScrollAnimations() {
   }, observerOptions);
   
   // Observe elements that should animate in
-  const animatedElements = document.querySelectorAll('.timeline-chapter, .project-card, .skill-category');
+  // Note: project cards are now dynamically created by timeline component
+  const animatedElements = document.querySelectorAll('.skill-category');
   animatedElements.forEach(el => {
     el.classList.add('fade-in');
     observer.observe(el);

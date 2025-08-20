@@ -23,19 +23,14 @@
   <div class="color-placeholder"></div>
   
   <header class="hero" id="hero">
-    <div class="hero-animation" id="heroAnimation"></div>
-    <div class="hero-content">
-      <h1 class="hero-title">Gábor Csapó</h1>
-      <p class="hero-subtitle">IoT | Urbanism | Data</p>
-      <nav class="hero-nav">
-        <a href="#about" class="nav-link">About Me</a>
-        <a href="#timeline" class="nav-link">My Journey</a>
-        <a href="pages/blog.html" class="nav-link">Blog</a>
-      </nav>
-    </div>
-    <div class="color-picker">
-      <img src="./img/click.svg" alt="Color picker">
-      <span>Click to pick color</span>
+    <div id="canvas-container">
+      <div class="hero-animation" id="heroAnimation"></div>
+      <div id="main-text">
+        <h1><span>Gábor</span> <span>Csapó</span></h1>
+        <h2>IoT | Urbanism | Data</h2>
+      </div>
+      <div class="click-hint">Click for new color | Scroll down for more...</div>
+      <div class="palette-name" id="palette-name"></div>
     </div>
   </header>
 
@@ -60,115 +55,75 @@
       </div>
     </section>
 
-    <section id="timeline" class="timeline-section">
-      <div class="section-header">
-        <div class="container">
-          <h2 class="section-title">My Journey</h2>
-          <p class="section-subtitle">A timeline of experiences, projects, and discoveries</p>
+    <section id="timeline" class="timeline-section-wrapper">
+      
+      <!-- Timeline Hint -->
+      <div class="timeline-hint-container" id="timelineHintContainer">
+        <div class="timeline-hint">
+          Click any point on the timeline to navigate
         </div>
       </div>
-      <div class="container">
-        <div id="timelineContainer" class="timeline-container">
-          <!-- Timeline will be rendered here via Mustache -->
-        </div>
-      </div>
-    </section>
 
-    <section class="skills-section">
-      <div class="section-header">
-        <div class="container">
-          <h2 class="section-title">Skillset</h2>
-        </div>
-      </div>
-      <div class="container">
-        <div class="skills-grid">
-          <div class="skill-category">
-            <p>IoT</p>
-            <p>Python</p>
-            <p>C Language</p>
-            <p>Javascript</p>
-          </div>
-          <div class="skill-category">
-            <p>Fullstack WebDev</p>
-            <p>Machine Learning</p>
-            <p>Cloud (GCP)</p>
-            <p>Data Vis</p>
-          </div>
-          <div class="skill-category">
-            <p>Mapping</p>
-            <p>Manufacturing</p>
-            <p>Product Design</p>
-            <p>User Experience</p>
-          </div>
-          <div class="skill-category">
-            <p>Mandarin B1</p>
-            <p>Hungarian</p>
-            <p>English</p>
-            <p>German</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+      <!-- Timeline with Navigation -->
+      <div class="timeline-wrapper">
+        <!-- Timeline Navigation Arrows -->
+        <button class="timeline-nav timeline-nav-prev" id="timelinePrev" aria-label="Previous chapter">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-links">
-          <div class="footer-icon">
-            <img src="./img/link.png" alt="Links">
-          </div>
-          <a href="pages/blog.html" class="footer-link">Blog</a>
-          <a href="https://github.com/gaborcsapo" target="_blank" rel="noopener" class="footer-link">
-            <img src="./img/github.png" alt="GitHub">
-          </a>
-          <a href="https://www.linkedin.com/in/gabor-csapo" target="_blank" rel="noopener" class="footer-link">
-            <img src="./img/linkedin.png" alt="LinkedIn">
-          </a>
-          <a href="./img/GaborCsapoCV.pdf" target="_blank" rel="noopener" class="footer-link">Resume</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Mustache Templates -->
-  <script id="timeline-template" type="x-tmpl-mustache">
-    <div class="timeline-line"></div>
-    {{#chapters}}
-    <div class="timeline-chapter" data-chapter="{{id}}">
-      <div class="timeline-marker">
-        <div class="timeline-dot"></div>
-      </div>
-      <div class="chapter-content">
-        <div class="chapter-header">
-          <div class="chapter-years">{{years}}</div>
-          <h3 class="chapter-title">{{title}}</h3>
-          <div class="chapter-location">{{location}}</div>
-          <p class="chapter-description">{{description}}</p>
-        </div>
-        <div class="chapter-projects">
-          <div class="projects-scroll-container">
-            <div class="projects-scroll">
-              {{#projects}}
-              <div class="project-card {{type}}">
-                <div class="project-image">
-                  <img src="{{image}}" alt="{{title}}" loading="lazy">
-                </div>
-                <div class="project-content">
-                  <div class="project-type-badge">{{type}}</div>
-                  <h4 class="project-title">{{title}}</h4>
-                  <p class="project-meta">{{meta}}</p>
-                  <div class="project-description">{{{description}}}</div>
-                </div>
-              </div>
-              {{/projects}}
+        <!-- Timeline -->
+        <div class="timeline-section" id="timelineSection">
+          <div class="timeline-line"></div>
+          <div class="timeline-track">
+            <div class="timeline-slider" id="timelineSlider">
+              <!-- Dots will be generated here -->
             </div>
           </div>
         </div>
+
+        <!-- Timeline Navigation Arrows -->
+        <button class="timeline-nav timeline-nav-next" id="timelineNext" aria-label="Next chapter">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
-    </div>
-    {{/chapters}}
-  </script>
+
+      <!-- Content -->
+      <div class="container">
+        <!-- Chapter Content -->
+        <div class="chapter-content">
+          <p class="chapter-description" id="chapterDescription">
+            <!-- Description will be generated here -->
+          </p>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Cards will be generated here -->
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="navigation-bottom">
+          <button class="nav-button" id="prevButton" aria-label="Previous chapter">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button class="nav-button" id="nextButton" aria-label="Next chapter">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
 
 </body>
 </html>

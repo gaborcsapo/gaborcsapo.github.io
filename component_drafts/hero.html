@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>P5.js Animated Circles - Portfolio Effect</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+   <style>
+       :root {
+           /* Default text colors - will be updated by JavaScript */
+           --text-color: rgb(40, 40, 40);
+           --text-color-dim: rgba(40, 40, 40, 0.6);
+           --text-color-light: rgba(40, 40, 40, 0.5);
+       }
+
+       body {
+           margin: 0;
+           padding: 0;
+           overflow: hidden;
+           font-family: 'Montserrat', sans-serif;
+       }
+
+       #canvas-container {
+           position: relative;
+           width: 100vw;
+           height: 100vh;
+       }
+
+       #main-text {
+           position: absolute;
+           top: 50%;
+           left: 50%;
+           width: 90%;
+           transform: translate(-50%, -50%);
+           text-align: center;
+           pointer-events: none;
+           z-index: 10;
+       }
+
+       #main-text h1 {
+           font-size: 3.5rem;
+           margin: 0;
+           font-weight: 400;
+           transition: color 3s ease;
+           color: var(--text-color);
+       }
+
+       #main-text h2 {
+           font-size: 1.3rem;
+           margin: 10px 0;
+           font-weight: 300;
+           opacity: 0.8;
+           transition: color 3s ease;
+           padding: 0 20px;
+           color: var(--text-color);
+       }
+
+       .click-hint {
+           position: absolute;
+           bottom: 20px;
+           left: 50%;
+           transform: translateX(-50%);
+           font-size: 0.9rem;
+           cursor: pointer;
+           z-index: 10;
+           transition: color 3s ease;
+           white-space: nowrap;
+           padding: 0 10px;
+           color: var(--text-color-dim);
+       }
+
+       .palette-name {
+           position: absolute;
+           top: 20px;
+           right: 20px;
+           font-size: 0.9rem;
+           z-index: 10;
+           font-style: italic;
+           opacity: 0;
+           transition: opacity 0.5s ease, color 0.5s ease;
+           padding: 0 10px;
+           color: var(--text-color-light);
+       }
+
+       .palette-name.show {
+           opacity: 1;
+       }
+
+       @media (max-width: 480px) {
+           .palette-name { max-width: 150px; text-align: right; }
+           #main-text h1 span {
+               display: block;
+           }
+       }
+   </style>
+</head>
+<body>
+   <div id="canvas-container">
+       <div id="main-text">
+           <h1><span>Gábor</span> <span>Csapó</span></h1>
+           <h2>AI | Evaluation | Data</h2>
+       </div>
+       <div class="click-hint">Click for new color | Scroll down for more...</div>
+       <div class="palette-name" id="palette-name"></div>
+   </div>
+
+
+   <script>
+       // Enhanced color palette system with artistic themes
+       const artPalettes = [
+           {
+               name: "Monet's Garden",
+               colors: ["#862B0D", "#FFF9C9", "#FFC95F", "#333333"],
+               bgColor: "#9DB779",
+               grainTint: [255, 252, 201],
+           },
+           {
+               name: "Forest Mist",
+               colors: ["#7A8C68", "#99A686", "#BFB7A8", "#333333", "#59404B"],
+               bgColor: "#4B5940",
+               grainTint: [153, 166, 134],
+           },
+           {
+               name: "Sunset",
+               colors: ["#6B240C", "#48240D", "#E48F45", "#F5CCA0", "#6B240C", "#333333"],
+               bgColor: "#994D1C",
+               grainTint: [245, 204, 160],
+           },
+           {
+               name: "Arctic Aurora",
+               colors: ["#001219", "#00734D", "#0a9396", "#94d2bd", "#333333"],
+               bgColor: "#005f73",
+               grainTint: [148, 210, 189],
+           },
+           {
+               name: "Golden Hour",
+               colors: ["#333333", "#E47D6A", "#787D46", "#7D4E25", "#222B1B"], // FIXED: removed double hash
+               bgColor: "#E4BA6A",
+               grainTint: [140, 120, 110],
+            },
+            {
+                name: "Kandinsky",
+                colors: ["#8D95A6", "#F28705", "#D98825", "#333333"],
+                bgColor: "#0A7360",
+                grainTint: [250, 170, 25],
+            },
+           {
+               name: "Twilight",
+               colors: ["#AAABA8", "#AB5A55", "#CD9B9D", "#DBC7C9", "#033540"],
+               bgColor: "#BC7B77",
+               grainTint: [219, 199, 201],
+           },
+           {
+               name: "Ocean Depths",
+               colors: ["#19A7CE", "#B0DAFF", "#FEFF86"],
+               bgColor: "#146C94",
+               grainTint: [176, 218, 255],
+           },
+       ];
+
+       // Floating circle class
+       class FloatingCircle {
+           constructor(x, y, radius, startPhase, rotationAngle, speedMultiplier, initialRadius) {
+               this.centerX = x;
+               this.centerY = y;
+               this.baseRadius = radius;
+               this.radius = radius;
+               this.targetRadius = radius;
+               this.phase = startPhase;
+               this.rotationAngle = rotationAngle;
+               this.floatSpeed = 0.01 * speedMultiplier;
+               this.colorIndex = floor(random(currentPalette.colors.length));
+               this.initialRadius = initialRadius;
+
+               // Movement properties - these will transition smoothly
+               this.floatRadius = 30;
+               this.targetFloatRadius = min(30, baseCircleRadius * 0.12);
+
+               // Ripple effect properties
+               this.rippleAmount = 0;
+               this.rippleDecay = 0.9;
+               this.rippleStrength = 40;
+               this.targetRippleStrength = min(30, baseCircleRadius * 0.12);
+
+               // Calculate initial position
+               this.updatePosition();
+           }
+
+           updatePosition() {
+               let baseX = cos(this.phase) * this.floatRadius;
+               let baseY = sin(this.phase * 2) * this.floatRadius * 0.5;
+
+               this.x = this.centerX + baseX * cos(this.rotationAngle) - baseY * sin(this.rotationAngle);
+               this.y = this.centerY + baseX * sin(this.rotationAngle) + baseY * cos(this.rotationAngle);
+           }
+
+           update() {
+               this.phase += this.floatSpeed * globalSpeedMultiplier;
+
+               // Smoothly transition float radius and ripple strength
+               this.floatRadius += (this.targetFloatRadius - this.floatRadius) * 0.02;
+               this.rippleStrength += (this.targetRippleStrength - this.rippleStrength) * 0.02;
+
+               this.updatePosition();
+               this.checkHover();
+
+               if (animationState.isOpening) {
+                   // During opening, use baseRadius
+                   this.radius = this.baseRadius + this.rippleAmount;
+               } else {
+                   // During breathing animation, smoothly transition to targetRadius
+                   let targetWithRipple = this.targetRadius + this.rippleAmount;
+                   this.radius += (targetWithRipple - this.radius) * 0.014;
+               }
+           }
+
+           display() {
+               if (!this.radius || this.radius <= 0) return;
+
+               noFill();
+               let c = color(currentPalette.colors[this.colorIndex]);
+               let alpha = this.rippleAmount > 0 ? min(80 + this.rippleAmount, 120) : 80;
+               c.setAlpha(alpha);
+
+               stroke(c);
+               let minDimension = min(width || windowWidth, height || windowHeight);
+               console.log(minDimension)
+               strokeWeight(minDimension < 540 ? 3 : 2); // Simplified screen size check
+               circle(this.x, this.y, this.radius * 2);
+           }
+
+           setTargetRadius(minSize, maxSize) {
+               this.targetRadius = random(minSize, maxSize);
+           }
+
+           updateColorIndex() {
+               this.colorIndex = floor(random(currentPalette.colors.length));
+           }
+
+           checkHover() {
+               if (mouseX !== undefined && mouseY !== undefined) {
+                   let distance = dist(mouseX, mouseY, this.x, this.y);
+                   if (distance < this.radius) {
+                       this.rippleAmount = this.rippleStrength; // Use current rippleStrength, not fixed value
+                   }
+               }
+
+               this.rippleAmount *= this.rippleDecay;
+               if (this.rippleAmount < 0.1) {
+                   this.rippleAmount = 0;
+               }
+           }
+
+           // Method to update target properties smoothly
+           updateTargets() {
+               this.targetFloatRadius = min(30, baseCircleRadius * 0.12);
+               this.targetRippleStrength = min(30, baseCircleRadius * 0.12);
+           }
+       }
+
+       // Global variables
+       let circles = [];
+       let currentPaletteIndex = 0;
+       let currentPalette = artPalettes[0];
+       let bgColor;
+       let overAllTexture;
+       let baseCircleRadius = 100;
+
+       // Animation state
+       const animationState = {
+           isOpening: true,
+           startTime: 0,
+           duration: 4000,
+           progress: 0
+       };
+
+       // Grain fade control
+       const grainFade = {
+           duration: 3000, // 3 seconds
+           opacity: 0,
+           isComplete: false
+       };
+
+       // Speed control
+       const speedControl = {
+           current: 1,
+           target: 1,
+           transitionRate: 0.02
+       };
+
+       // Size control
+       const sizeControl = {
+           transitionProgress: 0,
+           transitionRate: 0.007,
+           isFirstBreathing: true // Track if this is the first breathing cycle
+       };
+
+       let globalSpeedMultiplier = 1;
+
+       function calculateBaseRadius() {
+           let minDimension = min(width || windowWidth, height || windowHeight);
+           let scaleFactor = minDimension < 540 ? 0.46 : minDimension < 768 ? 0.4 : 0.35;
+           return minDimension * scaleFactor;
+       }
+
+       function createCircles() {
+           circles = [];
+           const numCircles = 7;
+
+           for (let i = 0; i < numCircles; i++) {
+               let startPhase = (TWO_PI / numCircles) * i;
+               let rotationAngle = (PI / numCircles) * i;
+               let speedMultiplier = random(0.8, 1.2);
+               let circleInitialRadius = random(baseCircleRadius * 8, baseCircleRadius * 15);
+
+               let circle = new FloatingCircle(
+                   width / 2, height / 2, circleInitialRadius,
+                   startPhase, rotationAngle, speedMultiplier, circleInitialRadius
+               );
+               circles.push(circle);
+           }
+       }
+
+       function updateCircleSizes() {
+           if (circles.length === 0) return;
+
+           let minRadius = baseCircleRadius * 0.8;
+           let maxRadius = baseCircleRadius * 1.0;
+
+           circles.forEach(circle => {
+               if (random() < 0.5) {
+                   circle.setTargetRadius(baseCircleRadius, maxRadius);
+               } else {
+                   circle.setTargetRadius(minRadius, baseCircleRadius);
+               }
+           });
+       }
+
+       function updateTextColors() {
+           // Extract RGB values and darken by 35%
+           let r = Math.round(red(bgColor) * 0.35);
+           let g = Math.round(green(bgColor) * 0.35);
+           let b = Math.round(blue(bgColor) * 0.35);
+
+           // Set CSS custom properties - let CSS handle the color applications
+           document.documentElement.style.setProperty('--text-color', `rgb(${r}, ${g}, ${b})`);
+           document.documentElement.style.setProperty('--text-color-dim', `rgba(${r}, ${g}, ${b}, 0.6)`);
+           document.documentElement.style.setProperty('--text-color-light', `rgba(${r}, ${g}, ${b}, 0.5)`);
+       }
+
+       function showPaletteName() {
+           let nameElement = document.getElementById('palette-name');
+           if (nameElement) {
+               nameElement.textContent = currentPalette.name;
+               nameElement.classList.add('show');
+               setTimeout(() => {
+                   nameElement.classList.remove('show');
+               }, 2000);
+           }
+       }
+
+       function makeGrainTexture() {
+           if (!width || !height || width <= 0 || height <= 0) {
+               console.warn('Invalid canvas dimensions for texture creation');
+               return;
+           }
+
+
+           overAllTexture = createGraphics(width, height);
+           overAllTexture.loadPixels();
+
+           let tint = currentPalette.grainTint;
+
+           // Optimized grain generation - sample every 2 pixels for performance
+           for (let i = 0; i < width; i += 2) {
+               for (let j = 0; j < height; j += 2) {
+                   let noiseVal = noise(i / 3, j / 3, (i * j) / 50);
+                   let opacity = noiseVal * random(2, 80);
+
+                   let grainColor = color(tint[0], tint[1], tint[2], opacity);
+                   overAllTexture.set(i, j, grainColor);
+                   if (i + 1 < width) overAllTexture.set(i + 1, j, grainColor);
+                   if (j + 1 < height) overAllTexture.set(i, j + 1, grainColor);
+                   if (i + 1 < width && j + 1 < height) overAllTexture.set(i + 1, j + 1, grainColor);
+               }
+           }
+           overAllTexture.updatePixels();
+       }
+
+       function handleOpeningAnimation() {
+           let elapsed = millis() - animationState.startTime;
+           animationState.progress = min(elapsed / animationState.duration, 1);
+
+           // Quartic ease-out easing function
+           let easedProgress = 1 - pow(1 - animationState.progress, 4);
+
+           circles.forEach(circle => {
+               let currentAnimRadius = lerp(circle.initialRadius, baseCircleRadius, easedProgress);
+               circle.baseRadius = currentAnimRadius;
+           });
+
+           if (animationState.progress >= 1) {
+               animationState.isOpening = false;
+
+               circles.forEach(circle => {
+                   circle.baseRadius = baseCircleRadius;
+                   circle.radius = baseCircleRadius + circle.rippleAmount;
+                   circle.targetRadius = baseCircleRadius; // Start breathing from base size
+                   circle.updateTargets(); // Smoothly transition movement properties
+               });
+
+               // Start breathing animation with gentle initial targets
+               updateCircleSizes();
+           }
+       }
+
+
+
+       function handleSpeedTransition() {
+           globalSpeedMultiplier += (speedControl.target - globalSpeedMultiplier) * speedControl.transitionRate;
+
+           if (abs(globalSpeedMultiplier - speedControl.target) < 0.01) {
+               speedControl.target = random(0, 0.6);
+               if (random() < 0.2) speedControl.target = 0;
+               speedControl.transitionRate = random(0.01, 0.03);
+           }
+       }
+
+       function handleGrainFade() {
+           if (!grainFade.isComplete) {
+               let elapsed = millis() - animationState.startTime; // Use same start time as opening
+               let fadeProgress = min(elapsed / grainFade.duration, 1);
+
+               // Smooth easing for fade in
+               grainFade.opacity = fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
+
+               if (fadeProgress >= 1) {
+                   grainFade.isComplete = true;
+                   grainFade.opacity = 1; // Ensure it's exactly 1 at the end
+               }
+           }
+       }
+
+       function handleSizeTransition() {
+           sizeControl.transitionProgress += sizeControl.transitionRate;
+
+           if (sizeControl.transitionProgress >= 1) {
+               sizeControl.transitionProgress = 0;
+
+               // After the first gentle breathing cycle, use normal variations
+               if (sizeControl.isFirstBreathing) {
+                   sizeControl.isFirstBreathing = false;
+                   updateCircleSizes(); // Now use full breathing range
+               } else {
+                   updateCircleSizes(); // Normal breathing variations
+               }
+
+               sizeControl.transitionRate = random(0.007, 0.02);
+           }
+       }
+
+       function setup() {
+           let canvasWidth = max(100, windowWidth);
+           let canvasHeight = max(100, windowHeight);
+
+           let canvas = createCanvas(canvasWidth, canvasHeight);
+           canvas.parent('canvas-container');
+
+           baseCircleRadius = calculateBaseRadius();
+
+           currentPalette = artPalettes[currentPaletteIndex];
+           bgColor = color(currentPalette.bgColor);
+           background(bgColor);
+
+           showPaletteName();
+           updateTextColors();
+
+           // Initialize animation timing BEFORE creating circles
+           animationState.startTime = millis();
+           animationState.isOpening = true;
+
+           createCircles();
+           updateCircleSizes();
+
+           // Mark texture for creation in draw loop
+           overAllTexture = null;
+       }
+
+       function draw() {
+           if (!width || !height || width <= 0 || height <= 0) return;
+
+           background(bgColor);
+
+           handleSpeedTransition();
+           handleGrainFade(); // Update grain fade opacity
+
+           if (animationState.isOpening) {
+               handleOpeningAnimation();
+           } else {
+               handleSizeTransition();
+           }
+
+           // Update and display circles
+           if (circles.length > 0) {
+               circles.forEach(circle => {
+                   circle.update();
+                   circle.display();
+               });
+           }
+
+           // Create texture if needed
+           if (!overAllTexture && frameCount > 5) {
+               makeGrainTexture();
+           }
+
+           // Apply grain texture with fade effect
+           if (overAllTexture && grainFade.opacity > 0) {
+               // Apply tint based on fade opacity
+               tint(255, grainFade.opacity * 255);
+               image(overAllTexture, 0, 0);
+               noTint(); // Reset tint for future drawing operations
+           }
+       }
+
+       function mousePressed() {
+           if (animationState.isOpening) return;
+
+           currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
+           currentPalette = artPalettes[currentPaletteIndex];
+           bgColor = color(currentPalette.bgColor);
+
+           circles.forEach(circle => circle.updateColorIndex());
+           makeGrainTexture();
+           showPaletteName();
+           updateTextColors();
+
+           // Reset grain fade to full opacity for palette changes
+           grainFade.opacity = 1;
+           grainFade.isComplete = true;
+       }
+
+       // Debounced resize handler to prevent excessive calls
+       let resizeTimeout;
+       function windowResized() {
+           clearTimeout(resizeTimeout);
+           resizeTimeout = setTimeout(() => {
+               if (windowWidth <= 0 || windowHeight <= 0) return;
+
+               let oldBaseRadius = baseCircleRadius;
+               resizeCanvas(windowWidth, windowHeight);
+               background(bgColor);
+
+               baseCircleRadius = calculateBaseRadius();
+               let scaleRatio = oldBaseRadius > 0 ? baseCircleRadius / oldBaseRadius : 1;
+
+               if (circles.length === 0) {
+                   createCircles();
+               } else {
+                   circles.forEach(circle => {
+                       circle.centerX = width / 2;
+                       circle.centerY = height / 2;
+                       circle.updateTargets(); // Use smooth transition method
+
+                       if (animationState.isOpening) {
+                           circle.initialRadius *= scaleRatio;
+                       } else {
+                           // During breathing animation
+                           circle.radius *= scaleRatio;
+                           circle.baseRadius = baseCircleRadius;
+                           circle.targetRadius *= scaleRatio;
+                       }
+                   });
+               }
+
+               makeGrainTexture();
+               if (!animationState.isOpening) {
+                   updateCircleSizes();
+                   // Ensure grain doesn't fade in again after resize
+                   grainFade.opacity = 1;
+                   grainFade.isComplete = true;
+               }
+           }, 150); // 150ms debounce
+       }
+   </script>
+</body>
+</html>
+

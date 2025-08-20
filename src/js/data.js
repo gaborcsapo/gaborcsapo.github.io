@@ -1,197 +1,240 @@
-// Timeline-based portfolio data organized by life chapters
+// Timeline data structure for the new timeline component
+// This matches the format expected by timeline.html component
+
+// Utility function to extract company and year from meta field
+function parseMetaField(meta) {
+  // Extract year from meta - look for 4-digit years
+  const yearMatch = meta.match(/(\d{4}(\s*-\s*\d{4}|\s*-\s*Present)?)/);
+  const year = yearMatch ? yearMatch[1] : '';
+  
+  // Extract company - everything before the first " - " or " | "
+  let company = meta.split(/\s+[-|]\s+/)[0];
+  
+  // Clean up common patterns
+  if (company.includes('Summer') || company.includes('Fall')) {
+    company = meta.split(/\s+[-|]\s+/)[1] || company;
+  }
+  
+  return { company, year };
+}
+
+// Transform project data from old format to new format
+function transformProject(oldProject) {
+  const { company, year } = parseMetaField(oldProject.meta);
+  
+  return {
+    type: oldProject.type === 'work' ? 'Professional' : 'Independent',
+    title: oldProject.title,
+    company: company,
+    year: year,
+    description: oldProject.description,
+    image: oldProject.image
+  };
+}
+
+// Timeline data in the new format expected by timeline component
+export const chapters = [
+  {
+    id: 'university',
+    title: 'College in Abu Dhabi',
+    description: 'I earned my Computer Science degree from NYU Abu Dhabi, with stints at the New York and Shanghai campuses along the way. These years were defined by relentless curiosity and pursuit of adventure: I cold-emailed professors for arctic expeditions, built apps in Ghana, and somehow convinced Mozilla to fund my ideas about AI ethics. Studying at NYUAD was one of the best decisions of my life.',
+    projects: [
+      {
+        type: 'Professional',
+        title: 'Data Scientist',
+        company: 'Sociovestix Labs',
+        year: 'Summer 2017 | Scotland',
+        description: 'Driven by my curiosity for economics, I reached out to SocioVestix Labs, Scotland\'s first responsible investment consulting firm. One of their most painful bottlenecks was manual PDF data extraction that took 2 months. I set out to transform the process into an automated language processing pipeline that delivered results in one week.',
+        image: './img/scotland.jpg'
+      },
+      {
+        type: 'Professional',
+        title: 'Data Visualization',
+        company: 'Center for Sea Level Change (CSLC)',
+        year: 'Fall 2016 | Abu Dhabi & Greenland',
+        description: 'What started as hunting for a class project turned into visualizing the Arctic datasets. I approached the Center for Sea Level Change and built the first successful visualization of 300,000 oceanographic data points collected by sensor-tagged seals in Greenland\'s fjords. The D3.js visualization revealed previously hidden patterns in polar water dynamics, earning me a spot on an actual expedition to Greenland where I designed a drone-mounted LiDAR system for 3D glacier mapping.',
+        image: './img/greenland.jpg'
+      },
+      {
+        type: 'Professional',
+        title: 'Software Engineer',
+        company: 'Center for Technology and Economic Development (CTED)',
+        year: 'Summer 2016 | Ghana & Abu Dhabi',
+        description: 'I joined CTED, one of NYU\'s research labs, to explore how simple tech could spark economic growth in rural Africa. In Ghana, I prototyped an SMS-based taxi dispatch system that brought Uber-like coordination to areas without smartphones or reliable internet. I also extended a road network analysis tool that helped local governments identify and address critical infrastructure gaps affecting supply chains.'
+      },
+      {
+        type: 'Professional',
+        title: 'Web Developer',
+        company: 'BlitzBringer',
+        year: 'Summer 2015 | Frankfurt',
+        description: 'I landed in Frankfurt with zero contacts and barely enough euros for ramen, the perfect conditions for growth. While designing the website for BlitzBringer (a crowdsourced delivery startup), I learned that surviving in a foreign city teaches you more about resourcefulness than any coding bootcamp ever could.',
+        image: './img/blitz.jpg'
+      },
+      {
+        type: 'Independent',
+        title: 'Freelance Web Design',
+        company: 'Various Clients',
+        year: '2014–2018',
+        description: 'I built websites for artists who had incredible work but zero web presence, including two digital art archives and an internal news portal for NYUAD. These projects evolved into broader design work: logos, print materials, even a marketing campaign for the Burj Khalifa. I also built tools that scratched my own itches, like Mytorch.tech (a conflict resolution app for the UAE) and DIYDictionary (a vocabulary tracker born from losing too many handwritten word lists). Through this mix of client work, computational art experiments, and personal projects, I learned that good design is about translating vision into pixels, whether for an artist\'s portfolio or a practical app.'
+      },
+      {
+        type: 'Independent',
+        title: 'Drone Design Challenge',
+        company: 'Lockheed Martin Funded',
+        year: '2017',
+        description: 'Won Lockheed Martin funding to 3D-map glaciers using drone-mounted LiDAR. We assembled a 5-person team and handled the technical pipeline: researching industrial LiDAR sensors, designing the data architecture, and building point cloud visualizations that helped glaciologists track ice movement patterns.',
+        image: './img/drone.png'
+      },
+      {
+        type: 'School Work',
+        title: 'Machine Learning Workshops',
+        company: 'NYUAD',
+        year: '2018',
+        description: 'After spending countless hours learning from online ML communities, I designed and taught workshops for 26 students at NYUAD. We built classifiers, and broke training datasets to understand how bias creeps into "objective" algorithms. All the material is free to use on my Github.'
+      },
+      {
+        type: 'School Work',
+        title: 'Gender & Ethnicity Bias Research',
+        company: 'NYUAD + Princeton Collaboration',
+        year: '2017',
+        description: 'Partnered with a Princeton researcher to statistically quantify the corporate glass ceiling. We used deep learning to reconstruct organizational hierarchies from LinkedIn data and predict advancement patterns across demographics. My research focused on image classification.'
+      },
+      {
+        type: 'School Work',
+        title: 'Visual Gender Bias Extension',
+        company: 'Chrome Extension',
+        year: '2017',
+        description: 'Built a Chrome extension that counted male vs. female faces during web browsing, then visualized the results. After tracking my own browsing for a month, I discovered I was exposed to 3x more male faces online - a sobering reminder that bias isn\'t always intentional, sometimes it\'s just baked into the pixels we consume daily.',
+        image: './img/bubble.jpg'
+      }
+    ]
+  },
+  {
+    id: 'london',
+    title: 'First Job in London',
+    description: 'London confirmed: I genuinely loved building things with code. Between hunting for affordable flats, learning to budget on a junior salary, and juggling side projects with a demanding day job, I discovered both my technical interests and the reality of adult life.',
+    projects: [
+      {
+        type: 'Professional',
+        title: 'Data Engineer',
+        company: 'Goldman Sachs',
+        year: '2018–2019',
+        description: 'Picture this: millions of daily trades waiting on batch processes designed when mainframes were a thing and everything was installed from CDs. My team and I rearchitected the intraday risk pipeline for prime services clients into a real-time microservices architecture using AWS, Kubernetes, and Hazelcast. The result? Data lag dropped from minutes to seconds, and a clean system that people enjoyed working with.',
+        image: './img/goldman.jpg'
+      },
+      {
+        type: 'Independent',
+        title: 'Creative Media Awards Winner',
+        company: 'Mozilla Foundation',
+        year: '2018–2019',
+        description: 'While grinding through trading systems by day, my friends and I spent evenings building what Mozilla would later fund with $31,500: an interactive website that taught algorithmic bias by letting people break AI systems themselves. The website reached 102,000+ learners and caught the attention of DeepMind, UNESCO, and the Government of Canada. Universities adopted it for their AI ethics courses, and I found myself giving workshops on responsible AI design. This project proved that the best way to teach complex concepts is to let people experience the failures firsthand, not just read about them in papers.',
+        image: './img/mozilla.jpg'
+      }
+    ]
+  },
+  {
+    id: 'taipei',
+    title: 'COVID in Taipei',
+    description: 'I\'d always dreamed of living in Asia and diving deep into smart home/smart city tech. Both felt like distant goals until I passed the Google interviews and I was free to pick any team, anywhere in the world. I chose Google Nest in Taiwan, and suddenly my bucket list became my Monday morning. The timing turned out to be perfect in ways I couldn\'t have predicted. While the world locked down during COVID, Taiwan\'s competent response meant I lived normally, just with a face mask. I went for cutting-edge tech. I stayed for the night markets, the mountain trails an MRT ride away, and a culture that restored my faith in how societies can function when people actually trust each other. ',
+    projects: [
+      {
+        type: 'Professional',
+        title: 'Google Nest Thermostat',
+        company: 'Google Nest',
+        year: '2021–2023',
+        description: 'The Nest Thermostat is a premium smart thermostat that learns user preferences and delivers intelligent alerts. With over 15 million units sold, it has saved 113 billion kilowatt-hours of energy since 2011 (more than double Portugal\'s annual energy consumption). I developed sensor fusion algorithms for presence and intent detection, creating core smart home experiences that help the device understand when you\'re home and what you need. I also worked on HVAC management algorithms, security features, and OS-level functionality. It\'s deeply satisfying to ship code that quietly fights climate change in millions of homes every single day. It\'s rare to work on a tech product that is objectively only good for the world.',
+        image: 'https://images.unsplash.com/photo-1565183928294-7d21b7c57ae8?w=800&q=80'
+      },
+      {
+        type: 'Professional',
+        title: 'Google Nest Camera & Doorbell',
+        company: 'Google Nest',
+        year: '2019–2021',
+        description: 'Google\'s battery-powered security cameras pack serious ML intelligence into devices that need to last months on a single charge. I owned core features from battery management to presence detection, and obsessed over every milliamp until I extended idle battery life by 10%. Managing the full lifecycle from prototype to mass production (2+ million units sold) taught me that shipping hardware means sweating details most users will never notice, like how temperature affects battery chemistry or innocent lines of code drain power during seemingly idle states.',
+        image: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=800&q=80'
+      },
+      {
+        type: 'Professional',
+        title: 'Open Source Contributor',
+        company: 'DAPLink Project',
+        year: '2022',
+        description: 'Led a team of 3 to develop a novel debugging solution, contributing the code upstream to the core DAPLink project. The work was presented at the 2023 Open Source Firmware Conference and has been used by hundreds of engineers.'
+      },
+      {
+        type: 'Independent',
+        title: 'Advisor & Contributor',
+        company: 'Urban AI Think Tank',
+        year: '2022–2025',
+        description: 'As an advisor to this French think tank, I explore how AI reshapes cities and urban life. My blog post on battery politics became their most-read piece of 2024, and I contributed a chapter to their book on Urban AI. I\'ve led workshops for the Champs-Élysées redevelopment project, bridging the gap between Silicon Valley tech optimism and European urban planning wisdom.',
+        image: './img/urbanai.jpg'
+      },
+      {
+        type: 'Independent',
+        title: 'MIT Urban Planning Contest',
+        company: 'MIT Media Lab',
+        year: '2021',
+        description: 'Proposed and prototyped a street design template and citizen engagement platform for the New Taipei City Government. I worked with 4 other teammates as part of a program organized by the City Science Group at MIT Media Lab. Check out our presentation here.'
+      },
+      {
+        type: 'Independent',
+        title: '3D Trip Renderer',
+        company: 'Personal Project',
+        year: '2023',
+        description: 'Built a WebGL tool that rendered travel memories on 3D maps, because photos in folders are boring. I used this hobby project 1) to send friends and family nostalgic reminders of past adventures 2) to learn about WebGL and production quality cloud solutions. This was my last pure fun project before ChatGPT arrived and changed how small projects are created.',
+        image: 'https://images.unsplash.com/photo-1606043694457-7e75de25f4fa?w=800&q=80'
+      }
+    ]
+  },
+  {
+    id: 'sf',
+    title: 'Now in San Francisco',
+    description: 'I moved to San Francisco with one goal: work at the intersection of data and cutting-edge ML. What I didn\'t expect was falling in love with a city that everyone warned me about. Yes, SF is a city of extremes, but the good parts are extraordinary. Where else can you debug models with strangers at coffee shops, camp with hippies debating AI futures, then hit H Mart for Korean groceries? The tech scene here goes beyond work: it\'s brilliant people who turn random encounters into deep conversations and genuinely care about building the future together.',
+    projects: [
+      {
+        type: 'Professional',
+        title: 'Google Beam',
+        company: 'Google Labs',
+        year: '2023–Present',
+        description: 'Beam is a combination of Google\'s latest breakthroughs in AI, 3D imaging, and light field rendering, Beam brings the depth and realism of in-person meetings to remote conversations without headsets or complex setup. I architect the data flywheel for the AI research team, which involves: collection, annotation, curation, and evaluation across multiple multi-year research projects. The computer vision team depends on my infrastructure to iterate quickly and ship breakthrough features.',
+        image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80'
+      },
+      {
+        type: 'Professional',
+        title: 'Dataset Sampling and Curation',
+        company: 'Google Labs',
+        year: '2024–Present',
+        description: 'Built a data curation library that became our team\'s standard after improving model performance by 4% across all metrics. The system implements programmatic sampling strategies based on annotations, and data diversity metrics. I\'m researching how individual data points influence model learning, how we could apply embeddings for data selection and how to reduce the dataset size. This work directly challenges the "more data is always better" orthodoxy by proving that careful curation of 10% of data can outperform random sampling of 50%.'
+      },
+      {
+        type: 'Professional',
+        title: 'Automated Data Annotation System',
+        company: 'Google Labs',
+        year: '2024–Present',
+        description: 'Developed an LLM-based system that autonomously annotates video data across 50+ different tasks, eliminating our biggest bottleneck. The solution won an internal AI innovation award and cut annotation costs by orders of magnitude. More importantly, it proved that LLMs can handle complex, multi-modal annotation tasks that we assumed required human judgment. The system now processes millions of frames monthly with quality metrics that match or exceed human annotators.',
+        image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80'
+      },
+      {
+        type: 'Professional',
+        title: 'Human Data Collection Pipeline',
+        company: 'Google Labs',
+        year: '2023',
+        description: 'Completely redesigned our human data collection process, resulting in 3x year-over-year increase in high-quality training data acquisition. The key insight was treating data collection as a product problem, not just a mechanical task. My focus was building feedback loops between model performance and collection priorities, automated quality checks, and created interfaces that made it easier for contributors to provide exactly what our models needed.'
+      },
+      {
+        type: 'Professional',
+        title: 'Fairness Evaluation Framework',
+        company: 'Google Labs',
+        year: '2024',
+        description: 'Created an evaluation system that ensures our models perform equitably across demographic groups. The framework combines statistical analysis with interactive visualizations that let researchers slice data across multiple dimensions, test hypotheses, and identify failure modes before they reach production. This tool has become essential for our launches, turning fairness and robustness from a checkbox exercise into an integral part of our development cycle.',
+        image: 'https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?w=800&q=80'
+      }
+    ]
+  }
+];
+
+// Legacy data structure for backward compatibility
 export const timelineData = {
-  chapters: [
-    {
-      id: "nyuad",
-      title: "Studies & Exploration",
-      location: "Abu Dhabi, UAE",
-      years: "2014 - 2018",
-      description: "University years at NYU Abu Dhabi, discovering my passion for technology and its impact on society",
-      projects: [
-        // Work projects first
-        {
-          type: "work",
-          title: "Webdesign Intern at BlitzBringer",
-          meta: "Frankfurt - Summer 2015 - 3 months",
-          image: "./img/blitz.jpg",
-          description: `Blitzbringer is a startup in Frankfurt, Germany working on a crowdsourced delivery service. I learnt a lot about <strong>web design, business, marketing</strong> while designing the company's website, but the real learning outcomes were about life. I moved to a completely new city with zero help, zero people I knew and zero money and I had find a way to make the most out of what I had, which was a pleasant challenge.`
-        },
-        {
-          type: "work",
-          title: "Software Engineer Intern at CTED",
-          meta: "Ghana and Abu Dhabi - Summer 2016 - 4 months",
-          image: "./img/CTED.jpg",
-          description: `Joined the Center for Technology and Economic Development to research novel ways, in which technology can create economic development in Africa. Prototyped an <strong>SMS-based taxi app on Android</strong> with the potential to provide 21st century service in rural regions. Extended a road network analyzing program using <strong>NodeJS and socket.io</strong> in a team of 5 to battle shortages in Ghana.`
-        },
-        {
-          type: "work",
-          title: "Data Viz Intern at CSLC",
-          meta: "Fall 2016 - 6 months",
-          image: "./img/greenland.jpg",
-          description: `Approached the Center for Sea Level Change looking for project ideas for a class. Designed the first successful visualization of a unique dataset of 300,000 salinity, temperature and depth data points collected by tags put on seals in fjords of Greenland using <strong>D3JS</strong>. As a result, I joined an expedition to <strong>Greenland</strong> and I'm designing a drone LiDAR payload to 3D map glaciers.`
-        },
-        {
-          type: "work",
-          title: "Data Science Intern at SVL",
-          meta: "Scotland - Summer 2017 - 3 months",
-          image: "./img/scotland.jpg",
-          description: `My previous internships inspired me to reach out to the first responsible financial consulting firm, SocioVestix Lab to learn more about sustainable startups. Proposed and built a PDF extraction and language processing application cutting down data collection efforts from 2 months to 1 week.`
-        },
-        {
-          type: "work",
-          title: "Freelance",
-          meta: "Since Fall 2014",
-          image: "./img/freelance.jpg",
-          description: `Many people need websites to showcase their works or to market themselves online. However many of them don't know how to make a good website, and that's what I'm trying to help with. I created <strong>two art archives and internal news portal</strong> for a department at NYUAD. Working on these projects taught me how to deal with clients with little knowledge about tech, and helped me develop my project management habits.`
-        },
-        // Hobby projects in decreasing importance
-        {
-          type: "hobby",
-          title: "Machine Learning Workshops",
-          meta: "2018 | Sklearn - Python - Jupyter - Pandas",
-          image: "./img/workshop.jpg",
-          description: `The workshop is part of a series of Interactive Media workshops at New York University Abu Dhabi and <a href="https://medium.com/@gaborcsapo/nyuad-ai-workshop-bf02172f59eb" target="_blank"><strong>all materials</strong></a> are free to use. After spending so much time studying machine learning, I thought it was high time to give back to the community that helped me develop personally. As a result, I designed a workshop and helped 26 students understand machine learning, automation and training data bias.`
-        },
-        {
-          type: "hobby",
-          title: "Gender & Ethnicity Bias",
-          meta: "2017 | Tensorflow - Jupyter - Linux - OpenCV",
-          image: "./img/gender.png",
-          description: `Quantifying the glass ceiling for ethnicities and genders in corporate structures. Together with a researcher from Princeton, we are trying to determine statistically how much harder it is to climb the corporate ladder for minorities. The project applies Deep Learning to reconstruct corporate structure from job titles and to predict gender and ethnicity from noisy labels. The resulting paper is currently under review.`
-        },
-        {
-          type: "hobby",
-          title: "Drone Design Challenge",
-          meta: "2017 | PCAL - C - Raspberry Pi - Linux - CloudCompare",
-          image: "./img/drone.png",
-          description: `Won funding on the Lockheed Martin Drone Design Challenge to realize our idea to 3D map glaciers using a lidar device put on a drone. After building a team of 5 students, my task was researching the lidar market, designing the data pipeline and visualizing the resulting point cloud. Read more about the design in our <a href="/img/drone_proposal.pdf" target="_blank"><strong>proposal</strong></a>. Our goal is to help scientist understand the motion of glaciers.`
-        },
-        {
-          type: "hobby",
-          title: "Seal Project",
-          meta: "2016 - 2017 | D3JS - Node - Google Maps API",
-          image: "./img/seal.png",
-          description: `Started as a class project, but after going beyond the class requirements with <a href="https://sealproject.herokuapp.com" target="_blank"><strong>this D3JS visualization</strong></a>, it ended up as a research project with the Center for Sea Level Change. Our dataset is collected by tags put on seals, and I designed a visualization that breaks down the 3D temporal information into 3 views.`
-        },
-        {
-          type: "hobby",
-          title: "Mytorch.tech",
-          meta: "2017 | Node - Javascript - Twilio - Google OAuth - MongoDB",
-          image: "./img/mytorch.png",
-          description: `<a href="https://github.com/gaborcsapo/mytorch.tech" target="_blank"><strong>Mytorch.tech</strong></a> offers a conflict resolution method to the legal gray area of substance abuses in the UAE. The app opens communication channels to resolve conflicts by contacting the person in charge appropriate to the situation in order to avoid unnecessary trouble.`
-        },
-        {
-          type: "hobby",
-          title: "Visual Gender Bias Experiment",
-          meta: "2017 | Chrome Extensions - Node - Linux - Tensorflow - D3JS",
-          image: "./img/bubble.jpg",
-          description: `Building on the results from the Gender Ethnicity project, I created a Chrome Extension to compare the number of male/female faces that people are presented with during a regular browsing session. <a href="pages/gender-bias/index.html" target="_blank"><strong>Click here</strong></a> to check out the results of analyzing my browsing habits for 1 month!`
-        },
-        {
-          type: "hobby",
-          title: "Interactive Websites",
-          meta: "2015 - 2018 | Angular 2 - Ionic 2 - WebAudio API - Instagram API - Google Maps API - Twitter API - ThreeJS - SocketIO - CouchDB - P5 - ToneJS - Arduino - D3 - Twilio",
-          image: "./img/interactive.png",
-          description: `The web holds countless opportunities to create web applications that leverage public data and digital services from a wide range of existing web products. I have played around with APIs and user experiences to design captivating websites. Check out the <a href="pages/perfect-weather/perfectWeather.html" target="_blank"><strong>very first website</strong></a> I ever created.`
-        },
-        {
-          type: "hobby",
-          title: "DIYDictionary",
-          meta: "2015 | Ionic Framework - AngularJS - SQLite",
-          image: "./img/DIYD.jpg",
-          description: `This is a selfish project. When I moved a foreign language environment, I met countless new words that I wanted to learn myself. First, I wrote them on pieces of papers, but I kept losing them. I wished there had been an app to store the words electronically… Then I realized I'm a CS major, why not make one for myself?!? I was introduced at a <strong>Hackathon in Shanghai</strong> to Hybrid Apps and I wanted to give them a try.`
-        },
-        {
-          type: "hobby",
-          title: "Game Design",
-          meta: "2014 - 2015",
-          image: "./img/games.jpg",
-          description: `I like to have fun while I'm learning and the easiest way to do so is to design games. My very first program was a copy of the <strong>Snake game</strong> that I used to play on my Dad's Nokia. I also created a <strong>2D Creativity Puzzle Game</strong>, that requires some brain power and the demolishment of mental walls to solve. In my Software Engineering class we learnt about the Factory, Singleton, Decorator, etc patterns by creating <strong>board games</strong>.`
-        },
-        {
-          type: "hobby",
-          title: "Visual & Computational Design",
-          meta: "",
-          image: "./img/visual.png",
-          description: `People decide whether to buy/use/watch a product in 3 seconds. Coders have to acknowledge that humans are visual mammals who judge by the looks, and use that to create the best experiences. I contributed to <strong>logo, printout, website designs and a marketing campaign for the Burj Khalifa in Dubai</strong>. However, my specialty lies in <strong>computational and AI art</strong>. Also, check out <a href="https://goo.gl/photos/p3Rjq9RH8nSQYmpz8" target="_blank"><strong>my favorite photographs here</strong></a>.`
-        }
-      ]
-    },
-    {
-      id: "london",
-      title: "Professional Beginning",
-      location: "London, UK",
-      years: "2018 - 2019",
-      description: "First full-time role at Goldman Sachs while launching an award-winning project on algorithmic bias",
-      projects: [
-        // Work projects first
-        {
-          type: "work",
-          title: "Software Engineer at Goldman Sachs",
-          meta: "London - July 2018 - August 2019",
-          image: "./img/goldman.jpg",
-          description: `Re-engineering the live intraday risk pipeline of Goldman Sachs as part of a global team. Migrating the system to a micro services architecture to increase scalability and maintainability. The solution manages millions of trades every day and reduces lag from 2 minutes to seconds. The data pipeline is built using Kubernetes, Gitlab, Hazelcast and Java.`
-        },
-        // Hobby projects
-        {
-          type: "hobby",
-          title: "Mozilla Creative Media Awards",
-          meta: "2018 - 2019 | Machine Learning - PIXI.js - JS - UX",
-          image: "./img/mozilla.jpg",
-          description: `Three passionate friends and I designed a web-based educational game <a href="https://www.survivalofthebestfit.com/" target="_blank"><strong>survivalofthebestfit.com</strong></a> to teach future policy makers where algorithmic bias in AI systems stems from and why accountability matters. We received <a href="https://medium.com/read-write-participate/would-an-algorithm-hire-you-or-ignore-your-resume-db315a873c91" target="_blank"><strong>the Creative Media Awards $25,000 prize</strong></a>, and the project has been mentioned by DeepMind, code.org and O'reilly. Over 37,000 people completed the game in their free time, in class assignments or in corporate trainings.`
-        }
-      ]
-    },
-    {
-      id: "taipei",
-      title: "IoT & Urban Innovation",
-      location: "Taipei, Taiwan",
-      years: "2019 - 2023",
-      description: "Deep dive into IoT development at Google while exploring urban planning and AI applications",
-      projects: [
-        // Work projects first
-        {
-          type: "work",
-          title: "Software Engineer at Google Nest",
-          meta: "Taipei - October 2019 - March 2023",
-          image: "./img/taipei.jpg",
-          description: `Designing and productioning Google Nest <a href="https://www.youtube.com/watch?v=20367DapHlc" target="_blank"><strong>energy saving thermostats</strong></a>, <a href="https://www.youtube.com/watch?v=_NYGYAv56LU" target="_blank"><strong>ML powered security cameras</strong></a> and other novel smart home devices. My team is responsible for IoT platform software, prototyping and factory builds in Vietnam.`
-        },
-        // Hobby projects
-        {
-          type: "hobby",
-          title: "Urban AI Think Tank",
-          meta: "2022 - 2023 | Urban Planning - Research - Writing",
-          image: "./img/urbanai.jpg",
-          description: `Contributed to the <a href="https://urbanai.fr/" target="_blank"><strong>Urban AI Think Tank</strong></a> by researching urban planning topics such as <a href="https://www.pca-stream.com/en/articles/do-cities-metabolize-202/" target="_blank"><strong>urban metabolism</strong></a>, meaningful inefficiencies and urban interfaces and also worked on the Champs-Elysees redesign project of the architecture studio, PCA-Stream.`
-        },
-        {
-          type: "hobby",
-          title: "MIT Urban Planning Contest",
-          meta: "2021 | Urban Planning - Project Management",
-          image: "./img/cshot.jpg",
-          description: `Proposed and prototyped a street design template and citizen engagement platform for the New Taipei City Government. I worked with 4 other teammates as part of a program organized by the City Science Group at MIT Media Lab. Check out our presentation <a href="/img/cshot-presentation.pdf" target="_blank"><strong>here</strong></a>.`
-        }
-      ]
-    },
-    {
-      id: "sanfrancisco",
-      title: "AI & Computer Vision",
-      location: "San Francisco, USA",
-      years: "2023 - Present",
-      description: "Leading advanced AI projects at Google, focusing on LLM applications and computer vision research",
-      projects: [
-        // Work projects first
-        {
-          type: "work",
-          title: "Software Engineer at Google Beam",
-          meta: "San Francisco - March 2023 - Present",
-          image: "./img/taipei.jpg", // placeholder image for now
-          description: `Working on cutting-edge Google Beam projects, developing LLM-based autoannotators and video search capabilities. Leading human data collection initiatives and optimizing training data sampling for computer vision research teams in the data flywheel ecosystem.`
-        }
-      ]
-    }
-  ]
+  chapters: chapters
 };
 
 // Legacy data structure for backward compatibility
