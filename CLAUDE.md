@@ -53,7 +53,9 @@ This is a personal portfolio website for Gabor Csapo built using modern web tech
    ```bash
    npm run dev
    ```
-   Starts Vite dev server at `http://localhost:3000` with hot reload and instant updates
+   Starts Vite dev server with hot reload and instant updates
+   - **Development URL**: `http://localhost:3000/index.dev.html` (with hot reload)
+   - **Production preview**: `http://localhost:3000/` (serves production build from root)
 
 2. **Preview production build** (for testing final output):
    ```bash
@@ -68,9 +70,9 @@ This is a personal portfolio website for Gabor Csapo built using modern web tech
    ```bash
    npm run dev
    ```
-   - Serves at `http://localhost:3000` 
-   - Auto-reloads on file changes
-   - Use this for active development
+   - **Development URL**: `http://localhost:3000/index.dev.html` (edits to `index.dev.html` auto-reload here)
+   - **Production preview**: `http://localhost:3000/` (serves root `index.html` for testing production build)
+   - Use the `/index.dev.html` URL for active development with hot reload
 
 2. **Edit source files**:
    - `src/js/main.js`: Main application logic
