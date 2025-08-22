@@ -58,13 +58,6 @@ function initColorPicker() {
         window.changeTheme();
       }
       
-      // Add visual feedback to click hint
-      if (clickHint) {
-        clickHint.style.transform = 'translateX(-50%) scale(0.95)';
-        setTimeout(() => {
-          clickHint.style.transform = 'translateX(-50%) scale(1)';
-        }, 150);
-      }
     });
     
     // Make hero area appear clickable
