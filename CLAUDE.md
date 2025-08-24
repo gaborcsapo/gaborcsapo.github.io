@@ -71,12 +71,11 @@ This is a personal portfolio website for Gabor Csapo built using modern web tech
    npm run dev
    ```
    - **Development URL**: `http://localhost:3000/index.dev.html` (edits to `index.dev.html` auto-reload here)
-   - **Production preview**: `http://localhost:3000/` (serves root `index.html` for testing production build)
    - Use the `/index.dev.html` URL for active development with hot reload
 
 2. **Edit source files**:
    - `src/js/main.js`: Main application logic
-   - `src/js/data.js`: Timeline data and project information  
+   - `src/js/data.js`: Timeline data and project information
    - `src/styles/main.css`: Styling and responsive design
    - `index.dev.html`: HTML structure and templates
 

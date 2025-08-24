@@ -163,12 +163,12 @@ function renderContent() {
             card.innerHTML = `
                 ${imageHTML}
                 <div class="project-content">
-                    <div class="project-header">
-                        <span class="project-type ${typeClass}">${project.type}</span>
-                        <span class="project-year">${project.year}</span>
-                    </div>
                     <h3 class="project-title">${project.title}</h3>
-                    <p class="project-company">${project.company}</p>
+                    <div class="project-metadata">
+                        <span class="project-company">${project.company}</span>
+                        <span class="project-year">${project.year}</span>
+                        <span class="project-type ${typeClass}">${project.type}</span>
+                    </div>
                     <p class="project-description">${project.description}</p>
                 </div>
             `;
