@@ -88,7 +88,7 @@ function initTimeline() {
 // Update timeline position
 function updateTimeline() {
     // Calculate transform based on active chapter
-    const dotWidth = isMobile() ? 130 : 200; // Width of each dot wrapper
+    const dotWidth = isMobile() ? 100 : 200; // Width of each dot wrapper
     const offset = -(activeChapter * dotWidth) + (window.innerWidth / 2) - (dotWidth / 2);
 
     timelineSlider.style.transform = `translateX(${offset}px)`;
