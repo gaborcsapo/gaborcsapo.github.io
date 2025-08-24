@@ -6,22 +6,22 @@ function parseMetaField(meta) {
   // Extract year from meta - look for 4-digit years
   const yearMatch = meta.match(/(\d{4}(\s*-\s*\d{4}|\s*-\s*Present)?)/);
   const year = yearMatch ? yearMatch[1] : '';
-  
+
   // Extract company - everything before the first " - " or " | "
   let company = meta.split(/\s+[-|]\s+/)[0];
-  
+
   // Clean up common patterns
   if (company.includes('Summer') || company.includes('Fall')) {
     company = meta.split(/\s+[-|]\s+/)[1] || company;
   }
-  
+
   return { company, year };
 }
 
 // Transform project data from old format to new format
 function transformProject(oldProject) {
   const { company, year } = parseMetaField(oldProject.meta);
-  
+
   return {
     type: oldProject.type === 'work' ? 'Professional' : 'Independent',
     title: oldProject.title,
@@ -42,31 +42,31 @@ export const chapters = [
       {
         type: 'Professional',
         title: 'Data Scientist',
-        company: 'Sociovestix Labs',
-        year: 'Summer 2017 | Scotland',
+        company: 'Sociovestix',
+        year: 'Summer 2017',
         description: 'Driven by my curiosity for economics, I reached out to SocioVestix Labs, Scotland\'s first responsible investment consulting firm. One of their most painful bottlenecks was manual PDF data extraction that took 2 months. I set out to transform the process into an automated language processing pipeline that delivered results in one week.',
         image: './img/scotland.jpg'
       },
       {
         type: 'Professional',
         title: 'Data Visualization',
-        company: 'Center for Sea Level Change (CSLC)',
-        year: 'Fall 2016 | Abu Dhabi & Greenland',
+        company: 'CSLC',
+        year: 'Fall 2016',
         description: 'What started as hunting for a class project turned into visualizing the Arctic datasets. I approached the Center for Sea Level Change and built the first successful visualization of 300,000 oceanographic data points collected by sensor-tagged seals in Greenland\'s fjords. The D3.js visualization revealed previously hidden patterns in polar water dynamics, earning me a spot on an actual expedition to Greenland where I designed a drone-mounted LiDAR system for 3D glacier mapping.',
         image: './img/greenland.jpg'
       },
       {
         type: 'Professional',
         title: 'Software Engineer',
-        company: 'Center for Technology and Economic Development (CTED)',
-        year: 'Summer 2016 | Ghana & Abu Dhabi',
-        description: 'I joined CTED, one of NYU\'s research labs, to explore how simple tech could spark economic growth in rural Africa. In Ghana, I prototyped an SMS-based taxi dispatch system that brought Uber-like coordination to areas without smartphones or reliable internet. I also extended a road network analysis tool that helped local governments identify and address critical infrastructure gaps affecting supply chains.'
+        company: 'CTED',
+        year: 'Summer 2016',
+        description: 'I joined the Center for Technology and Economic Development (CTED), one of NYU\'s research labs, to explore how simple tech could spark economic growth in rural Africa. In Ghana, I prototyped an SMS-based taxi dispatch system that brought Uber-like coordination to areas without smartphones or reliable internet. I also extended a road network analysis tool that helped local governments identify and address critical infrastructure gaps affecting supply chains.'
       },
       {
         type: 'Professional',
         title: 'Web Developer',
         company: 'BlitzBringer',
-        year: 'Summer 2015 | Frankfurt',
+        year: 'Summer 2015',
         description: 'I landed in Frankfurt with zero contacts and barely enough euros for ramen, the perfect conditions for growth. While designing the website for BlitzBringer (a crowdsourced delivery startup), I learned that surviving in a foreign city teaches you more about resourcefulness than any coding bootcamp ever could.',
         image: './img/blitz.jpg'
       },
@@ -80,7 +80,7 @@ export const chapters = [
       {
         type: 'Independent',
         title: 'Drone Design Challenge',
-        company: 'Lockheed Martin Funded',
+        company: 'Lockheed Martin',
         year: '2017',
         description: 'Won Lockheed Martin funding to 3D-map glaciers using drone-mounted LiDAR. We assembled a 5-person team and handled the technical pipeline: researching industrial LiDAR sensors, designing the data architecture, and building point cloud visualizations that helped glaciologists track ice movement patterns.',
         image: './img/drone.png'
@@ -95,7 +95,7 @@ export const chapters = [
       {
         type: 'School Work',
         title: 'Gender & Ethnicity Bias Research',
-        company: 'NYUAD + Princeton Collaboration',
+        company: 'NYUAD + Princeton',
         year: '2017',
         description: 'Partnered with a Princeton researcher to statistically quantify the corporate glass ceiling. We used deep learning to reconstruct organizational hierarchies from LinkedIn data and predict advancement patterns across demographics. My research focused on image classification.'
       },

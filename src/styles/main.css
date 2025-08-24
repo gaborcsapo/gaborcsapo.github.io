@@ -32,7 +32,7 @@
   --space-2xl: 6rem;
   --space-3xl: 8rem;
   --space-4xl: 12rem;
-  
+
 
   /* Layout */
   --container-max-width: 1200px;
@@ -452,16 +452,6 @@ p, h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.timeline-header::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  width: 2rem;
-  height: 1px;
-  background: var(--timeline-border-light);
-  opacity: 0.5;
-}
 
 @media (min-width: 640px) {
   .timeline-header::after {
@@ -471,11 +461,11 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .timeline-header h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  font-weight: 400;
+  font-size: clamp(2.3rem, 5vw, 3rem);
+  font-weight: 600;
   font-optical-sizing: auto;
-  color: var(--timeline-text-primary);
-  letter-spacing: -0.02em;
+  color: var(--secondary-color);
+  letter-spacing: -0.01em;
   margin-bottom: 0.75rem;
   animation: fadeUp 0.8s ease-out 0.2s backwards;
 }
@@ -486,16 +476,10 @@ p, h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.header-line {
-  width: 3rem;
-  height: 2px;
-  background: linear-gradient(90deg, var(--timeline-accent-primary), transparent);
-  animation: expandWidth 0.8s ease-out 0.4s backwards;
-}
 
 .timeline-section-wrapper {
   background: var(--bg-color);
-  padding: var(--space-2xl) 0;
+  padding: var(--space-md) 0;
   /* Dynamic colors - will be overridden by JavaScript */
   --timeline-accent-primary: var(--interactive-color, #4F46E5); /* Fallback to indigo */
   --timeline-accent-hover: var(--interactive-color, #6366F1); /* Fallback to lighter indigo */
@@ -522,6 +506,12 @@ p, h1, h2, h3, h4, h5, h6 {
   --timeline-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
   --timeline-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   --timeline-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+  .timeline-section-wrapper {
+    padding: var(--space-xl) 0;
+  }
 }
 
 .section-subtitle {

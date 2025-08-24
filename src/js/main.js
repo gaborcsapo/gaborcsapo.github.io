@@ -39,30 +39,9 @@ async function loadP5Animation() {
 
 
 function initColorPicker() {
-  // Hero area click handler - click anywhere on hero to change theme
-  const heroElement = document.querySelector('.hero');
-  const clickHint = document.querySelector('.click-hint');
-  
-  if (heroElement) {
-    // Add click handler to entire hero area
-    heroElement.addEventListener('click', (e) => {
-      // Don't trigger if clicking on navigation links
-      if (e.target.matches('a, a *')) {
-        return;
-      }
-      
-      e.preventDefault();
-      
-      // Call changeTheme if available
-      if (typeof window.changeTheme === 'function') {
-        window.changeTheme();
-      }
-      
-    });
-    
-    // Make hero area appear clickable
-    heroElement.style.cursor = 'pointer';
-  }
+  // Color picker is now handled directly by the p5.js canvas
+  // The canvas has its own mousePressed handler in heroAnimation.js
+  // No additional setup needed here
 }
 
 function initSmoothScrolling() {
