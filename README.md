@@ -1,63 +1,107 @@
 # gaborcsapo.github.io
 
-Modern portfolio website built with HTML5, CSS3, p5.js, and Mustache.js. Optimized for performance and responsive design.
+Modern portfolio website built with Vite, featuring interactive timeline, p5.js animations, and responsive design. Optimized for performance with automated deployment.
 
 [Click here to check out the website](https://gaborcsapo.com/)
 
-## 🚀 Development
+## 🚀 Quick Start
 
 ```bash
 npm install        # Install dependencies
 npm run dev        # Start development server with hot reload (http://localhost:3000)
 npm run build      # Build for production (outputs to dist/)
 npm run preview    # Preview production build (http://localhost:4173)
-npm run deploy     # Build and prepare for GitHub Pages (cleans old assets)
 ```
 
-## 📦 Deployment to GitHub Pages
+## 📁 Project Structure
 
-The site is configured to deploy from the root directory to GitHub Pages with a custom domain (`gaborcsapo.com`).
+```
+├── src/                    # Source files
+│   ├── js/
+│   │   ├── main.js        # Main JavaScript entry point
+│   │   ├── data.js        # Timeline data and projects
+│   │   └── animation.js   # p5.js animations
+│   └── styles/
+│       └── main.css       # Main stylesheet
+├── public/                 # Static assets (copied as-is)
+│   ├── img/               # Images and favicons
+│   └── pages/             # Sub-projects and blog pages
+├── index.html             # Main HTML entry point
+├── vite.config.js         # Vite configuration
+└── .github/workflows/     # GitHub Actions for deployment
+    └── deploy.yml
+```
 
-### Complete Deployment Process
+## 🚀 Automated Deployment
 
-1. **Build and prepare files for GitHub Pages**:
-   ```bash
-   npm run deploy
-   ```
-   This will:
-   - Build the production version in `dist/`
-   - Clean old asset files from root
-   - Copy `index.html` and `assets/` to root directory
+The site uses **GitHub Actions** for automated deployment to GitHub Pages with a custom domain (`gaborcsapo.com`).
 
-2. **Commit and push the changes**:
+### How It Works
+
+1. **Push to master branch**:
    ```bash
    git add .
-   git commit -m "Deploy: Update site content"
-   git push
+   git commit -m "Update site content"
+   git push origin master
    ```
 
-3. **Automatic deployment**: GitHub Pages will automatically serve the updated site from the root `index.html`
+2. **GitHub Actions automatically**:
+   - Installs dependencies (`npm ci`)
+   - Builds production version (`npm run build`)
+   - Deploys to GitHub Pages from `dist/` directory
+   - Updates live site at [gaborcsapo.com](https://gaborcsapo.com/)
 
-### What Happens During Deploy
+### Deployment Features
 
-- ✅ Vite builds optimized production files
-- ✅ Old duplicate asset files are removed from root
-- ✅ Fresh `index.html` and `assets/` copied to root
-- ✅ CNAME file preserved for custom domain
-- ✅ GitHub Pages serves from root directory
+- ✅ **Automated**: No manual build steps required
+- ✅ **Optimized**: Vite handles minification and asset hashing
+- ✅ **Fast**: Only builds when code changes
+- ✅ **Reliable**: GitHub Actions ensures consistent deployments
+- ✅ **Clean**: No build artifacts in repository root
 
-**Note**: The deploy script automatically handles cleanup of old hashed asset files to prevent accumulation.
+### Configuration
 
-## 🔧 Workflow
+- **Workflow**: `.github/workflows/deploy.yml`
+- **Build**: Outputs to `dist/` directory 
+- **Base Path**: Configured in `vite.config.js` for GitHub Pages
+- **Custom Domain**: CNAME file in `public/` directory
 
-- **Development**: `npm run dev` - Hot reload dev server for active coding
-- **Production Testing**: `npm run preview` - Test the final optimized build
+## 🔧 Development Workflow
+
+### Daily Development
+1. **Start development server**: `npm run dev`
+   - Opens `http://localhost:3000`
+   - Hot module replacement for instant updates
+   - Edit `src/` files and see changes immediately
+
+2. **Edit content**:
+   - **Timeline data**: Edit `src/js/data.js` to add projects and experiences
+   - **Styling**: Modify `src/styles/main.css` for design changes
+   - **HTML structure**: Update `index.html` for layout changes
+   - **Animations**: Adjust `src/js/animation.js` for p5.js effects
+
+3. **Test production build**: 
+   ```bash
+   npm run build    # Creates optimized dist/ folder
+   npm run preview  # Test at http://localhost:4173
+   ```
+
+4. **Deploy**: Simply push to master branch - GitHub Actions handles the rest!
 
 ## 🛠️ Tech Stack
 
-- **HTML5** - Semantic markup
-- **Modern CSS** - Grid, Flexbox, Custom Properties
-- **JavaScript ES6+** - Modular architecture
-- **p5.js** - Interactive background animation
-- **Mustache.js** - Template rendering
-- **Vite** - Build tool and dev server
+- **[Vite](https://vitejs.dev/)** - Modern build tool with fast HMR
+- **HTML5** - Semantic markup and ES modules
+- **Modern CSS** - Grid, Flexbox, Custom Properties, responsive design
+- **JavaScript ES6+** - Modular architecture with import/export
+- **[p5.js](https://p5js.org/)** - Interactive background animations
+- **[Mustache.js](https://mustache.github.io/)** - Template rendering for timeline
+- **GitHub Actions** - Automated CI/CD deployment
+
+## 🎨 Features
+
+- **Interactive Timeline**: Horizontal scrolling project showcase
+- **Animated Background**: Dynamic p5.js visual effects with color themes
+- **Responsive Design**: Mobile-first approach with touch interactions
+- **Performance Optimized**: Vite's automatic code splitting and optimization
+- **Modern Architecture**: ES modules, semantic HTML, CSS custom properties

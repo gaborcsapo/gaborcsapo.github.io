@@ -24,16 +24,18 @@ This is a personal portfolio website for Gabor Csapo built using modern web tech
   - `src/js/animation.js`: Three.js p5.js animation logic
   - `src/styles/main.css`: Main stylesheet with timeline styling
 - **Build Files**:
-  - `dist/`: Vite build output directory
-  - `assets/`: Built and minified assets (CSS/JS bundles)
-  - `index.html`: Production build copied to root for GitHub Pages
-- **Development Files**:
-  - `index.dev.html`: Source HTML file used as Vite entry point
-  - `vite.config.js`: Vite configuration
-  - `package.json`: Dependencies and build scripts
-- **Static Assets**:
-  - `img/`: All images including favicons and blog assets organized in subdirectories
-  - `pages/`: Secondary pages and sub-applications (preserved as-is)
+  - `dist/`: Vite build output directory (auto-deployed via GitHub Actions)
+  - `dist/assets/`: Built and minified assets (CSS/JS bundles with hash names)
+  - `dist/index.html`: Production HTML with optimized asset references
+- **Configuration Files**:
+  - `index.html`: Main HTML entry point (Vite default)
+  - `vite.config.js`: Vite configuration optimized for GitHub Pages
+  - `package.json`: Dependencies and simplified build scripts
+  - `.github/workflows/deploy.yml`: Automated GitHub Pages deployment
+- **Static Assets (`public/`)**:
+  - `public/img/`: Favicons and static images served from root
+  - `public/pages/`: Secondary pages and sub-applications (preserved as-is)
+  - Assets in `public/` are copied as-is to build output
 
 ### Development Approach
 - **Modern Build System**: Uses Vite for ES module bundling, hot reload, and optimization
@@ -54,8 +56,8 @@ This is a personal portfolio website for Gabor Csapo built using modern web tech
    npm run dev
    ```
    Starts Vite dev server with hot reload and instant updates
-   - **Development URL**: `http://localhost:3000/index.dev.html` (with hot reload)
-   - **Production preview**: `http://localhost:3000/` (serves production build from root)
+   - **Development URL**: `http://localhost:3000/` (with hot reload)
+   - Vite automatically serves `index.html` as the entry point
 
 2. **Preview production build** (for testing final output):
    ```bash
@@ -70,27 +72,28 @@ This is a personal portfolio website for Gabor Csapo built using modern web tech
    ```bash
    npm run dev
    ```
-   - **Development URL**: `http://localhost:3000/index.dev.html` (edits to `index.dev.html` auto-reload here)
-   - Use the `/index.dev.html` URL for active development with hot reload
+   - **Development URL**: `http://localhost:3000/` (edits auto-reload instantly)
+   - Vite serves `index.html` directly with hot module replacement
 
 2. **Edit source files**:
    - `src/js/main.js`: Main application logic
    - `src/js/data.js`: Timeline data and project information
    - `src/styles/main.css`: Styling and responsive design
-   - `index.dev.html`: HTML structure and templates
+   - `index.html`: HTML structure and templates
 
 3. **Test production build**:
    ```bash
+   npm run build
    npm run preview
    ```
-   - Serves optimized build at `http://localhost:4173`
+   - Build creates optimized files in `dist/`
+   - Preview serves build at `http://localhost:4173`
    - Use this to verify final output before deployment
 
 4. **Deploy to GitHub Pages**:
-   ```bash
-   npm run deploy
-   ```
-   Builds and copies files to root directory for GitHub Pages (cleans old assets first)
+   - **Automatic**: Push to `master` branch triggers GitHub Actions deployment
+   - **Manual**: Push changes and GitHub Actions handles building and deployment
+   - No manual file copying or build steps required
 
 ### Timeline Data Management
 - Edit `src/js/data.js` to add/modify life chapters and projects
@@ -110,11 +113,18 @@ Each demo project in `pages/` is self-contained with its own dependencies and ca
 **Critical**: Always serve via HTTP for proper ES module loading.
 
 For testing with Puppeteer MCP server:
-1. Start preview server: `npm run preview` (serves production build at `http://localhost:4173/`)
-2. Use Puppeteer with no-sandbox option: `allowDangerous: true, launchOptions: {"headless": true, "args": ["--no-sandbox", "--disable-setuid-sandbox"]}`
-3. Test both desktop (1200x800) and mobile (375x800) viewports
-4. Verify timeline rendering, horizontal scrolling, and animations
-5. Animations need to be tested for 5 seconds with a screenshot every 300ms
+1. **Development testing**: `npm run dev` (serves at `http://localhost:3000/`)
+2. **Production testing**: `npm run build && npm run preview` (serves at `http://localhost:4173/`)
+3. Use Puppeteer with no-sandbox option: `allowDangerous: true, launchOptions: {"headless": true, "args": ["--no-sandbox", "--disable-setuid-sandbox"]}`
+4. Test both desktop (1200x800) and mobile (375x800) viewports
+5. Verify timeline rendering, horizontal scrolling, and animations
+6. Animations need to be tested for 5 seconds with a screenshot every 300ms
+
+### Build Configuration
+- **Vite Config**: Optimized for GitHub Pages with proper base path
+- **Single Entry Point**: `index.html` serves as both development and production entry
+- **Asset Optimization**: Automatic hashing, minification, and bundling
+- **GitHub Actions**: Automated deployment on push to master branch
 
 ## Design Philosophy
 
