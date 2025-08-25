@@ -454,11 +454,35 @@ export function initAnimation() {
 
         // p5.js setup function
         p.setup = function() {
-            let canvasWidth = p.max(100, p.windowWidth);
-            let canvasHeight = p.max(100, p.windowHeight);
+            // Get hero section dimensions instead of full window
+            const heroElement = document.getElementById('hero');
+            const heroRect = heroElement ? heroElement.getBoundingClientRect() : { width: p.windowWidth, height: p.windowHeight };
+            
+            let canvasWidth = p.max(100, heroRect.width);
+            let canvasHeight = p.max(100, heroRect.height);
 
             let canvas = p.createCanvas(canvasWidth, canvasHeight);
             canvas.parent('heroAnimation');
+            
+            // Add click handler directly to the p5.js canvas element
+            canvas.elt.addEventListener('click', function(event) {
+                if (animationState.isOpening) return;
+                
+                event.stopPropagation(); // Prevent event bubbling
+                
+                currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
+                currentPalette = artPalettes[currentPaletteIndex];
+                bgColor = p.color(currentPalette.bgColor);
+
+                circles.forEach(circle => circle.updateColorIndex());
+                makeGrainTexture();
+                showPaletteName();
+                updateTextColors();
+
+                // Reset grain fade to full opacity for palette changes
+                grainFade.opacity = 1;
+                grainFade.isComplete = true;
+            });
 
             baseCircleRadius = calculateBaseRadius();
 
@@ -519,33 +543,24 @@ export function initAnimation() {
             }
         };
 
-        // p5.js mouse pressed function
-        p.mousePressed = function() {
-            if (animationState.isOpening) return;
+        // Canvas click handler is now added directly during canvas creation
 
-            currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
-            currentPalette = artPalettes[currentPaletteIndex];
-            bgColor = p.color(currentPalette.bgColor);
-
-            circles.forEach(circle => circle.updateColorIndex());
-            makeGrainTexture();
-            showPaletteName();
-            updateTextColors();
-
-            // Reset grain fade to full opacity for palette changes
-            grainFade.opacity = 1;
-            grainFade.isComplete = true;
-        };
+        // Completely disable p5.js mouse pressed function to avoid conflicts
+        p.mousePressed = undefined;
 
         // Debounced resize handler to prevent excessive calls
         let resizeTimeout;
         p.windowResized = function() {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
-                if (p.windowWidth <= 0 || p.windowHeight <= 0) return;
+                // Get updated hero section dimensions
+                const heroElement = document.getElementById('hero');
+                const heroRect = heroElement ? heroElement.getBoundingClientRect() : { width: p.windowWidth, height: p.windowHeight };
+                
+                if (heroRect.width <= 0 || heroRect.height <= 0) return;
 
                 let oldBaseRadius = baseCircleRadius;
-                p.resizeCanvas(p.windowWidth, p.windowHeight);
+                p.resizeCanvas(heroRect.width, heroRect.height);
                 p.background(bgColor);
 
                 baseCircleRadius = calculateBaseRadius();
@@ -582,7 +597,21 @@ export function initAnimation() {
 
         // Store reference to trigger theme changes externally
         p.triggerThemeChange = function() {
-            p.mousePressed();
+            // Manually trigger the theme change logic without mouse press
+            if (animationState.isOpening) return;
+                
+            currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
+            currentPalette = artPalettes[currentPaletteIndex];
+            bgColor = p.color(currentPalette.bgColor);
+
+            circles.forEach(circle => circle.updateColorIndex());
+            makeGrainTexture();
+            showPaletteName();
+            updateTextColors();
+
+            // Reset grain fade to full opacity for palette changes
+            grainFade.opacity = 1;
+            grainFade.isComplete = true;
         };
     };
 

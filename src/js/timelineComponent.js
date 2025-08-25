@@ -165,9 +165,7 @@ function renderContent() {
                 <div class="project-content">
                     <h3 class="project-title">${project.title}</h3>
                     <div class="project-metadata">
-                        <span class="project-company">${project.company}</span>
-                        <span class="project-year">${project.year}</span>
-                        <span class="project-type ${typeClass}">${project.type}</span>
+                        <span class="project-company">${project.company}</span><span class="project-metadata-bullet">•</span><span class="project-year">${project.year}</span><span class="project-metadata-bullet">•</span><span class="project-type ${typeClass}">${project.type}</span>
                     </div>
                     <p class="project-description">${project.description}</p>
                 </div>
