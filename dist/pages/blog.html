@@ -11,7 +11,38 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/blog.css">
+    <style>
+      /* Inlined blog.css for self-contained legacy page */
+      body{min-width:525px;font-size:17px;font-family:'Roboto Mono', monospace;line-height:1.8;background-color:white;color:rgb(45, 47, 50);}
+      h1{text-align:center;font-size:36px;padding-top:40px;height:50%;font-family:'Montserrat', sans-serif;font-weight:bold;}
+      h2, h3{font-family:'Montserrat', sans-serif;font-weight:bold;padding-top:20px;}
+      a:link, a:visited{text-decoration:none !important;text-transform:none !important;color:#ef4c50;border-bottom:2px solid #ef4c50;}
+      a:hover, a:active{color:#AF383B;}
+      .collapse{padding-top:0!important;}
+      .navbar{background-color:white;color:#ef4c50;box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);font-size:18px;}
+      a.nav-link:hover, a.navbar-brand:hover{border-bottom:2px solid #ef4c50;color:#ef4c50;}
+      a.nav-link, a.navbar-brand{color:rgb(45, 47, 50);border-bottom:2px solid #fff;}
+      .header{position:relative;left:50%;top:50%;width:630px;height:260px;transform:translate(-40%, 0);}
+      .header-text{position:relative;float:left;width:210px;height:240px;display:none;}
+      .header-blg{font-family:'Montserrat', sans-serif;font-size:180px;font-weight:bolder;color:black;position:absolute;bottom:100px;line-height:20px;}
+      #header-sketch{float:left;display:none;}
+      .card-img{border-radius:50%;padding:0 !important;margin-bottom:40px;margin-left:.9375rem;padding-left:10px;float:left;}
+      @media (max-width: 768px){.col-xs-offset-3{margin-left: 25%;margin-right: 25%;}}
+      .card{box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);margin-top:10px;margin-bottom:50px;box-sizing:border-box;border-radius:2px;border-top:1px solid rgba(160, 160, 160, 0.2);padding:18px;position:relative;line-height:1.5;text-align:justify;}
+      .info{color:#818a91;text-align:center;font-size:14px;}
+      .text-center{text-align:center;}
+      .button{display:inline-block;position:relative;width:120px;height:32px;line-height:32px;border-radius:2px;font-size:0.9em;background-color:#ef4c50;color:black;text-align:center;left:50%;transform:translate(-50%);}
+      .button > paper-ripple{border-radius:2px;overflow:hidden;}
+      .button.raised{transition:box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);transition-delay:0.2s;box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.26);}
+      .button.raised:active{box-shadow:0 8px 17px 0 rgba(0, 0, 0, 0.2);transition-delay:0s;}
+      .collapse{padding-top:50px;}
+      .page-navigation{right:0;position:absolute;left:0;text-align:center;}
+      ::-webkit-scrollbar{width:10px;height:0px;}
+      ::-webkit-scrollbar-track-piece{background:rgb(220,220,220);}
+      ::-webkit-scrollbar-thumb:vertical{height:6px;background-color:#666;-webkit-border-radius:6px;}
+      ::selection{background:#ef4c50;}
+      ::-moz-selection{background:#ef4c50;}
+    </style>
     <link rel="icon" href="../img/favicon.png" type="image/png" />
     <link rel="shortcut icon" href="../img/favicon.ico" />
     <script>
@@ -35,7 +66,7 @@
         </li>
       </ul>
     </nav>
-    
+
     <!-- complex header text with o being replaced with a P5js sketch-->
     <div class="container" >
       <div class="header">
@@ -61,7 +92,7 @@
     - write abstract that appears before expanding the post
     - add text after expanding post
     - change data-target of the button and change ID of expanded area!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
+
 
 
 
@@ -77,7 +108,7 @@
           <p>abstract</p>
           <div class="collapse" id="CHANGE THIS TOO">
             <p>body</p>
-          </div>         
+          </div>
           <div class="button raised" type="button" data-toggle="collapse" data-target="#CHANGE THIS" aria-expanded="false" aria-controls="collapseExample">
             <div fit>Expand post</div>
             <paper-ripple fit></paper-ripple>
@@ -88,7 +119,7 @@
 
 
 -->
-    
+
     <!--contentsWrapper is where new contents are added when infinite scrolling
     MAKE SURE EVERY HTML PAGE START WITH contentsWrapper and inside a div with class contents-->
     <div id="contentsWrapper">
@@ -124,7 +155,7 @@
                 <p>
                 In response to Part 2 of the article I have mixed feelings about the uncertainty of the future. The article talked about concept that I myself have been thinking about for some time. First, the idea that our brain are just made up of small/big neural nets for every task we encounter. I imagine these neural nets to be rewirable and reprogrammable for new tasks and behaviours, but I guess we have only a limited amount of training time (youth) so we should make use of it. The other fascinating concept is how qualitative differences between intelligence levels are hard to imagine, but provide such an incredible evolutionary advantage. As the author explains, chimps can see skyscrapers, can see that humans are working around it, but will never be able to think on an abstract level that humans are building the skyscraper and in fact any animal could build it. This is why humans came to dominate and why humans will be dominated by AI or morphed into AI in a few decades. On the other hand, I didn’t think of how artificial super intelligence (ASI) could potentially give us immortality. Moreover, I never had the crazy idea that since I will die anyways, my only chance to survive is ASI and therefore I should fight with all my energy to achieve it.
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#hlimit" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -144,19 +175,19 @@
               </div>
               <p>The purpose of technology is to augment and enhance human capabilities. This is the value proposition of every meaningful piece of technology, and I hope to one day create a tool to extend human abilities as part of the artist/computer scientist movement.
               </p>
-              
+
               <div class="collapse" id="wekinator">
                 <p>
                 We are all direct products of the democratization of technology and as a result there has been a big shift on how people approach creation. Previously, people regarded creation of anything as a highly professional activity that requires years to master the necessary skills and gather experience. In the modern world creation is often regarded as an easy everyday task. The internet is full of tutorials that make advanced mathematics, painting, and music seem like a piece of cake.
                 </p>
                 <p>
-                Due to the availability of assisted creation systems and tutorials, the value of creation plummets. It is worrying that many formerly highly valued professionals like photographers are struggling, but I firmly believe that as we create tools and the tools shape us we will always find purpose and task for ourselves. This new purpose, however, becomes higher and higher level and more disconnected from the real world. We are clicking a mouse to paint on a canvas, or to play a drum set instead of using our hands. I wonder how that will change people’s relation to their environment. 
+                Due to the availability of assisted creation systems and tutorials, the value of creation plummets. It is worrying that many formerly highly valued professionals like photographers are struggling, but I firmly believe that as we create tools and the tools shape us we will always find purpose and task for ourselves. This new purpose, however, becomes higher and higher level and more disconnected from the real world. We are clicking a mouse to paint on a canvas, or to play a drum set instead of using our hands. I wonder how that will change people’s relation to their environment.
                 </p>
                 <p>
-                  On a different note, inspired by the Google Quick draw game, I created this dynamic time warping model with 2 iniputs and 3 output classes. The predicted classes are "chair", "circle" and "letter P". The training and test data was drawn by me in processing, and the output goes through the localhost to another processing window, which displays the name of the class. 
+                  On a different note, inspired by the Google Quick draw game, I created this dynamic time warping model with 2 iniputs and 3 output classes. The predicted classes are "chair", "circle" and "letter P". The training and test data was drawn by me in processing, and the output goes through the localhost to another processing window, which displays the name of the class.
                 </p>
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/dWQ_mIAbdy8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#wekinator" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -199,12 +230,12 @@
                 </p>
                 <h3>User testing</h3>
                 <p>
-                Tested 5 close friends from Asian, European and American backgrounds, 3 female, 2 male. Being liberal arts students they all found the project very interesting, but they also revealed holes in my design. The installation is currently very difficult as they have to download the extension from my website, enable developer mode and load the extension. Uploading the project to the paid Chrome Webstore would ideal, but I will need to explain the goal of the project clearly through examples and effective text, because the users were not absolutely clear how the whole project worked even after I explained them. I expected them to grasp my concept quicker, but testing readjusted my expectations. The user testing also made me realize that I need way more processing power. Currently on my dual core server, I don’t think I could handle more than 5 people at a time, because the machine learning and image processing is really demanding. The biggest overhead is loading the libraries. As for the visualization, I will have to improve labelling, apply more effective text, and simply have a section just to explain the project. People didn’t realize what the scatterplot meant, didn’t guess the origins of the hosts at first. The zooming on the scatterplot is good and bad at the same time, I definitely need to set a max zoom. They also asked me to put new metrics up, like comparing .com, .de, .cnn, etc… One big question was privacy, and everybody was really surprised how easily I can grab their private images and download them on my server, which created some concern in them, so I deleted all their pictures after the testing was done. 
+                Tested 5 close friends from Asian, European and American backgrounds, 3 female, 2 male. Being liberal arts students they all found the project very interesting, but they also revealed holes in my design. The installation is currently very difficult as they have to download the extension from my website, enable developer mode and load the extension. Uploading the project to the paid Chrome Webstore would ideal, but I will need to explain the goal of the project clearly through examples and effective text, because the users were not absolutely clear how the whole project worked even after I explained them. I expected them to grasp my concept quicker, but testing readjusted my expectations. The user testing also made me realize that I need way more processing power. Currently on my dual core server, I don’t think I could handle more than 5 people at a time, because the machine learning and image processing is really demanding. The biggest overhead is loading the libraries. As for the visualization, I will have to improve labelling, apply more effective text, and simply have a section just to explain the project. People didn’t realize what the scatterplot meant, didn’t guess the origins of the hosts at first. The zooming on the scatterplot is good and bad at the same time, I definitely need to set a max zoom. They also asked me to put new metrics up, like comparing .com, .de, .cnn, etc… One big question was privacy, and everybody was really surprised how easily I can grab their private images and download them on my server, which created some concern in them, so I deleted all their pictures after the testing was done.
                 </p>
                 <h3>Issues </h3>
                 <p>
-                A big issue is the number of libraries needed for the python scripts. Every library depends on 6 other python modules, and controlling the versions and installation environments is a difficult task. In the process, I installed a lot of redundant libraries, and simply the project should be made simpler. I learnt a lot about concurrency in javascript in the project, but it is still not absolutely perfect. Unfortunately, cached images are not requested from the internet, so for the best result, the extension should empty the cache before starting to use the system. Thirdly, the project is wildly violating privacy by downloading and storing + displaying private images of anybody. Changing the platform of the project would a great way to resolve many issues. Currently the analysis part is centralized into the server and the extensions funnel data to the server. A better approach would be to package up the project and make it available for anybody to run and analyze his/her own browsing habits. Only the numbers would be sent to the central server to keep track of the global results. This distributed approach would not only resolve the privacy issue, but also the computational burden. It is not scalable to offer an expensive computation service for free for potentially hundreds of users, but if installation is sufficiently easy, the users can use their own computers. 
-                
+                A big issue is the number of libraries needed for the python scripts. Every library depends on 6 other python modules, and controlling the versions and installation environments is a difficult task. In the process, I installed a lot of redundant libraries, and simply the project should be made simpler. I learnt a lot about concurrency in javascript in the project, but it is still not absolutely perfect. Unfortunately, cached images are not requested from the internet, so for the best result, the extension should empty the cache before starting to use the system. Thirdly, the project is wildly violating privacy by downloading and storing + displaying private images of anybody. Changing the platform of the project would a great way to resolve many issues. Currently the analysis part is centralized into the server and the extensions funnel data to the server. A better approach would be to package up the project and make it available for anybody to run and analyze his/her own browsing habits. Only the numbers would be sent to the central server to keep track of the global results. This distributed approach would not only resolve the privacy issue, but also the computational burden. It is not scalable to offer an expensive computation service for free for potentially hundreds of users, but if installation is sufficiently easy, the users can use their own computers.
+
                 <h3>Learning outcomes</h3>
                 <p>
                 The project gave me a lot of though days, but I learnt about JS concurrency, data processing, applying machine learning algorithms, D3, chrome extensions and image processing. Unfortunately, I will have to shut down the project eventually, as it is using too much of my virtual machine, but I hope to develop it in the future to be able to release it open-source or at least to archive it in a video.
@@ -253,7 +284,7 @@
                 <p style="text-align:left;">
                 11. Matt Strohmeyer, https://medium.com/30-pages/reading-2-2-simulacra-and-simulation-jean-baudrillard-c0f1cb5227d
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#bubble-gender" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -273,13 +304,13 @@
               </div>
               <p>Pollution is one of the major tragedies of the commons that we need to avoid to survive as a species. The human race functions as a system and as every system there are leverage points that we need to adjust in order to tackle the issue. We can change the parameters (taxes, standards), buffers, flows, feedback loops, as discussed indirectly by Brett Victor, but these have week effects. Real success depends on how well we can support a paradigm shift in higher level leverage points. We need to change the rules of who makes rules. As long as corporations dictate trends, we will not push forward for a cleaner future until that becomes economically viable, which will never happen if there is no initial investment. The best way to achieve such a transformation is to change the mindset that created the previous system. I truly believe that education can profoundly impact the way individuals think, and that has to be utilized. If I never learnt about the social context that technology is creating, I would have never thought about the consequences of my creations.</p>
               <div class="collapse" id="greentech">
-                <p>Two specific leverage points that captured my imagination is to create a business world where green tech is taken seriously by establishing funds and incubators and to manipulate large corporations who can drive the shift. First, we need to promote green tech incubators that have the ability to capture the minds of the brightest to solve the problems that actually matter for the future. Available funding would make people’s goals to innovate in the field, and hopefully people would start to think about green tech as a serious business and not merely a toy field. 
+                <p>Two specific leverage points that captured my imagination is to create a business world where green tech is taken seriously by establishing funds and incubators and to manipulate large corporations who can drive the shift. First, we need to promote green tech incubators that have the ability to capture the minds of the brightest to solve the problems that actually matter for the future. Available funding would make people’s goals to innovate in the field, and hopefully people would start to think about green tech as a serious business and not merely a toy field.
                 As I. Burrington explains in the case of data centers, industries are fragmented between a few big and a lot of small players. While it is impossible to persuade thousands of small companies to adapt green tech, it prove possible to push Facebook and Google to buy sustainable energy for their data centers. I found it empowering that Green peace could achieve this in the case of Facebook, and I believe we should learn from this and find new ways to jumpstart the shift at big companies.
                 </p>
                 <p>
-                Instead of just solving specific green engineering problems at hand, we need to focus on finding a solution to setting people in motion to reevaluate the constant growth model and value sustainability instead. That is the hardest challenge of the 21st century as we have romanticized wealth, development, and progress for more than 2 centuries, and it is also part of our nature to always want more. 
+                Instead of just solving specific green engineering problems at hand, we need to focus on finding a solution to setting people in motion to reevaluate the constant growth model and value sustainability instead. That is the hardest challenge of the 21st century as we have romanticized wealth, development, and progress for more than 2 centuries, and it is also part of our nature to always want more.
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#greentech" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -303,9 +334,9 @@
                 <p>The idea that struck me the most is the asymmetry between the source and the target of code. Speech and writing are meant to transfer thoughts between multiple human minds, and therefore optimizing the communication for one means optimizing it for the other as well . Meanwhile, code has an asymmetric relation between the two parties. We have human minds translating their thoughts into voltage signals. There is a myriad of layers between the two to help with the translation and we can see a trend to abstract more and more of the machine language to create code that is more naturally understandable to the human mind.
                 </p>
                 <p>
-                Until now, our thoughts only lived in our heads, or were recorded on paper. W can convince people to act upon the thoughts we send them on paper or on speech and create physical change, but ultimately thoughts never lived in the world. Code is the first language that is executable. Humans write down ideas through code and then physical machines in the outer world without minds execute these thoughts on our behalf. Code is a “mind amplification” that captures and executes human thought in the physical world. With an analogy to a painter we no longer need to paint using a brush. We can “tell the brush what we want” it will do it, as in the case of the famous one-liner: 10 PRINT CHR$(205.5+RND(1));  GOTO 10. 
+                Until now, our thoughts only lived in our heads, or were recorded on paper. W can convince people to act upon the thoughts we send them on paper or on speech and create physical change, but ultimately thoughts never lived in the world. Code is the first language that is executable. Humans write down ideas through code and then physical machines in the outer world without minds execute these thoughts on our behalf. Code is a “mind amplification” that captures and executes human thought in the physical world. With an analogy to a painter we no longer need to paint using a brush. We can “tell the brush what we want” it will do it, as in the case of the famous one-liner: 10 PRINT CHR$(205.5+RND(1));  GOTO 10.
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#speech" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -325,22 +356,22 @@
               </div>
               <p>Copyright licenses can be a really hairy topic. For most of my life, I never bother looking up what all the licenses like MIT, Apache, GPL, BSD, CC, etc actually mean, but some of my recent readings on ownership inspired me to research some of the most common licenses. Licenses are granted by authorities in order to set limits to the usage and redistribution of a creator's work. The above mentioned licenses differ in their takes on copying, modifying, distributing, sharing alike and derivative work. Below I provide a quick non-professional overview of some differences between license.</p>
               <div class="collapse" id="licenses">
-                
+
                 <h3>Creative commons (CC)</h3>
                 <p>Creative commons is actually a collection of licenses by itself. These licenses are a combination of the following attributes: Attribution (author must be credited), ShareAlike (all derivative work must be shared under the same copyright), NonCommercial (only non commercial use allowed) and NoDerivs(meaning no modifications are allowed when sharing). As an example, Wikipedia uses a CC Attribution-ShareAlike license, which essentially means you should credit authors and share your work derived from Wikipedia with the same license.</p>
-                
+
                 <h3>GNU General Public License</h3>
                 <p>It was founded on the principle that we should be free to use, change, share and share changes to free software. No matter how the software is distributed, it HAS to remain free. This concept is called “copyleft”. A GPL license is very restrictive in the sense that everything has to be open, which doesn’t leave much freedom to somebody who wants to create proprietary software based on GPL licensed work.</p>
-                
+
                 <h3>Apache License 2.0</h3>
                 <p>This license is more flexible. The source code of derivative work doesn’t need to be public, and can be published under any other license, but similarly to GPL, changes have to be documented.</p>
-                
+
                 <h3>MIT License</h3>
                 <p>The most open license, which basically puts the work in the public domain and permits anyone to use it in any way. This is probably the most popular open source license.</p>
-                
+
                 <h3>Berkeley Software Distribution (BSD)</h3>
                 <p>BSD is very similar to MIT, except a clause that prohibits to use the original creators trademark without prior permission. A lot of people know about BSD because of Facebook’s controversial copyright decisions around their open source projects like React. They wrote the BSD+ license building on the BSD, but extended it with clauses that heavily protected Facebook's interests. Luckily, they recently decided to change their policy and switched to the MIT license after realizing the drawbacks of these clauses.</p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#licenses" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -366,12 +397,12 @@
                   <img src="../img/blog/greenland2.jpg" class="col-md-6 img-fluid pull-xs-left">
                 </div>
                 <p class="text-muted text-center">Sorting equipment at airport & Loading Bell 212 helicopter</p>
-                <div>  
+                <div>
                   <img src="../img/blog/greenland3.jpg" class="col-md-6 img-fluid pull-xs-left">
                   <img src="../img/blog/greenland4.jpg" class="col-md-6 img-fluid pull-xs-left">
                 </div>
                 <p class="text-muted text-center">Calving front through binocular & Battery pack and controllers</p>
-                <div>  
+                <div>
                   <img src="../img/blog/greenland5.jpg" class="col-md-6 img-fluid pull-xs-left">
                   <img src="../img/blog/greenland6.jpg" class="col-md-6 img-fluid pull-xs-left">
                 </div>
@@ -380,7 +411,7 @@
                 <p>We started off in Ilulissat, the third largest town in Greenland. First, we prepared equipment that we had to take with us to the camp-site including camping, scientific and personal gear. Once we were out at the fjord we had limited access to resources, so we had to make sure we had everything needed ready to be loaded on the helicopters. In Ilulissat, I was also explained in detail how to set up the TRI radar, that I was specifically interested in. After we were taken on a Bell 212 helicopter out to the ice sheet, we set up camp and started deploying sensors. First we had to fix the blown controller in the battery pack that was built last year to support year long data collection with constant clean energy. Then we assembled the radars, collected data from weather and seismic stations planted last year.
                 </p>
                 <p>
-                The most valuable aspect of the field trip was seeing the practical use of my academic knowledge by understanding and interacting with real scientific equipment. My most profound realization was the applicability of the skills learnt in Interactive Media courses in actual field research. Previous experience with circuits, soldering, in-series and parallel connections came in handy when we had to understand the wiring of 40 battery packs, 6 solar panels, 4 wind turbines, their controllers and the radar. Also, operating the TRI radar was essentially the same as using sensors and motors in one of my courses. Working alongside Prof. Holland opened up my eyes about the engineering of high-tech scientific equipment, and I believe I wouldn’t have problems operating or debugging such tools in the future. 
+                The most valuable aspect of the field trip was seeing the practical use of my academic knowledge by understanding and interacting with real scientific equipment. My most profound realization was the applicability of the skills learnt in Interactive Media courses in actual field research. Previous experience with circuits, soldering, in-series and parallel connections came in handy when we had to understand the wiring of 40 battery packs, 6 solar panels, 4 wind turbines, their controllers and the radar. Also, operating the TRI radar was essentially the same as using sensors and motors in one of my courses. Working alongside Prof. Holland opened up my eyes about the engineering of high-tech scientific equipment, and I believe I wouldn’t have problems operating or debugging such tools in the future.
                 </p>
                 <p>
                 Having seen the glacier with my eyes provides a sense of scale and a more accurate understanding that will support further projects with CSLC that I’m involved in. I have designed a salinity, temperature, depth data visualization during my junior fall semester that is visualizing some of the data collected during these expedition. I wish to update the tool based on my improved understanding of the data collection and of the mission of the project. I am also involved in a project designing a drone payload to support data collection at the glacier. Our aim is to mount a LiDAR sensor on a drone to allow the 3D mapping of the calving front that can feed into sea-level models. We planned a test flight during the 10 days, but unfortunately the drone lost its stabilisation, which makes it dangerous to fly in high winds. Estimations of height and width of the calving front support our view of the feasibility of the project.
@@ -391,8 +422,8 @@
                 <p>
                 The 10 days working alongside such dedicated scientists as Prof. David Holland, Irena and Xianwei, while being kept safe by the caring hands of Denise Holland and Brian has been a humbling experience that I will carry with myself for decades. The expedition served as an incredible interdisciplinary learning experience for a lifetime that I can never be grateful enough for.
                 </p>
-                
-              </div>         
+
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#greenland" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -413,7 +444,7 @@
               <p>Uber, Airbnb, Amazon Mechanical Turk and other similar “marketplace” apps seem to regulators like a careless, anticompetitive business model that is trying to cheat the system of existing laws. However, these companies participate in a radically new mode of production, the networked information economy (NIE). This term was coined by Yochai Benkler, and refers to individuals taking decentralized individual action to cooperate and create goods and services. This new mode of production was enabled by the easy access to information and necessary capital. NIE has created many open-source software, and is evolving further in the form of the so called “marketplace” apps. To support the spreading of this new business model, it needs to be formalized to create trust between regulators, participants and the “marketplace”, but most importantly, companies should take more responsibility as owners of their networks rather than just marketplaces.
               </p>
               <div class="collapse" id="uber">
-                <p>As we all know, Uber and its companions create economic value by mobilizing existing resources to serve demand. Most people have cars and smartphones, which means there is zero capital needed to jump into the business. As part of the NIE, drivers and users are supposedly free-willed actors who decide to cooperate as part of the Uber network, which connects demand and supply. As A. Rosenblat’s paper about the power asymmetries in Uber prove, however, the ownership and control over the design of the network allows unfair exploitation of the service. Uber uses this control for short-term gains, but through that they also create long-term obstacles in the acceptance of the platform. 
+                <p>As we all know, Uber and its companions create economic value by mobilizing existing resources to serve demand. Most people have cars and smartphones, which means there is zero capital needed to jump into the business. As part of the NIE, drivers and users are supposedly free-willed actors who decide to cooperate as part of the Uber network, which connects demand and supply. As A. Rosenblat’s paper about the power asymmetries in Uber prove, however, the ownership and control over the design of the network allows unfair exploitation of the service. Uber uses this control for short-term gains, but through that they also create long-term obstacles in the acceptance of the platform.
                 </p>
                 <p>
                 Uber and Mechanical turk especially has been criticized for being a platform that basically enables to hire and fire people within days with no responsibility as an employer. That is why Uber and its companions thought to be exploitive platforms and are banned in many countries. I would argue, this quick employer turnover definitely has a place in the modern economy, but companies should not be the only ones benefitting from it. “Marketplace apps” need to end. Avoiding social responsibility by hiding behind the “we are a marketplace” mentality, promotes a short-term business model. These companies need to realize that they are network owners, and as the owner they have responsibility over the health of their networks. Uber doesn’t own the drivers or their cars, they own the network of drivers and riders. With that they should also ensure that driver’s have appropriate insurance, clean backgrounds, and pay taxes. It is in their best interest to have a non-exploitive model, that serves not just the company, but also the drivers, riders and society as large. As an idea, for example Uber could create a tighter network, by making the platform invite only. Driver’s would get money for inviting other drivers, but will get a penalty if their invitee breaks the laws, etc… This would create an even tighter community, where drivers are responsible for each other.
@@ -421,7 +452,7 @@
                 <p>
                 But I think it doesn't’ matter that much for Uber, as driverless cars will soon eliminate the need for drivers, and they would become a traditional rental car company.
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#uber" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -447,7 +478,7 @@
                 <p>
                 You might say, machines can never be creative, but then most creativity researchers agree that the main secret of creativity is simply gathering experience and combining the ideas gained from them. If we stop thinking of creativity as this magical process, even creativity can seem like something that could potentially be mechanized. Humans developed these superior biological features through thousands of years of evolution, during which we have been molded by people around us, organizations, institutions, and surroundings to develop the best techniques of survival. I’m curios what having machines in this feedback loop would mean. Would the always moral machines, create a peaceful society, or is that against human nature? If society's ultimate goal is to create a peaceful, prosperous environment, do we need machines to enforce that and to overcome the inherently imperfect human nature? What will an AI say about our existence once it becomes more advanced than a model that was trained on movie scenes?
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#existance" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -473,7 +504,7 @@
                 <p>
                 On the other hand, all this power makes me worried about human rights. Facebook is free to conduct these experiments without our consent simply because we clicked accept on the terms and conditions button when signed up. I believe it is a misuse of their power, as many of us were brought onto facebook as a result of social pressure, which should be taken into consideration. I believe to make these experiments more ethical, we will have to make laws around user privacy stricter. This will hopefully happen sooner than later but currently players in the data business are just trying to figure out what having this much data actually means.
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#facebook" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -502,7 +533,7 @@
                 </p>
                 <h3>Early development </h3>
                 <p>
-                Machine learning is a complex field. Deep learning is done through frameworks that implement the mathematical formulas behind the different convolution, loss, optimization, classification and various other functions that a deep learning model consists of. In the early days, most frameworks were open-source and were maintained by university research groups, who shared their result along with their frameworks. Researchers’ main goal is to maximize the publicity of their research, which requires them to share their development tools so that their results can be reproduced. This meant that researchers were building on top of each other’s frameworks, which sped up the overall development through open-source contributions. These frameworks made deep learning really easy jump into and to use, but even with today's tools the forefront of machine learning is a difficult field. A smart engineer can usually implement ideas by following formulas in papers, but does not have the mathematical background to develop them (hyperbolic geometry, functional analysis, dynamical systems, random matrix theory). On top of this, very few people and companies could actually afford to run extremely large and deep networks on several GPUs. 
+                Machine learning is a complex field. Deep learning is done through frameworks that implement the mathematical formulas behind the different convolution, loss, optimization, classification and various other functions that a deep learning model consists of. In the early days, most frameworks were open-source and were maintained by university research groups, who shared their result along with their frameworks. Researchers’ main goal is to maximize the publicity of their research, which requires them to share their development tools so that their results can be reproduced. This meant that researchers were building on top of each other’s frameworks, which sped up the overall development through open-source contributions. These frameworks made deep learning really easy jump into and to use, but even with today's tools the forefront of machine learning is a difficult field. A smart engineer can usually implement ideas by following formulas in papers, but does not have the mathematical background to develop them (hyperbolic geometry, functional analysis, dynamical systems, random matrix theory). On top of this, very few people and companies could actually afford to run extremely large and deep networks on several GPUs.
                 </p>
                 <h3>Corporations and Open-source</h3>
                 <p>
@@ -510,7 +541,7 @@
                 </p>
                 <h3>Results of open sourcing on Machine Learning</h3>
                 <p>
-                Google’s decision was completely rational and forward thinking. They created an open-source project, that is biased towards making developers use other Google services in a hidden ways. 
+                Google’s decision was completely rational and forward thinking. They created an open-source project, that is biased towards making developers use other Google services in a hidden ways.
                 </p>
                 <p>
                 The company would not gain any serious advantage by keeping its technology proprietary. In reality, Tensorflow is not superior to other libraries. The open field of deep learning frameworks is already a crowded and hyper competitive market. The traditional open-source scientific libraries (Torch, Theano) perform similarly to Tensorflow, and most research was published on them. Other platforms, such as CNTK (Microsoft’s take on machine learning) is far more scalable on large servers, and MXnet supported by Amazon is much faster to train. The underlying algorithms of Tensorflow were based on open-source projects and were always well known. Even if Tensorflow becomes a superior framework, and Google gives away these training algorithms to the competition, at the end of the day speed is not always the most important thing. The real algorithmic advantage lies in the implementation of the deep learning models like the one behind Alphago, the AI, which beat the world’s best Go player. Google has not given away these implementation specific algorithms. The real value of Tensorflow is in the engineering that runs those algorithms cross-platform and at scale across a wide range of devices from a cloud server, a desktop machine to a mobile phone. That's not a trivial feat by any stretch, but it also is hard to replicate. Overall, Google did not lose much from publishing yet another deep learning library, but gained tremendously from it.
@@ -519,7 +550,7 @@
                 The framework is not valuable by itself, but the people and the service built on top of it make it valuable. Google realized it, and tried to monetize on this idea. Tensorflow has by far the best documentation, largest range of additional tools, like Tensorboard to visualize data to help debug it, a visual representation of deep learning layers, widest support for potential devices that people might run their models on. With all this Google lowered the barrier to entry to reach as many developers as possible. In a hyper competitive and fast-evolving market, like machine learning, the only way to stay afloat and get ahead of the competition is to convince the future talent to use Tensorflow. If the smartest talent already uses Tensorflow, hiring and training them becomes an easy process. Similarly, if innovative startups decide to use Tensorflow as their framework, acquiring them and integrating them into Google becomes seamless. The more people use the platform, the faster Google can get feedback on new features allowing its engineers to increase their productivity, and have a more realistic picture of what the community really needs. Open sourcing and the transparency facilitates conversation between developers and people using the products, and creates confidence in people, which motivates developers, outside researchers and potential future hires to be dedicated to this platform. Obviously, by open sourcing, they get the benefits from contributors outside the core team. Once Tensorflow gets popular, many new research ideas would be implemented in Tensorflow first, which makes it more efficient for Google to productize those ideas and have advantages over competitors.
                 </p>
                 <p>
-                By having an open-source development framework with a strong community, Google will not make any profits. The company needs its community to create products that use its other paid services. Training deep learning models requires terabytes of data being run through computation heavy functions for days at least. Perhaps not surprisingly, the cloud giants that stand to gain from an influx of data-heavy applications are the same ones open sourcing their frameworks in the first place. Microsoft, Amazon and Google are all in the business of machine learning to drive business to their respective Microsoft Azure, Amazon Web Services and Google Cloud businesses. Currently, Google is a distant third in the cloud business, but they are betting heavily on the success of Tensorflow. 
+                By having an open-source development framework with a strong community, Google will not make any profits. The company needs its community to create products that use its other paid services. Training deep learning models requires terabytes of data being run through computation heavy functions for days at least. Perhaps not surprisingly, the cloud giants that stand to gain from an influx of data-heavy applications are the same ones open sourcing their frameworks in the first place. Microsoft, Amazon and Google are all in the business of machine learning to drive business to their respective Microsoft Azure, Amazon Web Services and Google Cloud businesses. Currently, Google is a distant third in the cloud business, but they are betting heavily on the success of Tensorflow.
                 </p>
                 <p>
                 Open-sourcing this way does not make development distributed in any way, as most development is still made in-house. Google maximizes the number of developers using its platform, and uses its immense influence on the field and the developer tools to divert the flow of talent and traffic for other web services in its favor. They deliberately create an environment where it is easier to use Google Cloud, than for instance Microsoft Azure, and where it is easier for them to hire the best talent and where most cutting edge research would be native to Tensorflow. The bias, and open-sourcing serves Google’s best interests, but it’s not something that wouldn’t happen otherwise. If Google kept Tensorflow closed-source, they could still force people to use their cloud services even stronger, and once you learnt Tensorflow it would be hard to switch anyways. So the result is essentially very similar, but Google’s reach is extended and these actions also promote transparency.
@@ -529,7 +560,7 @@
                 </p>
                 <h3>Conclusion</h3>
                 <p>
-                We're effectively seeing a market where the rational behaviour is to spend lots of time and effort building something incredibly useful, and then giving it away for free. This was probably unthinkable just a decade ago, but business has changed quickly.  When competitive market forces drive big corporations toward a model of "openness", everyone wins as long as it is easy to move between platforms. 
+                We're effectively seeing a market where the rational behaviour is to spend lots of time and effort building something incredibly useful, and then giving it away for free. This was probably unthinkable just a decade ago, but business has changed quickly.  When competitive market forces drive big corporations toward a model of "openness", everyone wins as long as it is easy to move between platforms.
                 </p>
                 <br>
                 <br>
@@ -570,7 +601,7 @@
                 <p style="text-align:left;">
                 2017 Gartner MQ for Cloud - Compare Top BI Leaders
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#tensorflow" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -588,7 +619,7 @@
                 <h1 col col-md-8 col-xs-12 text-center">Browsing Bias</h1>
                 <p class="info">Politics of Code - Gabor Csapo - 22. Oct. 2017</p>
               </div>
-              <p>Faces in traditional media are mostly white and male, and the internet seems to abide by the same rules. In this project, I would like to create a tool that measures what portion of faces encountered during a regular browsing session is male/female, and what the ethnic background of them is. To achieve that, I will create a Chrome extension, that will collect links to every single image that a user encounters while browsing the internet. The extension will then send the list of links to a server that has a trained model on pictures of people, their ethnicity and gender, which would be able to classify the people on those images. This latter server side would use part of my capstone. Overall, the project would give a sense of to what extent is the internet gender and ethnicity biased.</p>       
+              <p>Faces in traditional media are mostly white and male, and the internet seems to abide by the same rules. In this project, I would like to create a tool that measures what portion of faces encountered during a regular browsing session is male/female, and what the ethnic background of them is. To achieve that, I will create a Chrome extension, that will collect links to every single image that a user encounters while browsing the internet. The extension will then send the list of links to a server that has a trained model on pictures of people, their ethnicity and gender, which would be able to classify the people on those images. This latter server side would use part of my capstone. Overall, the project would give a sense of to what extent is the internet gender and ethnicity biased.</p>
             </div>
           </div>
         </div>
@@ -643,7 +674,7 @@
                 <h3>Moving forward</h3>
                 <p>
                 The app is not production ready yet. Mytorchtech is a lot of responsibility, and we would need to ask for funding, talk to public safety, student life, the SIG Reach, print posters, raise awareness, which as seniors we don’t have time for. A clear solution to the problem would be getting other people on board, and open-sourcing the project. We spent a significant amount of time commenting up the code, and writing a readme, so that anybody could pick up the project, and implement any of the extra feedback we received while presenting in Mashups, such as the ability to confirm that a guard is arriving, integrating facebook messenger into the app, and the list continues.</p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#torchsprint2" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -682,7 +713,7 @@
                   <div><img src="../img/blog/drumpf.jpg" class="col-lg-6 img-fluid pull-xs-right"></div>
                 </figure>
                 <p class="text-muted text-center">Applications of style transfer using neural nets.</p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#aiart" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -704,9 +735,9 @@
               <div class="collapse" id="manipulation">
                 <p>Social media stood for the celebration of the individual, but ironically this hyper individualistic platform became the proof of how intertwined our lives are. It seems almost as if humans were merely a herd and governments/companies are constantly redrawing the fence around us, to benefit themselves. It makes me a bit disappointed that we have this massive power to push people towards doing good, to promote entrepreneurial spirit, volunteering, or to make diverse news reach everybody, but we don’t make use of it. After all business is business and the sole purpose of social networks is to crunch out as much money as possible from the collected data.</p>
                 <p>
-                We are designed to be manipulated in our very nature. We respond to our environment, and adapt to changes. Every design decision of shaping our environment that affect the way we interact with our surrounding, is an act of manipulation. The change in our behaviour goes often unnoticed or we simply don’t care. People never really question if they receive more liberal or conservative articles for Google queries, which gives incredible power into the hands of software engineers who design the tools we use daily. Thinking about the huge impact software has on our lives, fires me up every time to make a positive contribution to society. 
+                We are designed to be manipulated in our very nature. We respond to our environment, and adapt to changes. Every design decision of shaping our environment that affect the way we interact with our surrounding, is an act of manipulation. The change in our behaviour goes often unnoticed or we simply don’t care. People never really question if they receive more liberal or conservative articles for Google queries, which gives incredible power into the hands of software engineers who design the tools we use daily. Thinking about the huge impact software has on our lives, fires me up every time to make a positive contribution to society.
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#manipulation" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -724,18 +755,18 @@
                 <h1 col col-md-8 col-xs-12 text-center">Electronic Governments</h1>
                 <p class="info">Politics of Code - Gabor Csapo - 4. Oct. 2017</p>
               </div>
-              <p>The world is changing, but democracy is slow to catch up. While power, capital and information is increasingly concentrated in the cyberspace utilizing the benefits of efficiency and faster adaptability, democracy still uses methods inherited from the last century. Michael Mussman in his paper “Programming a Deliberative Direct-Democracy” touched upon a lot of thoughts  that I’ve been baffled with. 
+              <p>The world is changing, but democracy is slow to catch up. While power, capital and information is increasingly concentrated in the cyberspace utilizing the benefits of efficiency and faster adaptability, democracy still uses methods inherited from the last century. Michael Mussman in his paper “Programming a Deliberative Direct-Democracy” touched upon a lot of thoughts  that I’ve been baffled with.
               </p>
               <div class="collapse" id="egov">
                 <p>In the first part of his paper, he compares governments to computer operating systems, as “[they both] have the ability to coordinate activity and delegate resources among the constituent parts of a system”. I absolutely agree that governments are the necessary facilitators of running businesses while they abstract and take care of issues such as security, justice, or education. This shows immense similarity with operating systems that provide an interface between the hardware and third party applications. In software engineering, it isn’t necessarily the hardware’s or the third party applications’ fault if they are crashing. Most likely the system that binds them together was badly designed or the wrong parameters were used. The same way, I believe in many cases failing governments are the result of an unsuitable system that prevents the ideal flow of ideas.
                 </p>
                 <p>
-                Political systems provide the breeding ground for ideas and the selection of the best ones. However, tweaking the environment can result in very different outcomes. As we discussed in the second week, urban planners have power over the behaviour of people through the design of space. Similarly switching from physical newsstands (that give a glimpse at all the available opinions as you stand in front of it) to facebook (where you get served only the information you subscribe to) greatly changed and polarized the ideological landscape. The same way, the people need to design a political system that cultivates a deep social network allowing the engagement of ideas instead of dividing and obstructing them. 
+                Political systems provide the breeding ground for ideas and the selection of the best ones. However, tweaking the environment can result in very different outcomes. As we discussed in the second week, urban planners have power over the behaviour of people through the design of space. Similarly switching from physical newsstands (that give a glimpse at all the available opinions as you stand in front of it) to facebook (where you get served only the information you subscribe to) greatly changed and polarized the ideological landscape. The same way, the people need to design a political system that cultivates a deep social network allowing the engagement of ideas instead of dividing and obstructing them.
                 </p>
                 <p>
-                As the “Civil Disobedience” paper argues, political power shifted from the physical to the cyberspace and activist need to follow it there. However, not just activist but the institution of democracy should also follow it into the new age. Political participation is failing in many countries, because new generations can’t engage with traditional elections and debates that we inherited from the last century. And hence crowd manipulators like Trump can get elected. While the older generation might be satisfied with traditional methods, and does not trust change, we have the admit that our world has changed, and politics is detached from it. We need to bring in new platforms to debate, data visualization to effectively express ideas, and decentralization to support new ideas. Technology needs to be better integrated into the political system and we need to create an environment that actively prompts the youth to think. 
+                As the “Civil Disobedience” paper argues, political power shifted from the physical to the cyberspace and activist need to follow it there. However, not just activist but the institution of democracy should also follow it into the new age. Political participation is failing in many countries, because new generations can’t engage with traditional elections and debates that we inherited from the last century. And hence crowd manipulators like Trump can get elected. While the older generation might be satisfied with traditional methods, and does not trust change, we have the admit that our world has changed, and politics is detached from it. We need to bring in new platforms to debate, data visualization to effectively express ideas, and decentralization to support new ideas. Technology needs to be better integrated into the political system and we need to create an environment that actively prompts the youth to think.
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#egov" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -756,16 +787,16 @@
               <p>Our team created mytorch.tech to resolve issues arising in the legal gray area of alcohol and other types of misconduct at NYU Abu Dhabi. The UAE being a Muslim country forbids residents including NYUAD student the consumption of alcohol with rare exceptions. Some students regardless choose to abuse substances, which puts them and the university’s reputation in danger.  Residential education trusts students to be smart about their personal decision, but there are always people who don’t know their limits or can’t control themselves. Most years went by with a few incidents, but last year oblivious freshmen called the ambulance without notifying the school, which resulted in a legally difficult situation. The administration’s solution was to crack down on any dangerous behaviour. Mytorch.tech offers an alternative conflict resolution method, by opening communication channels to resolve conflicts by contacting the person in charge appropriate to the situation in order to avoid unnecessary trouble.</p>
               <div class="collapse" id="mytorchdiv">
                 <p class="text-center"><a href="https://mytorch.tech">Link to the project</a></p>
-                <p>Mytorch.tech offers a web-based application streamlined to put the user in touch with the appropriate person in charge. For instance, a potentially escalating situation does not necessarily require the same level of intervention as alcohol poisoning or sexual assault. The app helps one make this decision by providing easy to read instructions, and making clear the consequences of each help option. The app avoids asking or storing information that could potentially get the user into trouble. By avoiding avoiding direct mention also prevents the service from any legal obligation to report the users for their behaviour. We don’t store incriminating information and if we were to continue the project, we would turn all data transfer encrypted and ephemeral. 
+                <p>Mytorch.tech offers a web-based application streamlined to put the user in touch with the appropriate person in charge. For instance, a potentially escalating situation does not necessarily require the same level of intervention as alcohol poisoning or sexual assault. The app helps one make this decision by providing easy to read instructions, and making clear the consequences of each help option. The app avoids asking or storing information that could potentially get the user into trouble. By avoiding avoiding direct mention also prevents the service from any legal obligation to report the users for their behaviour. We don’t store incriminating information and if we were to continue the project, we would turn all data transfer encrypted and ephemeral.
                 </p>
                 <p>
-                My main contribution to the project was in the development steps. After we conceptualized the app together, we decided on the technologies we would use and starting materializing the app in just two weeks. Mytorch.tech is a node js application that renders the UI with pug. The app has the ability to contact people using the Twilio SMS API, look up addresses using the Google Location API and one can log in using the Google Oauth passport js module. My tasks were to build the login feature and the SMS capability, while also debugging issues encountered with heroku. Initially, I planned to use the official NYU login API, but after several hours of various attempts, I found an alternative way to login. My workaround was to login into the NYU provided google account and authenticate the user through that. Although it seems like a straightforward feature, it was not an easy process. I attempted to use directly the Google API and then Firebase with little success. In the end, passport js seemed the only working solution. To set it up,  I had to learn about sessions, secure cookies, passport js and Google Oauth2. Setting up the SMS capability using Twilio was an easier task, as I used their service before. The project also required me to familiarize myself with Pug. 
+                My main contribution to the project was in the development steps. After we conceptualized the app together, we decided on the technologies we would use and starting materializing the app in just two weeks. Mytorch.tech is a node js application that renders the UI with pug. The app has the ability to contact people using the Twilio SMS API, look up addresses using the Google Location API and one can log in using the Google Oauth passport js module. My tasks were to build the login feature and the SMS capability, while also debugging issues encountered with heroku. Initially, I planned to use the official NYU login API, but after several hours of various attempts, I found an alternative way to login. My workaround was to login into the NYU provided google account and authenticate the user through that. Although it seems like a straightforward feature, it was not an easy process. I attempted to use directly the Google API and then Firebase with little success. In the end, passport js seemed the only working solution. To set it up,  I had to learn about sessions, secure cookies, passport js and Google Oauth2. Setting up the SMS capability using Twilio was an easier task, as I used their service before. The project also required me to familiarize myself with Pug.
                 </p>
                 <p>
                 Mytorch.tech is an app that resolves accidental conflicts by opening up communication channels and informing user about their behaviour while dodging any legal trouble. While I expanded my web development skills, I also learnt more about the alcohol related topics on campus and every mention of this app to my friends received approval from them. Unfortunately, there are some issues we could not resolve due to our time constraint. The Google Oauth does not allow cross-domain origin login, which prevent us from masking the mytorchtech.herokuapp.com url into mytorch.tech. We will have to develop our own NYUAD specific location API, as Google does not provide information about our campus. Our current design is, however, a perfect demo to show officials to win support. After creating this prototype the next step would be to start a campus wide conversation about the usability of our app. We need to win the support of public safety, RAs and residential education. After receiving approval, we would extend the app with additional features such as encrypted ephemeral messaging and data transfers, further streamlining the interface, and ensuring the reliability of the app, so that it can always service the people in need. With every startup timing is the number one issue and based on the recent campus wide concern about alcohol related issues, this semester is the perfect time to launch our service.
 
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#mytorchdiv" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -789,15 +820,15 @@
                 <p>Games like Sims and Grand Theft Auto fascinate me because they are able to create such expressive worlds. They manage to simplify complex, often random relations with hard coded if else statements, that overall capture the essence a simplified life. They show us the issues of criminal behaviour, or critique how our lives and personalities are dependent on the objects we interact with. But a game doesn’t have to be complex to have a message. The first example in the above mentioned paper, is Animal Crossing, which is a simple village life simulator, and an implicit critique of materialistic thinking and the financial bourgeoisie. Even a five a year old can see and question why the village banker gets richer and richer as you take out more and more loans so that you can buy a bigger house for all the items you collected in the game. By showing this, the game makes people wonder about the dynamics that exist in the real world.
                 </p>
                 <p>
-                The three main reason why games have potential as learning tools is that even children can understand them, which is the prime age of learning, they are fun so people do it on their own, and they provide a deeper engagement with theories. Video games are created by encapsulating a set of ideals and theories about a certain world through code, and inserting these biases into a digital space, where we are free to explore combinations of decisions. This procedural presentation of ideas provide a deeper experiential learning as opposed to linear media such as a book or a movie, where everything is laid out in a predetermined manner and you don’t get a chance to engage with its world.  
+                The three main reason why games have potential as learning tools is that even children can understand them, which is the prime age of learning, they are fun so people do it on their own, and they provide a deeper engagement with theories. Video games are created by encapsulating a set of ideals and theories about a certain world through code, and inserting these biases into a digital space, where we are free to explore combinations of decisions. This procedural presentation of ideas provide a deeper experiential learning as opposed to linear media such as a book or a movie, where everything is laid out in a predetermined manner and you don’t get a chance to engage with its world.
                 </p>
                 <p>
-                If I was taught about computer science as a kid, I don’t think I would have liked it. However, I came across a game called Littlebig Planet, that captured my interest for a long time. It is a simple platforming game, but there is an incredibly intuitive level building mode, which is actually the selling point of the game. My level designs became very sophisticated as I learnt to utilize the tools provided in the game, which strongly resembled web and app design. The levels have logic boards, which receive inputs from switches and output signals to elements in the game that control the gameplay. One has to think about usability, design, reusability the same way as in software engineering, and I believe this simplistic presentation of thinking as a coder contributed to my interest in computer science. 
+                If I was taught about computer science as a kid, I don’t think I would have liked it. However, I came across a game called Littlebig Planet, that captured my interest for a long time. It is a simple platforming game, but there is an incredibly intuitive level building mode, which is actually the selling point of the game. My level designs became very sophisticated as I learnt to utilize the tools provided in the game, which strongly resembled web and app design. The levels have logic boards, which receive inputs from switches and output signals to elements in the game that control the gameplay. One has to think about usability, design, reusability the same way as in software engineering, and I believe this simplistic presentation of thinking as a coder contributed to my interest in computer science.
                 </p>
                 <p>
-                I can’t think of a field that can’t be gamified. Politics, management, racing all found an easy ground into our entertainment habits through games, but I think many more fields can do the same if we make a conscious effort to have a positive impact through video games, and study how we can create expressive worlds. But to do that people’s perception of video games need to change, and they need to be taken seriously as simulations of our world that we can learn from rather than sources of entertainment for children. 
+                I can’t think of a field that can’t be gamified. Politics, management, racing all found an easy ground into our entertainment habits through games, but I think many more fields can do the same if we make a conscious effort to have a positive impact through video games, and study how we can create expressive worlds. But to do that people’s perception of video games need to change, and they need to be taken seriously as simulations of our world that we can learn from rather than sources of entertainment for children.
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#games" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -816,13 +847,13 @@
                 <p class="info">Politics of Code - Gabor Csapo - 18. Sept. 2017</p>
               </div>
               <p>“The blind application of machine learning runs the risk of amplifying biases present in data.”
-                  The number one task of modern data analytic tools and machine learning is to recognize meaningful patterns in data. We spent thousands of hours trying to make sure our algorithms can differentiate with 100% accuracy cats and dogs, but in the process we also created machines that recognize patterns in data that are not meant to be there. 
+                  The number one task of modern data analytic tools and machine learning is to recognize meaningful patterns in data. We spent thousands of hours trying to make sure our algorithms can differentiate with 100% accuracy cats and dogs, but in the process we also created machines that recognize patterns in data that are not meant to be there.
               </p>
               <div class="collapse" id="bias">
                 <p>Every machine learning tutorial starts with making sure your training data has an even distribution with no biases. However, based on recent readings, data that describes humans will likely also capture our biased nature. We thought algorithms are pure rationality, but as we increasingly take heuristic methods and train algorithms on human data, they seem to become the victims of human biases. As the paper “Man is to Computer Programmer as Woman is to Homemaker?” points out even news corpora curated by professional journalists is characterized by our everyday gender bias. It is important to notice, because if we train a natural language processing model based on that dataset, we will end up with an undesired, gendered computer model of our language. Such a model is Word2Vec, which transforms words into vector in order to describe their similarities and to help natural language processing. Google trained a Word2Vec model on a biased news corpus, which has been widely applied in hundreds of production software and projects. Such software only amplifies the existing biases in our society.
                 </p>
                 <p>
-                As computers software becomes more and more complex, we start to believe algorithms, which we don’t understand anymore. Technoscience with its machine predictions increasingly overtakes traditional scientific reasoning, where cause and effect explanations dominate. Most of our financial decisions on the stock market are done by algorithms nobody understand anymore. They are merely data hungry databases that crunch out the best possible investments in milliseconds. While it is a bit troublesome that our economy could easily crash because of a faulty algorithm, machines are generally good with numbers. The problem is when we give these same machines ethical jobs to do. 
+                As computers software becomes more and more complex, we start to believe algorithms, which we don’t understand anymore. Technoscience with its machine predictions increasingly overtakes traditional scientific reasoning, where cause and effect explanations dominate. Most of our financial decisions on the stock market are done by algorithms nobody understand anymore. They are merely data hungry databases that crunch out the best possible investments in milliseconds. While it is a bit troublesome that our economy could easily crash because of a faulty algorithm, machines are generally good with numbers. The problem is when we give these same machines ethical jobs to do.
                 </p>
                 <p>
                 The US government has created a sort of social network of terrorist based incredible amounts of data collected about the interactions between people among large populations. They have a database where they feed data, and cluster it, and hope to discover patterns and anomalies that indicate terrorist activity to ultimately nominate people to kill. This data hungry giant bases life and death decisions on computed possibilities instead of facts, and these possibilities are becoming harder and harder to justify as the algorithm grows. The other problem is that it is based largely on heuristics, which introduces naturally a large error margin. If we look at only who these terrorists interact with, often family members and friends are also nominated on the killing list. Is this wrong or does it serve society? Hard to tell, but it portrays a rather grim future to me where machines know everything about us. For instance, just like in a scifi movie, in the future if you don’t eat an apple in the morning, you can expect a message from a robot that sort, recycles, and look for patterns in your trash, that you need more vitamins. I’m not sure if I want so much control over my decisions.
@@ -830,7 +861,7 @@
                 <p>
                 Too bad machines don’t have ethics yet. For now machines are still created by humans, so we should make sure we fight undesired biases in the process of creating our future. That is why I immensely admire the research presented in the “Man is to Computer Programmer as Woman is to Homemaker?” paper.
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#bias" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -853,10 +884,10 @@
                 <p>Today’s automatic programming arose from the desire to reuse code and to use the computer to write its own code. I was always curious who invented symbolic programming, where we simply write variables that represent numbers in the way everybody understands them. The history of automatic programming seems like an fascinating journey pushed by two world wrecking wars, where women have interesting symbolic role.
                 </p>
                 <p>
-                In the 50s programming was a feminine, clerical job (not yet a profession) where scientists would command women to input computations to the huge computers they had at that time. As Wendy says “One could say that programming and software became software when commands shifted from commanding a “girl” to commanding a machine.” Assembly was invented, so instructions could be written by the men in a human readable way. That is how women were eliminated from the industry for a long time and programming became culturally a masculine industry.  
+                In the 50s programming was a feminine, clerical job (not yet a profession) where scientists would command women to input computations to the huge computers they had at that time. As Wendy says “One could say that programming and software became software when commands shifted from commanding a “girl” to commanding a machine.” Assembly was invented, so instructions could be written by the men in a human readable way. That is how women were eliminated from the industry for a long time and programming became culturally a masculine industry.
                 </p>
                 <p>
-                As Wendy discusses, software engineering’s purpose is to speed up the process of abstraction, to hide the machine and secure it from the programmer itself. You no longer needed black magic to understand the computer, as it became a black box, ultimately democratizing programming for the masses. Today we arrived to an age where most users have no idea how computers work. Even people creating software no longer understand the computer, because each software builds upon an older one, which builds upon another, etc... Creating an endless chain distancing humans from the computer, but freeing the user and the programmer from “suffering through the mastering of computing” (Rob Kitchin, Nature of Software). 
+                As Wendy discusses, software engineering’s purpose is to speed up the process of abstraction, to hide the machine and secure it from the programmer itself. You no longer needed black magic to understand the computer, as it became a black box, ultimately democratizing programming for the masses. Today we arrived to an age where most users have no idea how computers work. Even people creating software no longer understand the computer, because each software builds upon an older one, which builds upon another, etc... Creating an endless chain distancing humans from the computer, but freeing the user and the programmer from “suffering through the mastering of computing” (Rob Kitchin, Nature of Software).
                 </p>
                 <p>
                 As the writer explains, software becomes identical to an ideology: an imaginary description of reality, giving an idealistic explanation for the nature of the machine.
@@ -865,7 +896,7 @@
                 My favorite quote from the reading is a funny irony about the contradictory development of software:
                 "As Our machines increasingly read and write without us, as our machines become more and more unreadable, so that seeing no longer guarantees knowing (if it ever did), we the so-called users are offered more to see, more to read. The computer - that most nonvisual and nontransparent device - has paradoxically fostered “visual culture” and “transparency.”"
                 </p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#reading1" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -891,11 +922,11 @@
               </p>
               <p>
               3: Meal swipe market place: offer meal swipes for sale to people without stipend or people who eat a lot.
-              </p>      
+              </p>
             </div>
           </div>
         </div>
-        
+
         <div class="container">
           <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
           <div class="card col col-lg-10 col-xl-8">
@@ -904,15 +935,15 @@
                 <img class="card-img col col-xs-6 col-xs-offset-3 col-md-3" src="../img/blog/seal.jpg" alt="Card image cap">
                 <h1 col col-md-8 col-xs-12 text-center">Seal Project</h1>
                 <p class="info">Information Visualization - Gabor Csapo - 2016/2017</p>
-              </div>              
+              </div>
               <p>Seal-Project - Visualizing Multivariate Ocean Data with Multiple Views.
               Approached the Center for Sea Level Change looking for project ideas for a class. The head of CSLC asked for help to create a visual analysis system for salinity, depth, temperature data collected by tags put on seals in two fjords in Greenland. The project will help scientists better understand fjords and the melting of glaciers through novel visualization techniques for the temporal and spatial aspects of CTD data. I built the visualization using D3 JS.<br></p>
-              
+
               <p class="text-center">How to use:</p>
               <p class="text-center"><a href="https://sealproject.herokuapp.com" target="_blank">The prototype of the project is available by clicking on this link</a></p>
               <p class="text-center"><a href="https://www.youtube.com/watch?v=aJQq8xtyHqA" target="_blank">See how an earlier version worked here</a></p>
               <p class="text-center"><a href="https://sealproject.herokuapp.com/instruction" target="_blank">Or check out the detailed description of how it works</a></p>
-              <p class="text-center"><a href="https://sealproject.herokuapp.com/paper" target="_blank">Or read an academic paper on the project</a></p>         
+              <p class="text-center"><a href="https://sealproject.herokuapp.com/paper" target="_blank">Or read an academic paper on the project</a></p>
             </div>
           </div>
         </div>
@@ -984,12 +1015,12 @@
                 Initially we intend to develop the "rider" app interface for Android phones, and then implement the "driver" interface other aspects of the project if time permits it.</p>
 
                 <h3 id="modifyingtheapp">Modifying the app</h3>
-                <p>If you would like to edit our code, you need to install Android Studio along with the Android SDK and the Java SDK. 
+                <p>If you would like to edit our code, you need to install Android Studio along with the Android SDK and the Java SDK.
                 Once you have these, clone the project and go to --> Select File | New | Project from Existing Sources from the main menu.
                 Browse to the project that you'd like to import and click next
                 Choose to "import the project from external model"
                 Android Studio walks you through all the steps to successfully import the project e.g. importing external libraries, dependencies...
-                Then you have to download "Volley" 
+                Then you have to download "Volley"
                 Next, you have to comment out from volley build.gradle the line "apply from: 'bintray.gradle'"
                 And go to File --> New --> Import Module --> [select location] and name the module "VolleyX"</p>
                 <p>Details on what each class and function does can be seenin the code. I don't want to create an object diagram, because the purpose, functionality and number of objects change frequently.</p>
@@ -1007,7 +1038,7 @@
                 <li>R : Rider sends GET request to request a driver</li>
                 </ul>
                 <p>While its functionality is being developed, the server will send a reply with information about the request, but once it is fully functional the responses will be limited to riders' requests.</p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#ctexi" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -1028,11 +1059,11 @@
               <p>Over the course of January 2017 I had the chance to take part in a class on Islamic terrorism. The class was full of intense discussion, heavy topics and the result of the class was a number of papers that try to grasp the problems of the Middle-East as of 2017.</p>
               <p class="text-center"><a target="_blank" href="../img/blog/Paper3.pdf">Was Obama's decision to not intervene wrong?</a></p>
               <p class="text-center"><a target="_blank" href="../img/blog/Final Paper.pdf">Is there a way out for Lybia?</a></p>
-              <p class="text-center"><a target="_blank" href="../img/blog/Paper2.pdf">Is ISIS redefining terrorism?</a></p>            
-            </div>         
+              <p class="text-center"><a target="_blank" href="../img/blog/Paper2.pdf">Is ISIS redefining terrorism?</a></p>
+            </div>
           </div>
         </div>
-        
+
 
         <div class="container">
           <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
@@ -1045,11 +1076,11 @@
               </div>
               <p>Nepal is a little known country in South Asia. What's even less known is that the bloody revolution wrecking the country has just ended a decade ago. After taking a class that took its students to Nepal to interview the former PM there and soldiers, and taking a class on revolutions, I wrote two papers. One is on the causes of the revolution and the other on whether one man can create a revolution in the context of Soviet revolution.</p>
               <p class="text-center"><a target="_blank" href="../img/blog/Myths of revolutions.pdf">A Brief History of the People’s War in Nepal</a></p>
-              <p class="text-center"><a target="_blank" href="../img/blog/Essay 2 Stalin.pdf">Forging the Man of Steel</a></p>            
-            </div>         
+              <p class="text-center"><a target="_blank" href="../img/blog/Essay 2 Stalin.pdf">Forging the Man of Steel</a></p>
+            </div>
           </div>
         </div>
-       
+
         <div class="container">
           <div class="col col-xs-0 col-lg-1 col-xl-2"></div>
           <div class="card col col-lg-10 col-xl-8">
@@ -1061,12 +1092,12 @@
               </div>
               <p>DIYDJ is a human computer interaction experiment, where the user interacts with a website through 3 separate interfaces to twist songs in fun ways. check out my project from my Github!!</p>
               <div class="collapse" id="diydj">
-              
+
                 <h3>The project is made up of three parts:</h3>
                 <p>1. The website grabs and plays songs from Soundcloud, using Tone JS manipulates them, using P5.dom tracks colors, which is used as one of the inputs for the sound manipulation, using P5.speech recognizes if the user says “reverse” and reverses the song. I spent a significant amount of time on designing a pretty interface.</p>
                 <p>2. The arduino yun controller is a box with a battery that sends signal over wifi to the server to change the sound being played on the website</p>
                 <p> 3. The server is set up using Node JS, hosted on Heroku, so it is publically available.</p>
-                
+
                 <h3>Ideation</h3>
                 <p>The project is inspired by my midterm project but it is upgraded in every sense. In the midterm project I was looking for fun ways to manipulate sound, which turned out to be harder than I thought. I consulted with Luisa and in the end we agreed that playbackrate, pitch and filters are the best ways that are still manageably hard. This time I wanted to create fun interfaces to manipulate the sound with. I was thinking a lot about meaningful, fun and novel interfaces and I concluded computer vision, speech recognition and a wifi enabled controller is the best.
                 Research and Development</p>
@@ -1079,7 +1110,7 @@
 
                 <h3>Lessons learnt:</h3>
                 <p>My biggest take away from the project is that computer vision and speech recognition isn’t necessarily as hard as I thought. There are high level libraries available that make everything fairly easy, but once I want to alter something I have to dig really deep into the topic.</p>
-              </div>         
+              </div>
               <div class="button raised" type="button" data-toggle="collapse" data-target="#diydj" aria-expanded="false" aria-controls="collapseExample">
                 <div fit>Expand post</div>
                 <paper-ripple fit></paper-ripple>
@@ -1087,7 +1118,7 @@
             </div>
           </div>
         </div>
-  
+
       </div>
     </div>
 
@@ -1098,14 +1129,161 @@
         <li id='2-page' class="page-item"><a class="page-link" href="blog2.html">2</a></li>
         <li id='1-page' class="page-item"><a class="page-link" href="blog1.html">3</a></li>
       </ul>
-    </nav>   
+    </nav>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/addons/p5.sound.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
-    <script src="../js/blog-nonminified.js"></script>
-    
+    <script>
+      // polygon array and number of verts
+      let poly = []
+      let n = 100 // feel free to play with this number :)
+
+      // canvas size variables
+      let w = 200
+      let h = 250
+
+      // oscillators
+      let chord = []
+      let root = 30
+      let major = [ 4, 5, 6 ]
+      let minor = [ 10, 12, 15 ]
+
+      var timeout = false
+      // setup and draw functions ---
+
+      function setup() {
+        var canvas = createCanvas(w, h)
+        canvas.parent('header-sketch');
+        strokeWeight(19)
+        noFill()
+        cursor(HAND)
+        noStroke()
+        n++ // add extra point for closing the polygon
+
+        for (let i = 0; i < n; i++) {
+          // populate regular polygon vertices given number of points n
+          let a = {
+            x: (w/2)-10 + 64*sin(map(i, 0, n-1, 0, TAU)),
+            y: (h/2) + 64*cos(map(i, 0, n-1, 0, TAU))
+          }
+          poly.push(a)
+        }
+
+        // initialize oscillators
+        if (n < 25) {
+          for (let i = 0; i < 3; i++)
+            chord[i] = new p5.TriOsc()
+        } else {
+          for (let i = 0; i < 3; i++)
+            chord[i] = new p5.SinOsc()
+        }
+
+        // initialize with major chord intervals
+        for (let i = 0; i < chord.length; i++) {
+            chord[i].freq(major[i] * root)
+              chord[i].amp(0.0)
+            chord[i].stop()
+        }
+        $( ".header-text, #header-sketch" ).fadeIn( "slow")
+      }
+
+      function draw() {
+        // use default blend mode for background
+        blendMode(BLEND)
+        background(247, 247, 249)
+
+        // use additive blend mode to separate color channels
+        blendMode(DIFFERENCE)
+        stroke(255, 0, 0)
+        drawPoly(1000, 1000)
+
+        stroke(0, 255, 0)
+        drawPoly(1200, 1500)
+
+        stroke(0, 0, 255)
+        drawPoly(2000, 1700)
+
+        // distort oscillatiors
+        warpOsc()
+      }
+
+
+      // helper function implementations ---
+
+      function logMap(value, start1, stop1, start2, stop2) {
+        // based off of linear regression + existing p5.map function
+
+        start2 = log(start2)
+        stop2 = log(stop2)
+
+        return exp(start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1)))
+      }
+
+      function drawPoly(dx, dy) {
+        // draws polygon given vertices in the poly[] array, adds mouse bias using params
+
+        let g = 0
+        if (mouseIsPressed)
+          g = random(-2, 2)
+
+        beginShape()
+        for (let i = 0; i < n; i++) {
+          let bias = dist(mouseX, mouseY, poly[i].x, poly[i].y)
+          vertex(poly[i].x + dx / logMap(bias, w, 0, dx, 45) + g, poly[i].y + dy / logMap(bias, h, 0, dy, 45) + g)
+        }
+        endShape()
+      }
+
+      function warpOsc() {
+        // uses max dist to determine the frequency distortion
+
+        let bias = 0
+        for (let i = 0; i < n; i++)
+          bias = max(bias, dist(mouseX, mouseY, poly[i].x, poly[i].y))
+
+        for (let i = 0; i < chord.length; i++){
+          var frequencyCalc = map(bias, w, 0, major[i], minor[i]) * root;
+          if (frequencyCalc < 22000 && frequencyCalc > -22000){
+            chord[i].freq(frequencyCalc)
+          }
+        }
+
+      }
+
+      //Infinte scrolling:
+      $(document).ready(function() {
+        var win = $(window);
+        var count = 2
+        if (window.location.pathname.split("/").pop().match(/\d+/g) != null) {
+            count = 0;
+        }
+        var timeout;
+
+        // Each time the user scrolls
+        win.scroll(function() {
+          // End of the document reached?
+          if ($(document).height() - win.height() - 200 <= win.scrollTop() && !timeout) {
+              if (count > 0){
+                timeout = true
+                $.ajax({
+                  url: "/pages/blog"+count+".html",
+                  dataType: 'html',
+                  success: function (data) {
+                    newcontent=$(data).find('.contents');
+                    $('#contentsWrapper').append(newcontent);
+                    $('#'+count+'-page').addClass('disabled').attr('title', 'already loaded');
+                    count--;
+                    timeout = false
+                  },
+                });
+              }
+            }
+          });
+      });
+    </script>
+
   </body>
 </html>
