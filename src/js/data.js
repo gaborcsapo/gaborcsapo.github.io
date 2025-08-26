@@ -1,22 +1,6 @@
 // Timeline data structure for the new timeline component
 // This matches the format expected by timeline.html component
 
-// Utility function to extract company and year from meta field
-function parseMetaField(meta) {
-  // Extract year from meta - look for 4-digit years
-  const yearMatch = meta.match(/(\d{4}(\s*-\s*\d{4}|\s*-\s*Present)?)/);
-  const year = yearMatch ? yearMatch[1] : '';
-
-  // Extract company - everything before the first " - " or " | "
-  let company = meta.split(/\s+[-|]\s+/)[0];
-
-  // Clean up common patterns
-  if (company.includes('Summer') || company.includes('Fall')) {
-    company = meta.split(/\s+[-|]\s+/)[1] || company;
-  }
-
-  return { company, year };
-}
 
 // Timeline data in the new format expected by timeline component
 export const chapters = [
@@ -226,13 +210,3 @@ export const chapters = [
   }
 ];
 
-// Legacy data structure for backward compatibility
-export const timelineData = {
-  chapters: chapters
-};
-
-// Legacy data structure for backward compatibility
-export const portfolioData = {
-  projects: [],
-  experiences: []
-};

@@ -77,13 +77,8 @@ function initScrollAnimations() {
     });
   }, observerOptions);
   
-  // Observe elements that should animate in
   // Note: project cards are now dynamically created by timeline component
-  const animatedElements = document.querySelectorAll('.skill-category');
-  animatedElements.forEach(el => {
-    el.classList.add('fade-in');
-    observer.observe(el);
-  });
+  // No static elements need animation observers currently
 }
 
 function initAnalytics() {
