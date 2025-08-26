@@ -74,6 +74,7 @@ export function initAnimation() {
         let circles = [];
         let currentPaletteIndex = 0;
         let currentPalette = artPalettes[0];
+        let renderingPalette = artPalettes[0]; // Separate palette reference for actual rendering
         let bgColor;
         let overAllTexture;
         let baseCircleRadius = 100;
@@ -86,11 +87,14 @@ export function initAnimation() {
             progress: 0
         };
 
-        // Grain fade control
+
+        // Grain fade control (only for initial load)
         const grainFade = {
-            duration: 6000, // 3 seconds
+            duration: 2000, // 2 seconds for initial fade-in
             opacity: 0,
-            isComplete: false
+            isActive: false,
+            startTime: 0,
+            isInitialLoad: true // Track if this is the first texture
         };
 
         // Speed control
@@ -124,7 +128,7 @@ export function initAnimation() {
                 this.phase = startPhase;
                 this.rotationAngle = rotationAngle;
                 this.floatSpeed = 0.01 * speedMultiplier;
-                this.colorIndex = p.floor(p.random(currentPalette.colors.length));
+                this.colorIndex = p.floor(p.random(renderingPalette.colors.length));
                 this.initialRadius = initialRadius;
 
                 // Movement properties - these will transition smoothly
@@ -173,7 +177,7 @@ export function initAnimation() {
                 if (!this.radius || this.radius <= 0) return;
 
                 p.noFill();
-                let c = p.color(currentPalette.colors[this.colorIndex]);
+                let c = p.color(renderingPalette.colors[this.colorIndex]);
                 let alpha = this.rippleAmount > 0 ? p.min(80 + this.rippleAmount, 120) : 80;
                 c.setAlpha(alpha);
 
@@ -188,7 +192,7 @@ export function initAnimation() {
             }
 
             updateColorIndex() {
-                this.colorIndex = p.floor(p.random(currentPalette.colors.length));
+                this.colorIndex = p.floor(p.random(renderingPalette.colors.length));
             }
 
             checkHover() {
@@ -361,66 +365,421 @@ export function initAnimation() {
             }
         }
 
-        function makeGrainTexture() {
-            if (!p.width || !p.height || p.width <= 0 || p.height <= 0) {
-                console.warn('Invalid canvas dimensions for texture creation');
-                return;
+        // Grain Texture System - Clean class-based architecture with WebGL support
+        class GrainTextureManager {
+            constructor(p5Instance) {
+                this.p = p5Instance;
+                this.isWebGL = false;
+                this.webglShader = null;
+                this.cpuRenderer = null;
+                this.currentTileSize = 128;
+                this.isReady = false;
+                this.textureCache = new Map(); // Cache textures by tint key
+                this.maxCacheSize = 10; // Reasonable limit for texture cache
+                
+                this.initializeRenderer();
             }
-
-            try {
-                overAllTexture = p.createGraphics(p.width, p.height);
-
-                if (!overAllTexture) {
-                    console.error('Failed to create graphics buffer');
+            
+            initializeRenderer() {
+                // Try WebGL first, fallback to CPU
+                if (this.detectWebGLSupport()) {
+                    console.log('Initializing WebGL grain texture renderer...');
+                    this.isWebGL = true;
+                    this.initWebGLRenderer();
+                } else {
+                    console.log('WebGL not available, using CPU grain texture renderer...');
+                    this.isWebGL = false;
+                    this.initCPURenderer();
+                }
+            }
+            
+            detectWebGLSupport() {
+                // Temporarily disable WebGL until fragment shader implementation is perfected
+                // The CPU approach already provides massive performance improvements
+                console.log('WebGL temporarily disabled - using optimized CPU renderer with excellent performance');
+                return false;
+                
+                /* 
+                // TODO: Re-enable once fragment shader rendering is perfected for mobile GPUs
+                try {
+                    const canvas = document.createElement('canvas');
+                    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                    const hasWebGL = !!gl;
+                    
+                    if (hasWebGL) {
+                        console.log('WebGL support detected, will attempt hardware acceleration');
+                        // Check for essential extensions
+                        const hasFloatTextures = gl.getExtension('OES_texture_float');
+                        console.log('WebGL float textures supported:', !!hasFloatTextures);
+                    } else {
+                        console.log('WebGL not supported, using CPU fallback');
+                    }
+                    
+                    return hasWebGL;
+                } catch (e) {
+                    console.error('WebGL detection failed:', e);
+                    return false;
+                }
+                */
+            }
+            
+            initWebGLRenderer() {
+                this.webglShader = new WebGLGrainRenderer(this.p);
+            }
+            
+            initCPURenderer() {
+                this.cpuRenderer = new CPUGrainRenderer(this.p);
+            }
+            
+            generateTexture(tint, onComplete) {
+                this.calculateTileSize();
+                
+                // Create cache key from tint and tile size
+                const cacheKey = `${tint[0]}-${tint[1]}-${tint[2]}-${this.currentTileSize}`;
+                
+                // Check cache first
+                if (this.textureCache.has(cacheKey)) {
+                    console.log('Using cached grain texture for tint:', tint);
+                    const cachedTexture = this.textureCache.get(cacheKey);
+                    onComplete(cachedTexture, true); // Pass true to indicate cached texture
                     return;
                 }
-
-                let tint = currentPalette.grainTint;
-
-                // Detect if mobile for performance optimization
-                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-                if (isMobile) {
-                    // Mobile: Use graphics drawing methods for reliability
-                    overAllTexture.noStroke();
-
-                    for (let i = 0; i < p.width; i += 2) {
-                        for (let j = 0; j < p.height; j += 2) {
-                            let noiseVal = p.noise(i / 3, j / 3, (i * j) / 50);
-                            let opacity = noiseVal * p.random(2, 80);
-
-                            // Draw 2x2 pixel rectangles for grain texture
-                            overAllTexture.fill(tint[0], tint[1], tint[2], opacity);
-                            overAllTexture.rect(i, j, 2, 2);
+                
+                // Generate new texture
+                const cacheTexture = (texture) => {
+                    if (texture) {
+                        // Manage cache size
+                        if (this.textureCache.size >= this.maxCacheSize) {
+                            // Remove oldest entry (first in Map)
+                            const firstKey = this.textureCache.keys().next().value;
+                            const oldTexture = this.textureCache.get(firstKey);
+                            if (oldTexture && oldTexture.remove) {
+                                oldTexture.remove(); // Clean up p5 graphics object
+                            }
+                            this.textureCache.delete(firstKey);
+                            console.log('Removed oldest texture from cache');
                         }
+                        
+                        // Add to cache
+                        this.textureCache.set(cacheKey, texture);
+                        console.log('Cached new grain texture for tint:', tint);
                     }
+                    onComplete(texture, false); // Pass false to indicate new texture
+                };
+                
+                if (this.isWebGL && this.webglShader) {
+                    console.log('Attempting WebGL texture generation...');
+                    // Try WebGL first, fallback to CPU on error
+                    this.webglShader.generateTexture(this.currentTileSize, tint, (texture) => {
+                        if (texture) {
+                            console.log('WebGL generation successful!');
+                            cacheTexture(texture);
+                        } else {
+                            // WebGL failed, fallback to CPU
+                            console.warn('WebGL generation failed, falling back to CPU renderer...');
+                            this.isWebGL = false;
+                            if (!this.cpuRenderer) {
+                                console.log('Initializing CPU renderer for fallback...');
+                                this.initCPURenderer();
+                            }
+                            if (this.cpuRenderer) {
+                                console.log('Using CPU fallback renderer');
+                                this.cpuRenderer.generateTexture(this.currentTileSize, tint, cacheTexture);
+                            } else {
+                                console.error('CPU fallback also failed!');
+                                onComplete(null, false);
+                            }
+                        }
+                    });
+                } else if (this.cpuRenderer) {
+                    console.log('Using CPU renderer (WebGL not available)');
+                    this.cpuRenderer.generateTexture(this.currentTileSize, tint, cacheTexture);
                 } else {
-                    // Desktop: Use fast pixel manipulation method
-                    overAllTexture.loadPixels();
-
-                    for (let i = 0; i < p.width; i += 2) {
-                        for (let j = 0; j < p.height; j += 2) {
-                            let noiseVal = p.noise(i / 3, j / 3, (i * j) / 50);
-                            let opacity = noiseVal * p.random(2, 80);
-
-                            let grainColor = p.color(tint[0], tint[1], tint[2], opacity);
-
-                            // Fast pixel setting method for desktop
-                            overAllTexture.set(i, j, grainColor);
-                            if (i + 1 < p.width) overAllTexture.set(i + 1, j, grainColor);
-                            if (j + 1 < p.height) overAllTexture.set(i, j + 1, grainColor);
-                            if (i + 1 < p.width && j + 1 < p.height) overAllTexture.set(i + 1, j + 1, grainColor);
-                        }
-                    }
-
-                    overAllTexture.updatePixels();
+                    console.error('No grain texture renderer available');
+                    onComplete(null, false);
                 }
-
-            } catch (error) {
-                console.error('Error creating grain texture:', error);
-                overAllTexture = null;
+            }
+            
+            calculateTileSize() {
+                this.currentTileSize = Math.max(64, Math.floor(this.p.width / 2));
+            }
+            
+            draw(texture, opacity = 1) {
+                if (!texture || opacity <= 0) return;
+                
+                if (opacity < 1) {
+                    this.p.tint(255, opacity * 255);
+                }
+                
+                // Tile the grain texture across the entire canvas
+                for (let x = 0; x < this.p.width; x += this.currentTileSize) {
+                    for (let y = 0; y < this.p.height; y += this.currentTileSize) {
+                        this.p.image(texture, x, y);
+                    }
+                }
+                
+                if (opacity < 1) {
+                    this.p.noTint();
+                }
+            }
+            
+            dispose() {
+                // Clean up cached textures
+                for (let texture of this.textureCache.values()) {
+                    if (texture && texture.remove) {
+                        texture.remove();
+                    }
+                }
+                this.textureCache.clear();
+                
+                if (this.webglShader) this.webglShader.dispose();
+                if (this.cpuRenderer) this.cpuRenderer.dispose();
             }
         }
+        
+        // WebGL Grain Renderer Class - True fragment shader approach
+        class WebGLGrainRenderer {
+            constructor(p5Instance) {
+                this.p = p5Instance;
+                this.grainBuffer = null;
+                this.grainShader = null;
+                console.log('WebGL grain renderer initialized');
+            }
+            
+            generateTexture(tileSize, tint, onComplete) {
+                console.log(`WebGL: Generating ${tileSize}x${tileSize} grain texture with tint [${tint.join(', ')}]`);
+                
+                try {
+                    // Step 1: Create WebGL graphics buffer
+                    console.log('WebGL: Creating graphics buffer...');
+                    this.grainBuffer = this.p.createGraphics(tileSize, tileSize, this.p.WEBGL);
+                    
+                    if (!this.grainBuffer) {
+                        console.error('WebGL: Failed to create graphics buffer');
+                        if (onComplete) onComplete(null);
+                        return;
+                    }
+                    
+                    console.log('WebGL: Graphics buffer created successfully');
+                    
+                    // Step 2: Create fragment shader for grain generation
+                    const vertSource = `
+                        attribute vec4 aPosition;
+                        attribute vec2 aTexCoord;
+                        varying vec2 vTexCoord;
+                        
+                        void main() {
+                            vTexCoord = aTexCoord;
+                            vec4 positionVec4 = aPosition;
+                            positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
+                            gl_Position = positionVec4;
+                        }
+                    `;
+                    
+                    const fragSource = `
+                        #ifdef GL_ES
+                        precision mediump float;
+                        #endif
+                        
+                        uniform vec2 u_resolution;
+                        uniform vec3 u_tint;
+                        uniform float u_time;
+                        varying vec2 vTexCoord;
+                        
+                        // High-quality pseudo-random function
+                        float random(vec2 st) {
+                            return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+                        }
+                        
+                        // Simple noise function
+                        float noise(vec2 st) {
+                            vec2 i = floor(st);
+                            vec2 f = fract(st);
+                            
+                            float a = random(i);
+                            float b = random(i + vec2(1.0, 0.0));
+                            float c = random(i + vec2(0.0, 1.0));
+                            float d = random(i + vec2(1.0, 1.0));
+                            
+                            vec2 u = f * f * (3.0 - 2.0 * f);
+                            
+                            return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+                        }
+                        
+                        void main() {
+                            vec2 st = gl_FragCoord.xy;
+                            
+                            // Generate grain pattern
+                            float noiseVal = noise(st / 3.0);
+                            float randomVal = random(st * 0.01);
+                            float opacity = noiseVal * mix(0.008, 0.314, randomVal);
+                            
+                            gl_FragColor = vec4(u_tint / 255.0, opacity);
+                        }
+                    `;
+                    
+                    console.log('WebGL: Creating fragment shader...');
+                    this.grainShader = this.grainBuffer.createShader(vertSource, fragSource);
+                    
+                    if (!this.grainShader) {
+                        console.error('WebGL: Failed to create fragment shader');
+                        if (onComplete) onComplete(null);
+                        return;
+                    }
+                    
+                    console.log('WebGL: Fragment shader created successfully');
+                    
+                    // Step 3: Render using fragment shader
+                    this.grainBuffer.shader(this.grainShader);
+                    
+                    // Set shader uniforms
+                    this.grainShader.setUniform('u_resolution', [tileSize, tileSize]);
+                    this.grainShader.setUniform('u_tint', [tint[0], tint[1], tint[2]]);
+                    this.grainShader.setUniform('u_time', this.p.millis() * 0.001);
+                    
+                    // Draw a full-screen quad to trigger the fragment shader
+                    this.grainBuffer.rectMode(this.grainBuffer.CORNER);
+                    this.grainBuffer.noStroke();
+                    this.grainBuffer.fill(255);
+                    this.grainBuffer.rect(-tileSize/2, -tileSize/2, tileSize, tileSize);
+                    
+                    console.log('WebGL: Fragment shader rendering complete');
+                    
+                    // Step 4: Texture generation complete
+                    console.log('WebGL: Texture generation successful');
+                    if (onComplete) onComplete(this.grainBuffer);
+                    
+                } catch (error) {
+                    console.error('WebGL grain texture generation failed:', error);
+                    console.error('Error details:', error.message);
+                    console.error('Stack trace:', error.stack);
+                    if (onComplete) onComplete(null);
+                }
+            }
+            
+            dispose() {
+                if (this.grainBuffer) {
+                    this.grainBuffer.remove();
+                    this.grainBuffer = null;
+                }
+                if (this.grainShader) {
+                    // p5.js handles shader cleanup automatically
+                    this.grainShader = null;
+                }
+                console.log('WebGL: Resources disposed');
+            }
+        }
+        
+        // CPU Grain Renderer Class (Fallback)
+        class CPUGrainRenderer {
+            constructor(p5Instance) {
+                this.p = p5Instance;
+                this.noiseLookup = new Map();
+                this.maxCacheSize = 10000;
+                this.progressiveGeneration = {
+                    isGenerating: false,
+                    progress: 0,
+                    totalPixels: 0,
+                    pixelsPerFrame: 0,
+                    currentTint: null,
+                    onComplete: null,
+                    grainBuffer: null
+                };
+            }
+            
+            getCachedNoise(x, y, z = 0) {
+                const key = `${Math.round(x * 3)},${Math.round(y * 3)},${Math.round(z * 50)}`;
+                
+                if (this.noiseLookup.has(key)) {
+                    return this.noiseLookup.get(key);
+                }
+                
+                if (this.noiseLookup.size > this.maxCacheSize) {
+                    this.noiseLookup.clear();
+                }
+                
+                const noiseValue = this.p.noise(x / 3, y / 3, z);
+                this.noiseLookup.set(key, noiseValue);
+                return noiseValue;
+            }
+            
+            generateTexture(tileSize, tint, onComplete) {
+                try {
+                    // Start progressive generation
+                    this.progressiveGeneration.grainBuffer = this.p.createGraphics(tileSize, tileSize);
+                    this.progressiveGeneration.currentTint = [...tint];
+                    this.progressiveGeneration.totalPixels = (tileSize / 2) * (tileSize / 2);
+                    this.progressiveGeneration.pixelsPerFrame = Math.max(1, Math.floor(this.progressiveGeneration.totalPixels / 30));
+                    this.progressiveGeneration.progress = 0;
+                    this.progressiveGeneration.isGenerating = true;
+                    this.progressiveGeneration.onComplete = onComplete;
+                    this.progressiveGeneration.tileSize = tileSize;
+                    
+                    this.progressiveGeneration.grainBuffer.loadPixels();
+                    
+                } catch (error) {
+                    console.error('CPU grain texture generation failed:', error);
+                    if (onComplete) onComplete(null);
+                }
+            }
+            
+            continueGeneration() {
+                if (!this.progressiveGeneration.isGenerating) return false;
+                
+                const gen = this.progressiveGeneration;
+                const tint = gen.currentTint;
+                let pixelsProcessed = 0;
+                let blockIndex = gen.progress;
+                
+                while (pixelsProcessed < gen.pixelsPerFrame && blockIndex < gen.totalPixels) {
+                    const blockX = (blockIndex % (gen.tileSize / 2)) * 2;
+                    const blockY = Math.floor(blockIndex / (gen.tileSize / 2)) * 2;
+                    
+                    const noiseVal = this.getCachedNoise(blockX, blockY, (blockX * blockY) / 50);
+                    const opacity = noiseVal * this.p.random(2, 80);
+                    const grainColor = this.p.color(tint[0], tint[1], tint[2], opacity);
+                    
+                    // Set 2x2 pixel blocks
+                    gen.grainBuffer.set(blockX, blockY, grainColor);
+                    if (blockX + 1 < gen.tileSize) gen.grainBuffer.set(blockX + 1, blockY, grainColor);
+                    if (blockY + 1 < gen.tileSize) gen.grainBuffer.set(blockX, blockY + 1, grainColor);
+                    if (blockX + 1 < gen.tileSize && blockY + 1 < gen.tileSize) {
+                        gen.grainBuffer.set(blockX + 1, blockY + 1, grainColor);
+                    }
+                    
+                    blockIndex++;
+                    pixelsProcessed++;
+                }
+                
+                gen.progress = blockIndex;
+                
+                if (blockIndex >= gen.totalPixels) {
+                    gen.grainBuffer.updatePixels();
+                    gen.isGenerating = false;
+                    
+                    if (gen.onComplete) gen.onComplete(gen.grainBuffer);
+                    return true;
+                }
+                
+                return false;
+            }
+            
+            isGenerating() {
+                return this.progressiveGeneration.isGenerating;
+            }
+            
+            dispose() {
+                if (this.progressiveGeneration.grainBuffer) {
+                    this.progressiveGeneration.grainBuffer.remove();
+                    this.progressiveGeneration.grainBuffer = null;
+                }
+                this.noiseLookup.clear();
+            }
+        }
+
+        // Grain texture manager instance
+        let grainTextureManager = null;
+        let currentGrainTexture = null;
 
         function handleOpeningAnimation() {
             let elapsed = p.millis() - animationState.startTime;
@@ -459,16 +818,22 @@ export function initAnimation() {
             }
         }
 
+        function startGrainFadeIn() {
+            grainFade.isActive = true;
+            grainFade.startTime = p.millis();
+            grainFade.opacity = 0;
+        }
+
         function handleGrainFade() {
-            if (!grainFade.isComplete) {
-                let elapsed = p.millis() - animationState.startTime; // Use same start time as opening
+            if (grainFade.isActive) {
+                let elapsed = p.millis() - grainFade.startTime;
                 let fadeProgress = p.min(elapsed / grainFade.duration, 1);
 
-                // Smooth easing for fade in
+                // Smooth easing for fade in (ease-out)
                 grainFade.opacity = fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
 
                 if (fadeProgress >= 1) {
-                    grainFade.isComplete = true;
+                    grainFade.isActive = false;
                     grainFade.opacity = 1; // Ensure it's exactly 1 at the end
                 }
             }
@@ -522,16 +887,26 @@ export function initAnimation() {
 
                 currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
                 currentPalette = artPalettes[currentPaletteIndex];
-                bgColor = p.color(currentPalette.bgColor);
+                // Don't change bgColor or circle colors immediately - wait for texture to be ready
 
-                circles.forEach(circle => circle.updateColorIndex());
-                makeGrainTexture();
+                // Generate new grain texture with updated palette
+                if (grainTextureManager) {
+                    grainTextureManager.generateTexture(currentPalette.grainTint, (texture, isFromCache) => {
+                        currentGrainTexture = texture;
+                        // Change everything atomically when texture is ready
+                        renderingPalette = currentPalette; // Update the rendering palette
+                        bgColor = p.color(currentPalette.bgColor);
+                        circles.forEach(circle => circle.updateColorIndex());
+                        // For color switching, always show immediately (no fade)
+                        if (texture) {
+                            grainFade.opacity = 1;
+                            grainFade.isActive = false;
+                        }
+                    });
+                }
+
                 showPaletteName();
                 updateTextColors();
-
-                // Reset grain fade to full opacity for palette changes
-                grainFade.opacity = 1;
-                grainFade.isComplete = true;
             });
 
             baseCircleRadius = calculateBaseRadius();
@@ -550,8 +925,7 @@ export function initAnimation() {
             createCircles();
             updateCircleSizes();
 
-            // Mark texture for creation in draw loop
-            overAllTexture = null;
+            // Grain texture will be initialized in draw loop
         };
 
         // p5.js draw function
@@ -577,17 +951,29 @@ export function initAnimation() {
                 });
             }
 
-            // Create texture if needed
-            if (!overAllTexture && p.frameCount > 5) {
-                makeGrainTexture();
+            // Initialize grain texture manager if needed
+            if (!grainTextureManager && p.frameCount > 5) {
+                grainTextureManager = new GrainTextureManager(p);
+                
+                // Generate initial grain texture
+                grainTextureManager.generateTexture(currentPalette.grainTint, (texture, isFromCache) => {
+                    currentGrainTexture = texture;
+                    if (texture && grainFade.isInitialLoad) {
+                        startGrainFadeIn();
+                        grainFade.isInitialLoad = false; // Mark that initial load is complete
+                    }
+                });
             }
 
-            // Apply grain texture with fade effect
-            if (overAllTexture && grainFade.opacity > 0) {
-                // Apply tint based on fade opacity
-                p.tint(255, grainFade.opacity * 255);
-                p.image(overAllTexture, 0, 0, p.width, p.height);
-                p.noTint(); // Reset tint for future drawing operations
+            // Continue CPU progressive texture generation if needed
+            if (grainTextureManager && grainTextureManager.cpuRenderer && 
+                grainTextureManager.cpuRenderer.isGenerating()) {
+                grainTextureManager.cpuRenderer.continueGeneration();
+            }
+
+            // Apply grain texture with conditional opacity
+            if (grainTextureManager && currentGrainTexture) {
+                grainTextureManager.draw(currentGrainTexture, grainFade.opacity);
             }
         };
 
@@ -639,13 +1025,20 @@ export function initAnimation() {
                 });
             }
 
-            makeGrainTexture();
+            // Regenerate grain texture for new canvas size
+            if (grainTextureManager) {
+                grainTextureManager.generateTexture(currentPalette.grainTint, (texture, isFromCache) => {
+                    currentGrainTexture = texture;
+                    // For resize, show immediately (no fade)
+                    if (texture) {
+                        grainFade.opacity = 1;
+                        grainFade.isActive = false;
+                    }
+                });
+            }
 
             if (!animationState.isOpening) {
                 updateCircleSizes();
-                // Ensure grain doesn't fade in again after resize
-                grainFade.opacity = 1;
-                grainFade.isComplete = true;
             }
         }
 
@@ -656,16 +1049,26 @@ export function initAnimation() {
 
             currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
             currentPalette = artPalettes[currentPaletteIndex];
-            bgColor = p.color(currentPalette.bgColor);
+            // Don't change bgColor or circle colors immediately - wait for texture to be ready
 
-            circles.forEach(circle => circle.updateColorIndex());
-            makeGrainTexture();
+            // Generate new grain texture with updated palette
+            if (grainTextureManager) {
+                grainTextureManager.generateTexture(currentPalette.grainTint, (texture, isFromCache) => {
+                    currentGrainTexture = texture;
+                    // Change everything atomically when texture is ready
+                    renderingPalette = currentPalette; // Update the rendering palette
+                    bgColor = p.color(currentPalette.bgColor);
+                    circles.forEach(circle => circle.updateColorIndex());
+                    // For color switching, always show immediately (no fade)
+                    if (texture) {
+                        grainFade.opacity = 1;
+                        grainFade.isActive = false;
+                    }
+                });
+            }
+
             showPaletteName();
             updateTextColors();
-
-            // Reset grain fade to full opacity for palette changes
-            grainFade.opacity = 1;
-            grainFade.isComplete = true;
         };
     };
 
