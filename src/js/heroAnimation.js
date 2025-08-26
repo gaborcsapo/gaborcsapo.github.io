@@ -60,8 +60,6 @@ let p5Instance = null;
 
 // Export functions for integration
 export function initAnimation() {
-    console.log('Initializing p5.js hero animation...');
-
     const heroElement = document.getElementById('heroAnimation');
     if (!heroElement) {
         console.error('Hero animation container not found');
@@ -76,7 +74,6 @@ export function initAnimation() {
         let currentPalette = artPalettes[0];
         let renderingPalette = artPalettes[0]; // Separate palette reference for actual rendering
         let bgColor;
-        let overAllTexture;
         let baseCircleRadius = 100;
 
         // Animation state
@@ -365,67 +362,18 @@ export function initAnimation() {
             }
         }
 
-        // Grain Texture System - Clean class-based architecture with WebGL support
+        // Grain Texture System - CPU-based grain generation with caching
         class GrainTextureManager {
             constructor(p5Instance) {
                 this.p = p5Instance;
-                this.isWebGL = false;
-                this.webglShader = null;
                 this.cpuRenderer = null;
                 this.currentTileSize = 128;
-                this.isReady = false;
                 this.textureCache = new Map(); // Cache textures by tint key
                 this.maxCacheSize = 10; // Reasonable limit for texture cache
                 
-                this.initializeRenderer();
+                this.initCPURenderer();
             }
             
-            initializeRenderer() {
-                // Try WebGL first, fallback to CPU
-                if (this.detectWebGLSupport()) {
-                    console.log('Initializing WebGL grain texture renderer...');
-                    this.isWebGL = true;
-                    this.initWebGLRenderer();
-                } else {
-                    console.log('WebGL not available, using CPU grain texture renderer...');
-                    this.isWebGL = false;
-                    this.initCPURenderer();
-                }
-            }
-            
-            detectWebGLSupport() {
-                // Temporarily disable WebGL until fragment shader implementation is perfected
-                // The CPU approach already provides massive performance improvements
-                console.log('WebGL temporarily disabled - using optimized CPU renderer with excellent performance');
-                return false;
-                
-                /* 
-                // TODO: Re-enable once fragment shader rendering is perfected for mobile GPUs
-                try {
-                    const canvas = document.createElement('canvas');
-                    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-                    const hasWebGL = !!gl;
-                    
-                    if (hasWebGL) {
-                        console.log('WebGL support detected, will attempt hardware acceleration');
-                        // Check for essential extensions
-                        const hasFloatTextures = gl.getExtension('OES_texture_float');
-                        console.log('WebGL float textures supported:', !!hasFloatTextures);
-                    } else {
-                        console.log('WebGL not supported, using CPU fallback');
-                    }
-                    
-                    return hasWebGL;
-                } catch (e) {
-                    console.error('WebGL detection failed:', e);
-                    return false;
-                }
-                */
-            }
-            
-            initWebGLRenderer() {
-                this.webglShader = new WebGLGrainRenderer(this.p);
-            }
             
             initCPURenderer() {
                 this.cpuRenderer = new CPUGrainRenderer(this.p);
@@ -439,9 +387,8 @@ export function initAnimation() {
                 
                 // Check cache first
                 if (this.textureCache.has(cacheKey)) {
-                    console.log('Using cached grain texture for tint:', tint);
                     const cachedTexture = this.textureCache.get(cacheKey);
-                    onComplete(cachedTexture, true); // Pass true to indicate cached texture
+                    onComplete(cachedTexture, true);
                     return;
                 }
                 
@@ -457,42 +404,15 @@ export function initAnimation() {
                                 oldTexture.remove(); // Clean up p5 graphics object
                             }
                             this.textureCache.delete(firstKey);
-                            console.log('Removed oldest texture from cache');
                         }
                         
                         // Add to cache
                         this.textureCache.set(cacheKey, texture);
-                        console.log('Cached new grain texture for tint:', tint);
                     }
                     onComplete(texture, false); // Pass false to indicate new texture
                 };
                 
-                if (this.isWebGL && this.webglShader) {
-                    console.log('Attempting WebGL texture generation...');
-                    // Try WebGL first, fallback to CPU on error
-                    this.webglShader.generateTexture(this.currentTileSize, tint, (texture) => {
-                        if (texture) {
-                            console.log('WebGL generation successful!');
-                            cacheTexture(texture);
-                        } else {
-                            // WebGL failed, fallback to CPU
-                            console.warn('WebGL generation failed, falling back to CPU renderer...');
-                            this.isWebGL = false;
-                            if (!this.cpuRenderer) {
-                                console.log('Initializing CPU renderer for fallback...');
-                                this.initCPURenderer();
-                            }
-                            if (this.cpuRenderer) {
-                                console.log('Using CPU fallback renderer');
-                                this.cpuRenderer.generateTexture(this.currentTileSize, tint, cacheTexture);
-                            } else {
-                                console.error('CPU fallback also failed!');
-                                onComplete(null, false);
-                            }
-                        }
-                    });
-                } else if (this.cpuRenderer) {
-                    console.log('Using CPU renderer (WebGL not available)');
+                if (this.cpuRenderer) {
                     this.cpuRenderer.generateTexture(this.currentTileSize, tint, cacheTexture);
                 } else {
                     console.error('No grain texture renderer available');
@@ -532,141 +452,7 @@ export function initAnimation() {
                 }
                 this.textureCache.clear();
                 
-                if (this.webglShader) this.webglShader.dispose();
                 if (this.cpuRenderer) this.cpuRenderer.dispose();
-            }
-        }
-        
-        // WebGL Grain Renderer Class - True fragment shader approach
-        class WebGLGrainRenderer {
-            constructor(p5Instance) {
-                this.p = p5Instance;
-                this.grainBuffer = null;
-                this.grainShader = null;
-                console.log('WebGL grain renderer initialized');
-            }
-            
-            generateTexture(tileSize, tint, onComplete) {
-                console.log(`WebGL: Generating ${tileSize}x${tileSize} grain texture with tint [${tint.join(', ')}]`);
-                
-                try {
-                    // Step 1: Create WebGL graphics buffer
-                    console.log('WebGL: Creating graphics buffer...');
-                    this.grainBuffer = this.p.createGraphics(tileSize, tileSize, this.p.WEBGL);
-                    
-                    if (!this.grainBuffer) {
-                        console.error('WebGL: Failed to create graphics buffer');
-                        if (onComplete) onComplete(null);
-                        return;
-                    }
-                    
-                    console.log('WebGL: Graphics buffer created successfully');
-                    
-                    // Step 2: Create fragment shader for grain generation
-                    const vertSource = `
-                        attribute vec4 aPosition;
-                        attribute vec2 aTexCoord;
-                        varying vec2 vTexCoord;
-                        
-                        void main() {
-                            vTexCoord = aTexCoord;
-                            vec4 positionVec4 = aPosition;
-                            positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
-                            gl_Position = positionVec4;
-                        }
-                    `;
-                    
-                    const fragSource = `
-                        #ifdef GL_ES
-                        precision mediump float;
-                        #endif
-                        
-                        uniform vec2 u_resolution;
-                        uniform vec3 u_tint;
-                        uniform float u_time;
-                        varying vec2 vTexCoord;
-                        
-                        // High-quality pseudo-random function
-                        float random(vec2 st) {
-                            return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
-                        }
-                        
-                        // Simple noise function
-                        float noise(vec2 st) {
-                            vec2 i = floor(st);
-                            vec2 f = fract(st);
-                            
-                            float a = random(i);
-                            float b = random(i + vec2(1.0, 0.0));
-                            float c = random(i + vec2(0.0, 1.0));
-                            float d = random(i + vec2(1.0, 1.0));
-                            
-                            vec2 u = f * f * (3.0 - 2.0 * f);
-                            
-                            return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
-                        }
-                        
-                        void main() {
-                            vec2 st = gl_FragCoord.xy;
-                            
-                            // Generate grain pattern
-                            float noiseVal = noise(st / 3.0);
-                            float randomVal = random(st * 0.01);
-                            float opacity = noiseVal * mix(0.008, 0.314, randomVal);
-                            
-                            gl_FragColor = vec4(u_tint / 255.0, opacity);
-                        }
-                    `;
-                    
-                    console.log('WebGL: Creating fragment shader...');
-                    this.grainShader = this.grainBuffer.createShader(vertSource, fragSource);
-                    
-                    if (!this.grainShader) {
-                        console.error('WebGL: Failed to create fragment shader');
-                        if (onComplete) onComplete(null);
-                        return;
-                    }
-                    
-                    console.log('WebGL: Fragment shader created successfully');
-                    
-                    // Step 3: Render using fragment shader
-                    this.grainBuffer.shader(this.grainShader);
-                    
-                    // Set shader uniforms
-                    this.grainShader.setUniform('u_resolution', [tileSize, tileSize]);
-                    this.grainShader.setUniform('u_tint', [tint[0], tint[1], tint[2]]);
-                    this.grainShader.setUniform('u_time', this.p.millis() * 0.001);
-                    
-                    // Draw a full-screen quad to trigger the fragment shader
-                    this.grainBuffer.rectMode(this.grainBuffer.CORNER);
-                    this.grainBuffer.noStroke();
-                    this.grainBuffer.fill(255);
-                    this.grainBuffer.rect(-tileSize/2, -tileSize/2, tileSize, tileSize);
-                    
-                    console.log('WebGL: Fragment shader rendering complete');
-                    
-                    // Step 4: Texture generation complete
-                    console.log('WebGL: Texture generation successful');
-                    if (onComplete) onComplete(this.grainBuffer);
-                    
-                } catch (error) {
-                    console.error('WebGL grain texture generation failed:', error);
-                    console.error('Error details:', error.message);
-                    console.error('Stack trace:', error.stack);
-                    if (onComplete) onComplete(null);
-                }
-            }
-            
-            dispose() {
-                if (this.grainBuffer) {
-                    this.grainBuffer.remove();
-                    this.grainBuffer = null;
-                }
-                if (this.grainShader) {
-                    // p5.js handles shader cleanup automatically
-                    this.grainShader = null;
-                }
-                console.log('WebGL: Resources disposed');
             }
         }
         
@@ -977,10 +763,7 @@ export function initAnimation() {
             }
         };
 
-        // Canvas click handler is now added directly during canvas creation
-
-        // Completely disable p5.js mouse pressed function to avoid conflicts
-        p.mousePressed = undefined;
+        // Canvas click handler is added directly during canvas creation
 
         // Smart resize handler with mobile-aware filtering
         p.windowResized = function() {
@@ -1074,7 +857,6 @@ export function initAnimation() {
 
     // Create the p5 instance
     p5Instance = new p5(sketch);
-    console.log('p5.js instance created successfully');
 }
 
 export function changeTheme() {
