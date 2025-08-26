@@ -298,6 +298,12 @@ export function initAnimation() {
             // Fix regular text color to proper dark gray instead of green
             document.documentElement.style.setProperty('--text-color', '#1f2937'); // Dark gray
             document.documentElement.style.setProperty('--text-light', '#6b7280'); // Medium gray
+
+            // Update color placeholder background to match current palette
+            const colorPlaceholder = document.querySelector('.color-placeholder');
+            if (colorPlaceholder) {
+                colorPlaceholder.style.backgroundColor = `rgb(${bgR}, ${bgG}, ${bgB})`;
+            }
         }
 
         // Helper functions for color conversion
@@ -351,16 +357,6 @@ export function initAnimation() {
             return { r: r * 255, g: g * 255, b: b * 255 };
         }
 
-        function showPaletteName() {
-            let nameElement = document.getElementById('palette-name');
-            if (nameElement) {
-                nameElement.textContent = currentPalette.name;
-                nameElement.classList.add('show');
-                setTimeout(() => {
-                    nameElement.classList.remove('show');
-                }, 2000);
-            }
-        }
 
         // Grain Texture System - CPU-based grain generation with caching
         class GrainTextureManager {
@@ -494,7 +490,10 @@ export function initAnimation() {
                     // Start progressive generation
                     this.progressiveGeneration.grainBuffer = this.p.createGraphics(tileSize, tileSize);
                     this.progressiveGeneration.currentTint = [...tint];
-                    this.progressiveGeneration.totalPixels = (tileSize / 2) * (tileSize / 2);
+                    // Use integer division to prevent floating point precision issues
+                    this.progressiveGeneration.blocksPerRow = Math.ceil(tileSize / 2);
+                    this.progressiveGeneration.blocksPerCol = Math.ceil(tileSize / 2);
+                    this.progressiveGeneration.totalPixels = this.progressiveGeneration.blocksPerRow * this.progressiveGeneration.blocksPerCol;
                     this.progressiveGeneration.pixelsPerFrame = Math.max(1, Math.floor(this.progressiveGeneration.totalPixels / 30));
                     this.progressiveGeneration.progress = 0;
                     this.progressiveGeneration.isGenerating = true;
@@ -518,8 +517,8 @@ export function initAnimation() {
                 let blockIndex = gen.progress;
                 
                 while (pixelsProcessed < gen.pixelsPerFrame && blockIndex < gen.totalPixels) {
-                    const blockX = (blockIndex % (gen.tileSize / 2)) * 2;
-                    const blockY = Math.floor(blockIndex / (gen.tileSize / 2)) * 2;
+                    const blockX = (blockIndex % gen.blocksPerRow) * 2;
+                    const blockY = Math.floor(blockIndex / gen.blocksPerRow) * 2;
                     
                     const noiseVal = this.getCachedNoise(blockX, blockY, (blockX * blockY) / 50);
                     const opacity = noiseVal * this.p.random(2, 80);
@@ -688,11 +687,11 @@ export function initAnimation() {
                             grainFade.opacity = 1;
                             grainFade.isActive = false;
                         }
+                        
+                        // Update HTML elements synchronously with canvas changes
+                        updateTextColors();
                     });
                 }
-
-                showPaletteName();
-                updateTextColors();
             });
 
             baseCircleRadius = calculateBaseRadius();
@@ -701,7 +700,6 @@ export function initAnimation() {
             bgColor = p.color(currentPalette.bgColor);
             p.background(bgColor);
 
-            showPaletteName();
             updateTextColors();
 
             // Initialize animation timing BEFORE creating circles
@@ -847,11 +845,11 @@ export function initAnimation() {
                         grainFade.opacity = 1;
                         grainFade.isActive = false;
                     }
+                    
+                    // Update HTML elements synchronously with canvas changes
+                    updateTextColors();
                 });
             }
-
-            showPaletteName();
-            updateTextColors();
         };
     };
 
