@@ -1,6 +1,8 @@
 // Hero Animation Module - p5.js based floating circles with artistic color palettes
 // Extracted and adapted from hero.html component
 
+import { SmartResizeHandler } from './smartResizeHandler.js';
+
 // Enhanced color palette system with artistic themes
 const artPalettes = [
     {
@@ -59,7 +61,7 @@ let p5Instance = null;
 // Export functions for integration
 export function initAnimation() {
     console.log('Initializing p5.js hero animation...');
-    
+
     const heroElement = document.getElementById('heroAnimation');
     if (!heroElement) {
         console.error('Hero animation container not found');
@@ -86,7 +88,7 @@ export function initAnimation() {
 
         // Grain fade control
         const grainFade = {
-            duration: 3000, // 3 seconds
+            duration: 6000, // 3 seconds
             opacity: 0,
             isComplete: false
         };
@@ -97,6 +99,10 @@ export function initAnimation() {
             target: 1,
             transitionRate: 0.02
         };
+
+        // Smart resize handler for mobile optimization
+        const smartResize = new SmartResizeHandler();
+
 
         // Size control
         const sizeControl = {
@@ -259,7 +265,7 @@ export function initAnimation() {
             // Interactive elements: create analogous/monochromatic colors that work on white
             // Convert to HSL for easier color manipulation
             let hsl = rgbToHsl(bgR, bgG, bgB);
-            
+
             // Create a color that's harmonious with the background but suitable for white backgrounds
             // Increase saturation slightly and adjust lightness for good contrast
             let interactiveHsl = {
@@ -267,7 +273,7 @@ export function initAnimation() {
                 s: Math.min(hsl.s * 1.2, 0.8), // Boost saturation but cap it
                 l: Math.max(0.25, Math.min(0.45, hsl.l * 0.8)) // Ensure good contrast on white
             };
-            
+
             let interactiveRgb = hslToRgb(interactiveHsl.h, interactiveHsl.s, interactiveHsl.l);
             let interactiveColor = `rgb(${Math.round(interactiveRgb.r)}, ${Math.round(interactiveRgb.g)}, ${Math.round(interactiveRgb.b)})`;
 
@@ -282,7 +288,7 @@ export function initAnimation() {
             document.documentElement.style.setProperty('--secondary-color', interactiveColor);
             document.documentElement.style.setProperty('--timeline-accent-primary', interactiveColor);
             document.documentElement.style.setProperty('--timeline-accent-hover', interactiveColor);
-            
+
             // Set shadow colors with the same base color but different opacity
             document.documentElement.style.setProperty('--timeline-accent-shadow', `rgba(${Math.round(interactiveRgb.r)}, ${Math.round(interactiveRgb.g)}, ${Math.round(interactiveRgb.b)}, 0.25)`);
             document.documentElement.style.setProperty('--timeline-accent-glow', `rgba(${Math.round(interactiveRgb.r)}, ${Math.round(interactiveRgb.g)}, ${Math.round(interactiveRgb.b)}, 0.1)`);
@@ -298,7 +304,7 @@ export function initAnimation() {
             r /= 255;
             g /= 255;
             b /= 255;
-            
+
             let max = Math.max(r, g, b);
             let min = Math.min(r, g, b);
             let h, s, l = (max + min) / 2;
@@ -361,25 +367,59 @@ export function initAnimation() {
                 return;
             }
 
-            overAllTexture = p.createGraphics(p.width, p.height);
-            overAllTexture.loadPixels();
+            try {
+                overAllTexture = p.createGraphics(p.width, p.height);
 
-            let tint = currentPalette.grainTint;
-
-            // Optimized grain generation - sample every 2 pixels for performance
-            for (let i = 0; i < p.width; i += 2) {
-                for (let j = 0; j < p.height; j += 2) {
-                    let noiseVal = p.noise(i / 3, j / 3, (i * j) / 50);
-                    let opacity = noiseVal * p.random(2, 80);
-
-                    let grainColor = p.color(tint[0], tint[1], tint[2], opacity);
-                    overAllTexture.set(i, j, grainColor);
-                    if (i + 1 < p.width) overAllTexture.set(i + 1, j, grainColor);
-                    if (j + 1 < p.height) overAllTexture.set(i, j + 1, grainColor);
-                    if (i + 1 < p.width && j + 1 < p.height) overAllTexture.set(i + 1, j + 1, grainColor);
+                if (!overAllTexture) {
+                    console.error('Failed to create graphics buffer');
+                    return;
                 }
+
+                let tint = currentPalette.grainTint;
+
+                // Detect if mobile for performance optimization
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+                if (isMobile) {
+                    // Mobile: Use graphics drawing methods for reliability
+                    overAllTexture.noStroke();
+
+                    for (let i = 0; i < p.width; i += 2) {
+                        for (let j = 0; j < p.height; j += 2) {
+                            let noiseVal = p.noise(i / 3, j / 3, (i * j) / 50);
+                            let opacity = noiseVal * p.random(2, 80);
+
+                            // Draw 2x2 pixel rectangles for grain texture
+                            overAllTexture.fill(tint[0], tint[1], tint[2], opacity);
+                            overAllTexture.rect(i, j, 2, 2);
+                        }
+                    }
+                } else {
+                    // Desktop: Use fast pixel manipulation method
+                    overAllTexture.loadPixels();
+
+                    for (let i = 0; i < p.width; i += 2) {
+                        for (let j = 0; j < p.height; j += 2) {
+                            let noiseVal = p.noise(i / 3, j / 3, (i * j) / 50);
+                            let opacity = noiseVal * p.random(2, 80);
+
+                            let grainColor = p.color(tint[0], tint[1], tint[2], opacity);
+
+                            // Fast pixel setting method for desktop
+                            overAllTexture.set(i, j, grainColor);
+                            if (i + 1 < p.width) overAllTexture.set(i + 1, j, grainColor);
+                            if (j + 1 < p.height) overAllTexture.set(i, j + 1, grainColor);
+                            if (i + 1 < p.width && j + 1 < p.height) overAllTexture.set(i + 1, j + 1, grainColor);
+                        }
+                    }
+
+                    overAllTexture.updatePixels();
+                }
+
+            } catch (error) {
+                console.error('Error creating grain texture:', error);
+                overAllTexture = null;
             }
-            overAllTexture.updatePixels();
         }
 
         function handleOpeningAnimation() {
@@ -457,19 +497,29 @@ export function initAnimation() {
             // Get hero section dimensions instead of full window
             const heroElement = document.getElementById('hero');
             const heroRect = heroElement ? heroElement.getBoundingClientRect() : { width: p.windowWidth, height: p.windowHeight };
-            
+
             let canvasWidth = p.max(100, heroRect.width);
             let canvasHeight = p.max(100, heroRect.height);
 
+            // Optimize pixel density based on device
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            if (isMobile) {
+                // Force pixel density to 1 for better mobile performance
+                // High pixel density (2-3x) causes massive performance issues on mobile
+                p.pixelDensity(1);
+            }
+            // Desktop keeps default pixel density for crisp visuals
+
             let canvas = p.createCanvas(canvasWidth, canvasHeight);
             canvas.parent('heroAnimation');
-            
+
             // Add click handler directly to the p5.js canvas element
             canvas.elt.addEventListener('click', function(event) {
                 if (animationState.isOpening) return;
-                
+
                 event.stopPropagation(); // Prevent event bubbling
-                
+
                 currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
                 currentPalette = artPalettes[currentPaletteIndex];
                 bgColor = p.color(currentPalette.bgColor);
@@ -502,8 +552,6 @@ export function initAnimation() {
 
             // Mark texture for creation in draw loop
             overAllTexture = null;
-
-            console.log('p5.js setup complete, circles created:', circles.length);
         };
 
         // p5.js draw function
@@ -538,7 +586,7 @@ export function initAnimation() {
             if (overAllTexture && grainFade.opacity > 0) {
                 // Apply tint based on fade opacity
                 p.tint(255, grainFade.opacity * 255);
-                p.image(overAllTexture, 0, 0);
+                p.image(overAllTexture, 0, 0, p.width, p.height);
                 p.noTint(); // Reset tint for future drawing operations
             }
         };
@@ -548,58 +596,64 @@ export function initAnimation() {
         // Completely disable p5.js mouse pressed function to avoid conflicts
         p.mousePressed = undefined;
 
-        // Debounced resize handler to prevent excessive calls
-        let resizeTimeout;
+        // Smart resize handler with mobile-aware filtering
         p.windowResized = function() {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                // Get updated hero section dimensions
-                const heroElement = document.getElementById('hero');
-                const heroRect = heroElement ? heroElement.getBoundingClientRect() : { width: p.windowWidth, height: p.windowHeight };
-                
-                if (heroRect.width <= 0 || heroRect.height <= 0) return;
-
-                let oldBaseRadius = baseCircleRadius;
-                p.resizeCanvas(heroRect.width, heroRect.height);
-                p.background(bgColor);
-
-                baseCircleRadius = calculateBaseRadius();
-                let scaleRatio = oldBaseRadius > 0 ? baseCircleRadius / oldBaseRadius : 1;
-
-                if (circles.length === 0) {
-                    createCircles();
-                } else {
-                    circles.forEach(circle => {
-                        circle.centerX = p.width / 2;
-                        circle.centerY = p.height / 2;
-                        circle.updateTargets(); // Use smooth transition method
-
-                        if (animationState.isOpening) {
-                            circle.initialRadius *= scaleRatio;
-                        } else {
-                            // During breathing animation
-                            circle.radius *= scaleRatio;
-                            circle.baseRadius = baseCircleRadius;
-                            circle.targetRadius *= scaleRatio;
-                        }
-                    });
-                }
-
-                makeGrainTexture();
-                if (!animationState.isOpening) {
-                    updateCircleSizes();
-                    // Ensure grain doesn't fade in again after resize
-                    grainFade.opacity = 1;
-                    grainFade.isComplete = true;
-                }
-            }, 150); // 150ms debounce
+            // Use smart resize handler to filter mobile address bar resizes
+            smartResize.handleResize((width, height) => {
+                performActualResize(width, height);
+            });
         };
+
+        // Actual resize implementation (only called for legitimate resizes)
+        function performActualResize(canvasWidth, canvasHeight) {
+            // Get updated hero section dimensions
+            const heroElement = document.getElementById('hero');
+            const heroRect = heroElement ? heroElement.getBoundingClientRect() : { width: canvasWidth, height: canvasHeight };
+
+            if (heroRect.width <= 0 || heroRect.height <= 0) return;
+
+            let oldBaseRadius = baseCircleRadius;
+
+            p.resizeCanvas(heroRect.width, heroRect.height);
+            p.background(bgColor);
+
+            baseCircleRadius = calculateBaseRadius();
+            let scaleRatio = oldBaseRadius > 0 ? baseCircleRadius / oldBaseRadius : 1;
+
+            if (circles.length === 0) {
+                createCircles();
+            } else {
+                circles.forEach(circle => {
+                    circle.centerX = p.width / 2;
+                    circle.centerY = p.height / 2;
+                    circle.updateTargets(); // Use smooth transition method
+
+                    if (animationState.isOpening) {
+                        circle.initialRadius *= scaleRatio;
+                    } else {
+                        // During breathing animation
+                        circle.radius *= scaleRatio;
+                        circle.baseRadius = baseCircleRadius;
+                        circle.targetRadius *= scaleRatio;
+                    }
+                });
+            }
+
+            makeGrainTexture();
+
+            if (!animationState.isOpening) {
+                updateCircleSizes();
+                // Ensure grain doesn't fade in again after resize
+                grainFade.opacity = 1;
+                grainFade.isComplete = true;
+            }
+        }
 
         // Store reference to trigger theme changes externally
         p.triggerThemeChange = function() {
             // Manually trigger the theme change logic without mouse press
             if (animationState.isOpening) return;
-                
+
             currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
             currentPalette = artPalettes[currentPaletteIndex];
             bgColor = p.color(currentPalette.bgColor);
