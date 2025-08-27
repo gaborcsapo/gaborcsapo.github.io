@@ -13,6 +13,7 @@ function initializeApp() {
   initColorPicker();
   initSmoothScrolling();
   initScrollAnimations();
+  initSocialLinkTracking();
   
   // Initialize animation after p5 is loaded
   loadP5Animation();
@@ -81,9 +82,47 @@ function initScrollAnimations() {
   // No static elements need animation observers currently
 }
 
+function initSocialLinkTracking() {
+  // Track clicks on all social/contact links
+  const socialLinks = document.querySelectorAll('.contact-minimal a');
+  
+  socialLinks.forEach(link => {
+    link.addEventListener('click', function(event) {
+      if (typeof gtag !== 'undefined') {
+        const linkText = this.textContent.trim();
+        const linkUrl = this.href;
+        const isExternal = linkUrl.startsWith('http') && !linkUrl.includes(window.location.hostname);
+        
+        gtag('event', 'social_link_click', {
+          event_category: 'Social Links',
+          event_label: linkText,
+          link_url: linkUrl,
+          link_type: isExternal ? 'external' : 'internal',
+          destination: linkText.toLowerCase()
+        });
+        
+        // For external links, add a small delay to ensure tracking
+        if (isExternal && event.target.target === '_blank') {
+          // No delay needed for _blank links as they open in new window
+        }
+      }
+    });
+  });
+}
+
 function initAnalytics() {
-  // Analytics placeholder - add Google Analytics script to HTML if needed
-  console.log('Analytics initialized');
+  // Google Analytics is now loaded via gtag in HTML
+  if (typeof gtag !== 'undefined') {
+    console.log('Google Analytics initialized');
+    
+    // Track page view
+    gtag('event', 'page_view', {
+      page_title: document.title,
+      page_location: window.location.href
+    });
+  } else {
+    console.log('Google Analytics not available');
+  }
 }
 
 // Utility functions

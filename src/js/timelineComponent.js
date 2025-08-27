@@ -183,7 +183,7 @@ function renderContent() {
 }
 
 // Navigate to chapter with animation
-function navigateToChapter(newIndex) {
+function navigateToChapter(newIndex, interactionMethod = 'click') {
     if (isTransitioning || newIndex === activeChapter) return;
 
     // Hide the hint after first navigation
@@ -194,6 +194,19 @@ function navigateToChapter(newIndex) {
 
     isTransitioning = true;
     const direction = newIndex > activeChapter ? 'next' : 'prev';
+    
+    // Track timeline navigation with Google Analytics
+    if (typeof gtag !== 'undefined') {
+        const chapterName = chapters[newIndex]?.title || `Chapter ${newIndex}`;
+        gtag('event', 'timeline_navigation', {
+            event_category: 'Timeline',
+            event_label: chapterName,
+            chapter_index: newIndex,
+            direction: direction,
+            previous_chapter: activeChapter,
+            interaction_method: interactionMethod
+        });
+    }
 
     // Calculate timeline position
     const timelineElement = document.querySelector('.timeline-section');
@@ -260,11 +273,11 @@ function navigateToChapter(newIndex) {
 }
 
 // Navigate with buttons
-function navigate(direction) {
+function navigate(direction, interactionMethod = 'button') {
     const newIndex = direction === 'next'
         ? Math.min(activeChapter + 1, chapters.length - 1)
         : Math.max(activeChapter - 1, 0);
-    navigateToChapter(newIndex);
+    navigateToChapter(newIndex, interactionMethod);
 }
 
 // Initialize event listeners
@@ -285,9 +298,12 @@ function initEventListeners() {
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') navigate('prev');
-        if (e.key === 'ArrowRight') navigate('next');
+        if (e.key === 'ArrowLeft') navigate('prev', 'keyboard');
+        if (e.key === 'ArrowRight') navigate('next', 'keyboard');
     });
+
+    // Touch gesture navigation
+    initTouchGestures();
 
     // Handle resize
     let resizeTimeout;
@@ -297,6 +313,54 @@ function initEventListeners() {
             updateTimeline();
         }, 250);
     });
+}
+
+// Touch gesture support
+function initTouchGestures() {
+    if (!timelineSection) return;
+    
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    
+    // Minimum distance for a swipe to register (in pixels)
+    const minSwipeDistance = 50;
+    // Maximum vertical movement allowed for horizontal swipe
+    const maxVerticalDeviation = 100;
+    
+    // Touch start
+    timelineSection.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    // Touch end
+    timelineSection.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        touchEndY = e.changedTouches[0].clientY;
+        handleSwipe();
+    }, { passive: true });
+    
+    // Handle swipe gesture
+    function handleSwipe() {
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = Math.abs(touchEndY - touchStartY);
+        
+        // Check if this was primarily a horizontal swipe
+        if (Math.abs(deltaX) > minSwipeDistance && deltaY < maxVerticalDeviation) {
+            // Prevent navigation if already transitioning
+            if (isTransitioning) return;
+            
+            // Swipe right (positive deltaX) = go to previous chapter
+            // Swipe left (negative deltaX) = go to next chapter
+            if (deltaX > 0) {
+                navigate('prev', 'swipe');
+            } else {
+                navigate('next', 'swipe');
+            }
+        }
+    }
 }
 
 // Main initialization function
