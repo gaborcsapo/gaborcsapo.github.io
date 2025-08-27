@@ -298,12 +298,6 @@ export function initAnimation() {
             // Fix regular text color to proper dark gray instead of green
             document.documentElement.style.setProperty('--text-color', '#1f2937'); // Dark gray
             document.documentElement.style.setProperty('--text-light', '#6b7280'); // Medium gray
-
-            // Update color placeholder background to match current palette
-            const colorPlaceholder = document.querySelector('.color-placeholder');
-            if (colorPlaceholder) {
-                colorPlaceholder.style.backgroundColor = `rgb(${bgR}, ${bgG}, ${bgB})`;
-            }
         }
 
         // Helper functions for color conversion
@@ -366,28 +360,28 @@ export function initAnimation() {
                 this.currentTileSize = 128;
                 this.textureCache = new Map(); // Cache textures by tint key
                 this.maxCacheSize = 10; // Reasonable limit for texture cache
-                
+
                 this.initCPURenderer();
             }
-            
-            
+
+
             initCPURenderer() {
                 this.cpuRenderer = new CPUGrainRenderer(this.p);
             }
-            
+
             generateTexture(tint, onComplete) {
                 this.calculateTileSize();
-                
+
                 // Create cache key from tint and tile size
                 const cacheKey = `${tint[0]}-${tint[1]}-${tint[2]}-${this.currentTileSize}`;
-                
+
                 // Check cache first
                 if (this.textureCache.has(cacheKey)) {
                     const cachedTexture = this.textureCache.get(cacheKey);
                     onComplete(cachedTexture, true);
                     return;
                 }
-                
+
                 // Generate new texture
                 const cacheTexture = (texture) => {
                     if (texture) {
@@ -401,13 +395,13 @@ export function initAnimation() {
                             }
                             this.textureCache.delete(firstKey);
                         }
-                        
+
                         // Add to cache
                         this.textureCache.set(cacheKey, texture);
                     }
                     onComplete(texture, false); // Pass false to indicate new texture
                 };
-                
+
                 if (this.cpuRenderer) {
                     this.cpuRenderer.generateTexture(this.currentTileSize, tint, cacheTexture);
                 } else {
@@ -415,30 +409,30 @@ export function initAnimation() {
                     onComplete(null, false);
                 }
             }
-            
+
             calculateTileSize() {
                 this.currentTileSize = Math.max(64, Math.floor(this.p.width / 2));
             }
-            
+
             draw(texture, opacity = 1) {
                 if (!texture || opacity <= 0) return;
-                
+
                 if (opacity < 1) {
                     this.p.tint(255, opacity * 255);
                 }
-                
+
                 // Tile the grain texture across the entire canvas
                 for (let x = 0; x < this.p.width; x += this.currentTileSize) {
                     for (let y = 0; y < this.p.height; y += this.currentTileSize) {
                         this.p.image(texture, x, y);
                     }
                 }
-                
+
                 if (opacity < 1) {
                     this.p.noTint();
                 }
             }
-            
+
             dispose() {
                 // Clean up cached textures
                 for (let texture of this.textureCache.values()) {
@@ -447,11 +441,11 @@ export function initAnimation() {
                     }
                 }
                 this.textureCache.clear();
-                
+
                 if (this.cpuRenderer) this.cpuRenderer.dispose();
             }
         }
-        
+
         // CPU Grain Renderer Class (Fallback)
         class CPUGrainRenderer {
             constructor(p5Instance) {
@@ -468,23 +462,23 @@ export function initAnimation() {
                     grainBuffer: null
                 };
             }
-            
+
             getCachedNoise(x, y, z = 0) {
                 const key = `${Math.round(x * 3)},${Math.round(y * 3)},${Math.round(z * 50)}`;
-                
+
                 if (this.noiseLookup.has(key)) {
                     return this.noiseLookup.get(key);
                 }
-                
+
                 if (this.noiseLookup.size > this.maxCacheSize) {
                     this.noiseLookup.clear();
                 }
-                
+
                 const noiseValue = this.p.noise(x / 3, y / 3, z);
                 this.noiseLookup.set(key, noiseValue);
                 return noiseValue;
             }
-            
+
             generateTexture(tileSize, tint, onComplete) {
                 try {
                     // Start progressive generation
@@ -499,31 +493,31 @@ export function initAnimation() {
                     this.progressiveGeneration.isGenerating = true;
                     this.progressiveGeneration.onComplete = onComplete;
                     this.progressiveGeneration.tileSize = tileSize;
-                    
+
                     this.progressiveGeneration.grainBuffer.loadPixels();
-                    
+
                 } catch (error) {
                     console.error('CPU grain texture generation failed:', error);
                     if (onComplete) onComplete(null);
                 }
             }
-            
+
             continueGeneration() {
                 if (!this.progressiveGeneration.isGenerating) return false;
-                
+
                 const gen = this.progressiveGeneration;
                 const tint = gen.currentTint;
                 let pixelsProcessed = 0;
                 let blockIndex = gen.progress;
-                
+
                 while (pixelsProcessed < gen.pixelsPerFrame && blockIndex < gen.totalPixels) {
                     const blockX = (blockIndex % gen.blocksPerRow) * 2;
                     const blockY = Math.floor(blockIndex / gen.blocksPerRow) * 2;
-                    
+
                     const noiseVal = this.getCachedNoise(blockX, blockY, (blockX * blockY) / 50);
                     const opacity = noiseVal * this.p.random(2, 80);
                     const grainColor = this.p.color(tint[0], tint[1], tint[2], opacity);
-                    
+
                     // Set 2x2 pixel blocks
                     gen.grainBuffer.set(blockX, blockY, grainColor);
                     if (blockX + 1 < gen.tileSize) gen.grainBuffer.set(blockX + 1, blockY, grainColor);
@@ -531,28 +525,28 @@ export function initAnimation() {
                     if (blockX + 1 < gen.tileSize && blockY + 1 < gen.tileSize) {
                         gen.grainBuffer.set(blockX + 1, blockY + 1, grainColor);
                     }
-                    
+
                     blockIndex++;
                     pixelsProcessed++;
                 }
-                
+
                 gen.progress = blockIndex;
-                
+
                 if (blockIndex >= gen.totalPixels) {
                     gen.grainBuffer.updatePixels();
                     gen.isGenerating = false;
-                    
+
                     if (gen.onComplete) gen.onComplete(gen.grainBuffer);
                     return true;
                 }
-                
+
                 return false;
             }
-            
+
             isGenerating() {
                 return this.progressiveGeneration.isGenerating;
             }
-            
+
             dispose() {
                 if (this.progressiveGeneration.grainBuffer) {
                     this.progressiveGeneration.grainBuffer.remove();
@@ -672,7 +666,7 @@ export function initAnimation() {
 
                 currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
                 currentPalette = artPalettes[currentPaletteIndex];
-                
+
                 // Track color switching with Google Analytics
                 if (typeof gtag !== 'undefined') {
                     gtag('event', 'color_switch', {
@@ -698,7 +692,7 @@ export function initAnimation() {
                             grainFade.opacity = 1;
                             grainFade.isActive = false;
                         }
-                        
+
                         // Update HTML elements synchronously with canvas changes
                         updateTextColors();
                     });
@@ -749,7 +743,7 @@ export function initAnimation() {
             // Initialize grain texture manager if needed
             if (!grainTextureManager && p.frameCount > 5) {
                 grainTextureManager = new GrainTextureManager(p);
-                
+
                 // Generate initial grain texture
                 grainTextureManager.generateTexture(currentPalette.grainTint, (texture, isFromCache) => {
                     currentGrainTexture = texture;
@@ -761,7 +755,7 @@ export function initAnimation() {
             }
 
             // Continue CPU progressive texture generation if needed
-            if (grainTextureManager && grainTextureManager.cpuRenderer && 
+            if (grainTextureManager && grainTextureManager.cpuRenderer &&
                 grainTextureManager.cpuRenderer.isGenerating()) {
                 grainTextureManager.cpuRenderer.continueGeneration();
             }
@@ -841,7 +835,7 @@ export function initAnimation() {
 
             currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
             currentPalette = artPalettes[currentPaletteIndex];
-            
+
             // Track programmatic color switching with Google Analytics
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'color_switch', {
@@ -867,7 +861,7 @@ export function initAnimation() {
                         grainFade.opacity = 1;
                         grainFade.isActive = false;
                     }
-                    
+
                     // Update HTML elements synchronously with canvas changes
                     updateTextColors();
                 });
