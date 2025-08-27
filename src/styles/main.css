@@ -240,12 +240,12 @@ p, h1, h2, h3, h4, h5, h6 {
     transform: translateX(-50%);
     text-align: center;
   }
-  
+
   /* Reduce canvas height to account for mobile browser bars */
   #canvas-container {
     height: calc(100vh - 40px);
   }
-  
+
   .hero {
     min-height: calc(100vh - 40px);
   }
@@ -358,11 +358,9 @@ p, h1, h2, h3, h4, h5, h6 {
 .contact-minimal {
   margin-left: 0;
   margin-top: var(--space-md);
-  max-width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  position: relative;
+  gap: var(--space-sm);
 }
 
 @media (min-width: 768px) {
@@ -384,106 +382,12 @@ p, h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.01em;
 }
 
-/* Remove old border-bottom and use our new underline system */
-.contact-minimal a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 1px;
-  bottom: -1px;
-  left: 0;
-  background-color: var(--interactive-color, #4F46E5);
-  transition: width 0.3s ease-out;
-}
 
-.contact-minimal a:hover {
-  color: var(--interactive-color, #4F46E5);
-  transform: translateY(-1px);
-}
 
-.contact-minimal a:hover::after {
-  width: 100%;
-}
-
-/* Focus state for accessibility */
-.contact-minimal a:focus {
-  outline: none;
-  color: var(--interactive-color, #4F46E5);
-  box-shadow: 0 0 0 2px var(--timeline-accent-focus, rgba(79, 70, 229, 0.15));
-  border-radius: 2px;
-}
-
-/* Active state */
-.contact-minimal a:active {
-  transform: translateY(0);
-}
-
-/* Link indicator for all contact minimal links */
-.contact-minimal a::before {
-  content: '';
-  display: inline-block;
-  width: 0.8em;
-  height: 0.8em;
-  margin-right: 0.2em;
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTkgMyBMMTAgMiAiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Im0zIDkgNi02bTAgMC0zLjUtLjVtMy41LjVWNS41IiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K');
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0.6;
-  vertical-align: baseline;
-}
-
-/* Desktop: Specific positioning to align with skills-editorial */
-@media (min-width: 769px) {
-  .contact-minimal a:first-child {
-    /* LinkedIn - align to left edge */
-    position: absolute;
-    left: 0;
-  }
-
-  .contact-minimal a:last-child {
-    /* Blog - align to right edge */
-    position: absolute;
-    right: 0;
-  }
-
-  .contact-minimal a:nth-child(2),
-  .contact-minimal a:nth-child(3) {
-    /* Resume and Github - center between LinkedIn and Blog */
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  /* Update hover transforms to work with existing positioning */
-  .contact-minimal a:nth-child(2):hover,
-  .contact-minimal a:nth-child(3):hover {
-    transform: translateX(-50%) translateY(-1px);
-  }
-
-  .contact-minimal a:nth-child(2) {
-    /* Resume - slightly left of center */
-    left: 35%;
-  }
-
-  .contact-minimal a:nth-child(3) {
-    /* Github - slightly right of center */
-    left: 65%;
-  }
-}
-
-/* Responsive Editorial Layout */
-/* Mobile-specific overrides */
 @media (max-width: 767px) {
   .contact-minimal {
     flex-direction: column;
-    gap: var(--flow-sm);
-    text-align: center;
-  }
-
-  .contact-minimal a {
-    position: static !important;
-    transform: none !important;
-    text-align: center;
+    align-items: center;
   }
 }
 
@@ -882,6 +786,21 @@ p, h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 0 4px var(--timeline-accent-focus, rgba(79, 70, 229, 0.15));
 }
 
+/* Year Indicator */
+.timeline-year {
+  position: absolute;
+  top: -0.75rem;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  color: var(--timeline-text-secondary);
+  text-align: center;
+  font-weight: var(--weight-medium);
+  font-optical-sizing: auto;
+  opacity: 0.6;
+  letter-spacing: 0.01em;
+}
+
 /* Dot Label */
 .timeline-label {
   position: absolute;
@@ -935,6 +854,12 @@ p, h1, h2, h3, h4, h5, h6 {
 
 /* Mobile: Show only active and adjacent labels */
 @media (max-width: 767px) {
+  .timeline-year {
+    font-size: var(--text-xs);
+    opacity: 0.5;
+    top: -0.5rem;
+  }
+
   .timeline-label {
     font-size: var(--text-xs);
     opacity: 0.4;
@@ -1287,12 +1212,8 @@ a:hover {
   transform: translateY(-1px);
 }
 
-/* Focus state for accessibility */
 a:focus {
   outline: none;
-  color: var(--interactive-color, #4F46E5);
-  box-shadow: 0 0 0 2px var(--timeline-accent-focus, rgba(79, 70, 229, 0.15));
-  border-radius: 2px;
 }
 
 /* Active state */

@@ -62,6 +62,12 @@ function initTimeline() {
         dot.className = 'timeline-dot';
         dot.id = `dot-${index}`;
 
+        // Create year indicator
+        const year = document.createElement('div');
+        year.className = 'timeline-year';
+        year.id = `year-${index}`;
+        year.textContent = chapter.years;
+
         // Create label
         const label = document.createElement('div');
         label.className = 'timeline-label';
@@ -75,6 +81,7 @@ function initTimeline() {
 
         // Assemble
         button.appendChild(dot);
+        wrapper.appendChild(year);
         wrapper.appendChild(button);
         wrapper.appendChild(label);
         timelineSlider.appendChild(wrapper);
