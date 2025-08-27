@@ -937,8 +937,8 @@ p, h1, h2, h3, h4, h5, h6 {
 @media (max-width: 767px) {
   .timeline-label {
     font-size: var(--text-xs);
-    opacity: 0;
-    top: 2.75rem;
+    opacity: 0.4;
+    top: 2rem;
   }
 
   .timeline-label.active {
