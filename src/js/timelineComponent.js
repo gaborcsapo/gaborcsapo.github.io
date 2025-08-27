@@ -21,7 +21,7 @@ let timelineHintContainer;
 
 // Check if mobile
 function isMobile() {
-    return window.innerWidth < 768;
+    return window.matchMedia('(max-width: 767px)').matches;
 }
 
 // Initialize timeline
@@ -100,7 +100,7 @@ function updateTimeline() {
 
     timelineSlider.style.transform = `translateX(${offset}px)`;
 
-    // Update visual states
+        // Update visual states
     chapters.forEach((_, index) => {
         const dot = document.getElementById(`dot-${index}`);
         const label = document.getElementById(`label-${index}`);
@@ -194,7 +194,7 @@ function navigateToChapter(newIndex, interactionMethod = 'click') {
 
     isTransitioning = true;
     const direction = newIndex > activeChapter ? 'next' : 'prev';
-    
+
     // Track timeline navigation with Google Analytics
     if (typeof gtag !== 'undefined') {
         const chapterName = chapters[newIndex]?.title || `Chapter ${newIndex}`;
@@ -318,40 +318,40 @@ function initEventListeners() {
 // Touch gesture support
 function initTouchGestures() {
     if (!timelineSection) return;
-    
+
     let touchStartX = 0;
     let touchStartY = 0;
     let touchEndX = 0;
     let touchEndY = 0;
-    
+
     // Minimum distance for a swipe to register (in pixels)
     const minSwipeDistance = 50;
     // Maximum vertical movement allowed for horizontal swipe
     const maxVerticalDeviation = 100;
-    
+
     // Touch start
     timelineSection.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
     }, { passive: true });
-    
+
     // Touch end
     timelineSection.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].clientX;
         touchEndY = e.changedTouches[0].clientY;
         handleSwipe();
     }, { passive: true });
-    
+
     // Handle swipe gesture
     function handleSwipe() {
         const deltaX = touchEndX - touchStartX;
         const deltaY = Math.abs(touchEndY - touchStartY);
-        
+
         // Check if this was primarily a horizontal swipe
         if (Math.abs(deltaX) > minSwipeDistance && deltaY < maxVerticalDeviation) {
             // Prevent navigation if already transitioning
             if (isTransitioning) return;
-            
+
             // Swipe right (positive deltaX) = go to previous chapter
             // Swipe left (negative deltaX) = go to next chapter
             if (deltaX > 0) {
@@ -366,7 +366,7 @@ function initTouchGestures() {
 // Main initialization function
 export function initTimelineComponent() {
     console.log('Initializing timeline component...');
-    
+
     // Wait a bit for DOM to be ready
     setTimeout(() => {
         initTimeline();
