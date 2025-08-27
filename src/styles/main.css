@@ -1,9 +1,10 @@
 /* CSS Custom Properties */
 :root {
-  /* Colors */
-  --primary-color: #2c3e50;
-  --secondary-color: #3498db;
-  --accent-color: #e74c3c;
+  /* Colors - Monet's Garden palette */
+  --primary-color: #799C49;
+  --secondary-color: #799C49;
+  --accent-color: #799C49;
+  --interactive-color: #799C49;
   --text-color: #1f2937; /* Fixed to proper dark gray */
   --text-light: #6b7280; /* Fixed to proper medium gray */
   --bg-color: #ffffff;
@@ -222,7 +223,7 @@ p, h1, h2, h3, h4, h5, h6 {
   transition: color 0.3s ease;
   white-space: nowrap;
   padding: 0 10px;
-  color: var(--hero-text-color-dim, rgba(255, 255, 255, 0.6));
+  color: var(--hero-text-color-dim, rgba(55, 64, 42, 0.6));
   letter-spacing: 0.01em;
 }
 
@@ -372,7 +373,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .contact-minimal a {
   font-family: var(--font-display);
-  color: var(--interactive-color, #4F46E5); /* Use dynamic color system */
+  color: var(--interactive-color); /* Use dynamic color system */
   text-decoration: none;
   font-size: var(--text-lg);
   font-weight: 500;
@@ -434,8 +435,8 @@ p, h1, h2, h3, h4, h5, h6 {
   background: var(--bg-color);
   padding: var(--space-md) 0;
   /* Dynamic colors - will be overridden by JavaScript */
-  --timeline-accent-primary: var(--interactive-color, #4F46E5); /* Fallback to indigo */
-  --timeline-accent-hover: var(--interactive-color, #6366F1); /* Fallback to lighter indigo */
+  --timeline-accent-primary: var(--interactive-color); /* Fallback to indigo */
+  --timeline-accent-hover: var(--interactive-color); /* Fallback to lighter indigo */
   --timeline-accent-success: #10B981; /* Green for independent projects */
   --timeline-text-primary: #111827;
   --timeline-text-secondary: #4B5563; /* Darker for better contrast */
@@ -1183,7 +1184,7 @@ p, h1, h2, h3, h4, h5, h6 {
 /* Dynamic Hyperlink Styles */
 /* Use the same interactive color system as timeline elements */
 a {
-  color: var(--interactive-color, #4F46E5); /* Dynamically set by color picker */
+  color: var(--interactive-color); /* Dynamically set by color picker */
   text-decoration: none;
   position: relative;
   transition: all 0.2s ease-out;
@@ -1198,7 +1199,7 @@ a::after {
   height: 1px;
   bottom: -1px;
   left: 0;
-  background-color: var(--interactive-color, #4F46E5);
+  background-color: var(--interactive-color);
   transition: width 0.3s ease-out;
 }
 
@@ -1208,7 +1209,7 @@ a:hover::after {
 
 /* Hover state */
 a:hover {
-  color: var(--interactive-color, #4F46E5);
+  color: var(--interactive-color);
   transform: translateY(-1px);
 }
 
