@@ -19,116 +19,122 @@ let timelinePrev;
 let timelineNext;
 let timelineHintContainer;
 
-// Check if mobile
-function isMobile() {
-    return window.matchMedia('(max-width: 767px)').matches;
-}
-
-// Initialize timeline
+// Initialize timeline with improved error handling
 function initTimeline() {
-    // Get DOM elements
-    timelineSlider = document.getElementById('timelineSlider');
-    timelineSection = document.getElementById('timelineSection');
-    chapterDescription = document.getElementById('chapterDescription');
-    projectsGrid = document.getElementById('projectsGrid');
-    prevButton = document.getElementById('prevButton');
-    nextButton = document.getElementById('nextButton');
-    timelinePrev = document.getElementById('timelinePrev');
-    timelineNext = document.getElementById('timelineNext');
-    timelineHintContainer = document.getElementById('timelineHintContainer');
+    // Get DOM elements with error handling
+    const elements = {
+        timelineSlider: document.getElementById('timelineSlider'),
+        timelineSection: document.getElementById('timelineSection'),
+        chapterDescription: document.getElementById('chapterDescription'),
+        projectsGrid: document.getElementById('projectsGrid'),
+        prevButton: document.getElementById('prevButton'),
+        nextButton: document.getElementById('nextButton'),
+        timelinePrev: document.getElementById('timelinePrev'),
+        timelineNext: document.getElementById('timelineNext'),
+        timelineHintContainer: document.getElementById('timelineHintContainer')
+    };
 
-    if (!timelineSlider) {
-        console.error('Timeline elements not found');
-        return;
+    // Check for critical elements
+    const criticalElements = ['timelineSlider', 'chapterDescription', 'projectsGrid'];
+    const missingElements = criticalElements.filter(key => !elements[key]);
+    
+    if (missingElements.length > 0) {
+        console.error('Critical timeline elements not found:', missingElements);
+        return false;
     }
 
+    // Assign to module variables
+    timelineSlider = elements.timelineSlider;
+    timelineSection = elements.timelineSection;
+    chapterDescription = elements.chapterDescription;
+    projectsGrid = elements.projectsGrid;
+    prevButton = elements.prevButton;
+    nextButton = elements.nextButton;
+    timelinePrev = elements.timelinePrev;
+    timelineNext = elements.timelineNext;
+    timelineHintContainer = elements.timelineHintContainer;
+
+    // Generate timeline dots
+    generateTimelineDots();
+
+    // Set initial state
+    updateTimeline();
+    renderContent();
+    
+    return true;
+}
+
+// Simplified dot generation using CSS Grid
+function generateTimelineDots() {
     // Clear existing elements
     timelineSlider.innerHTML = '';
 
-    // Create dots for each chapter
+    // Create dots for each chapter using modern approach
+    const fragment = document.createDocumentFragment();
+    
     chapters.forEach((chapter, index) => {
-        // Create dot wrapper
-        const wrapper = document.createElement('div');
-        wrapper.className = 'timeline-dot-wrapper';
-
-        // Create button
-        const button = document.createElement('button');
-        button.className = 'timeline-dot-button';
-        button.setAttribute('aria-label', `Go to ${chapter.title}`);
-        button.onclick = () => navigateToChapter(index);
-
-        // Create dot
-        const dot = document.createElement('div');
-        dot.className = 'timeline-dot';
-        dot.id = `dot-${index}`;
-
-        // Create year indicator
-        const year = document.createElement('div');
-        year.className = 'timeline-year';
-        year.id = `year-${index}`;
-        year.textContent = chapter.years;
-
-        // Create label
-        const label = document.createElement('div');
-        label.className = 'timeline-label';
-        label.id = `label-${index}`;
-        label.textContent = chapter.title;
-        // Add click handler to the label as well
-        label.onclick = (e) => {
-            e.stopPropagation(); // Prevent event bubbling
-            navigateToChapter(index);
-        };
-
-        // Assemble
-        button.appendChild(dot);
-        wrapper.appendChild(year);
-        wrapper.appendChild(button);
-        wrapper.appendChild(label);
-        timelineSlider.appendChild(wrapper);
+        const wrapper = createDotWrapper(chapter, index);
+        fragment.appendChild(wrapper);
     });
-
-    // Set initial position
-    updateTimeline();
-    renderContent();
+    
+    timelineSlider.appendChild(fragment);
 }
 
-// Update timeline position
-function updateTimeline() {
-    // Calculate transform based on active chapter
-    const dotWidth = isMobile() ? 100 : 200; // Width of each dot wrapper
-    const offset = -(activeChapter * dotWidth) + (window.innerWidth / 2) - (dotWidth / 2);
+// Factory function for creating dot wrappers
+function createDotWrapper(chapter, index) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'timeline-dot-wrapper';
+    wrapper.dataset.chapterIndex = index;
 
-    timelineSlider.style.transform = `translateX(${offset}px)`;
+    wrapper.innerHTML = `
+        <div class="timeline-year" id="year-${index}">${chapter.years}</div>
+        <button class="timeline-dot-button" aria-label="Go to ${chapter.title}">
+            <div class="timeline-dot" id="dot-${index}"></div>
+        </button>
+        <div class="timeline-label" id="label-${index}">${chapter.title}</div>
+    `;
 
-        // Update visual states
-    chapters.forEach((_, index) => {
-        const dot = document.getElementById(`dot-${index}`);
-        const label = document.getElementById(`label-${index}`);
-
-        // Remove all state classes first
-        dot.classList.remove('active', 'adjacent');
-        label.classList.remove('active', 'adjacent');
-
-        if (index === activeChapter) {
-            dot.classList.add('active');
-            label.classList.add('active');
-        } else {
-            // On mobile, add proximity classes
-            if (isMobile()) {
-                const distance = Math.abs(index - activeChapter);
-                if (distance === 1) {
-                    dot.classList.add('adjacent');
-                    label.classList.add('adjacent');
-                }
-            }
+    // Add event listeners using event delegation
+    wrapper.addEventListener('click', (e) => {
+        // Prevent double-firing and allow button/label clicks
+        if (e.target.closest('.timeline-dot-button') || e.target.closest('.timeline-label')) {
+            navigateToChapter(index);
         }
     });
 
-    // Update edge fade indicators on mobile
-    if (isMobile() && timelineSection) {
-        timelineSection.classList.toggle('has-prev', activeChapter > 0);
-        timelineSection.classList.toggle('has-next', activeChapter < chapters.length - 1);
+    return wrapper;
+}
+
+// Update timeline position - active dot centered on timeline-line
+function updateTimeline() {
+    // Get timeline wrapper and slider for updates
+    const timelineWrapper = document.querySelector('.timeline-section-wrapper');
+    const timelineSection = document.getElementById('timelineSection');
+    
+    if (!timelineWrapper || !timelineSlider || !timelineSection) return;
+    
+    // Update CSS custom property for other uses
+    timelineWrapper.style.setProperty('--timeline-active-chapter', activeChapter);
+    
+    // Calculate positioning to center active dot on timeline-line
+    const dotSpacing = window.matchMedia('(max-width: 767px)').matches ? 100 : 200;
+    const sectionWidth = timelineSection.offsetWidth;
+    const sectionCenter = sectionWidth / 2;
+    
+    // Position so the active dot (at index activeChapter) aligns with section center
+    const activeDotPosition = (activeChapter * dotSpacing) + (dotSpacing / 2);
+    const sliderOffset = sectionCenter - activeDotPosition;
+    
+    // Apply transform: translateY(-50%) for vertical centering, translateX for horizontal positioning
+    timelineSlider.style.transform = `translateY(-50%) translateX(${sliderOffset}px)`;
+    
+    // Remove all previous chapter classes
+    for (let i = 0; i < chapters.length; i++) {
+        timelineWrapper.classList.remove(`timeline-chapter-${i}`);
     }
+    
+    // Add current chapter class for CSS-based state management
+    timelineWrapper.classList.add(`timeline-chapter-${activeChapter}`);
 
     // Update all navigation buttons
     const isFirst = activeChapter === 0;
@@ -182,7 +188,7 @@ function renderContent() {
     }
 }
 
-// Navigate to chapter with animation
+// Navigate to chapter with CSS transition-based animation
 function navigateToChapter(newIndex, interactionMethod = 'click') {
     if (isTransitioning || newIndex === activeChapter) return;
 
@@ -212,60 +218,94 @@ function navigateToChapter(newIndex, interactionMethod = 'click') {
     const timelineElement = document.querySelector('.timeline-section');
     const timelinePosition = timelineElement.getBoundingClientRect().top + window.pageYOffset - 20;
 
-    // Function to perform the slide animations
+    // Function to perform the slide animations using CSS transitions
     const performSlideAnimation = () => {
-        // Animate content out
+        // Start slide out animation
         const outClass = direction === 'next' ? 'slide-out-left' : 'slide-out-right';
+        
         if (chapterDescription) {
-            chapterDescription.className = `chapter-description ${outClass}`;
+            chapterDescription.classList.add('content-transitioning-out', outClass);
         }
         if (projectsGrid) {
-            projectsGrid.className = `projects-grid ${outClass}`;
+            projectsGrid.classList.add('content-transitioning-out', outClass);
         }
 
-        // After content slides out
-        setTimeout(() => {
-            // Update active chapter
-            activeChapter = newIndex;
+        // Listen for transition end on description (primary element)
+        const handleTransitionOut = (event) => {
+            // Only proceed if this is the transform transition completing
+            if (event.propertyName === 'transform' && event.target === chapterDescription) {
+                chapterDescription.removeEventListener('transitionend', handleTransitionOut);
+                
+                // Update active chapter
+                activeChapter = newIndex;
 
-            // Update timeline position
-            updateTimeline();
+                // Update timeline position
+                updateTimeline();
 
-            // Render new content
-            renderContent();
+                // Render new content
+                renderContent();
 
-            // Animate content in
-            const inClass = direction === 'next' ? 'slide-in-right' : 'slide-in-left';
-            if (chapterDescription) {
-                chapterDescription.className = `chapter-description ${inClass}`;
-            }
-            if (projectsGrid) {
-                projectsGrid.className = `projects-grid ${inClass}`;
-            }
-
-            // Reset classes after animation
-            setTimeout(() => {
+                // Start slide in animation
+                const inClass = direction === 'next' ? 'slide-in-right' : 'slide-in-left';
+                
+                // Reset out classes and add in classes
                 if (chapterDescription) {
-                    chapterDescription.className = 'chapter-description';
+                    chapterDescription.classList.remove('content-transitioning-out', outClass);
+                    chapterDescription.classList.add('content-transitioning-in', inClass);
                 }
                 if (projectsGrid) {
-                    projectsGrid.className = 'projects-grid';
+                    projectsGrid.classList.remove('content-transitioning-out', outClass);
+                    projectsGrid.classList.add('content-transitioning-in', inClass);
                 }
-                isTransitioning = false;
-            }, 500);
-        }, 500);
+
+                // Listen for transition end on slide in
+                const handleTransitionIn = (event) => {
+                    if (event.propertyName === 'transform' && event.target === chapterDescription) {
+                        chapterDescription.removeEventListener('transitionend', handleTransitionIn);
+                        
+                        // Clean up all transition classes
+                        if (chapterDescription) {
+                            chapterDescription.classList.remove('content-transitioning-in', inClass);
+                        }
+                        if (projectsGrid) {
+                            projectsGrid.classList.remove('content-transitioning-in', inClass);
+                        }
+                        
+                        isTransitioning = false;
+                    }
+                };
+
+                if (chapterDescription) {
+                    chapterDescription.addEventListener('transitionend', handleTransitionIn);
+                }
+            }
+        };
+
+        if (chapterDescription) {
+            chapterDescription.addEventListener('transitionend', handleTransitionOut);
+        }
     };
 
-    // Check if we need to scroll first
-    if (window.pageYOffset > timelinePosition + 100) {
+    // Check if we need to scroll first using Intersection Observer data
+    if (shouldScrollToTimeline()) {
         // Scroll first, then animate
         window.scrollTo({
             top: timelinePosition,
             behavior: 'smooth'
         });
 
-        // Wait for scroll to complete (roughly), then perform animations
-        setTimeout(performSlideAnimation, 400);
+        // Wait for scroll to complete using a more reliable method
+        const scrollToComplete = () => {
+            if (timelineInView) {
+                performSlideAnimation();
+            } else {
+                // Check again in a short interval
+                setTimeout(scrollToComplete, 100);
+            }
+        };
+        
+        // Start checking after a minimum delay
+        setTimeout(scrollToComplete, 200);
     } else {
         // Already in view, just animate
         performSlideAnimation();
@@ -305,14 +345,51 @@ function initEventListeners() {
     // Touch gesture navigation
     initTouchGestures();
 
-    // Handle resize
+    // Intersection Observer for scroll effects
+    initIntersectionObserver();
+
+    // Handle resize - minimal since CSS handles responsive behavior
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
+            // CSS handles positioning, just update buttons and custom properties if needed
             updateTimeline();
-        }, 250);
+        }, 100);
     });
+}
+
+// Intersection Observer for scroll effects
+let timelineInView = false;
+
+function initIntersectionObserver() {
+    // Timeline intersection observer
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            timelineInView = entry.isIntersecting;
+            
+            // Optional: Add visual feedback when timeline comes into view
+            if (entry.isIntersecting) {
+                entry.target.classList.add('timeline-in-view');
+            } else {
+                entry.target.classList.remove('timeline-in-view');
+            }
+        });
+    }, {
+        rootMargin: '-20px 0px -20px 0px', // Slightly reduce detection area
+        threshold: 0.1
+    });
+
+    // Observe timeline section
+    const timelineElement = document.querySelector('.timeline-section');
+    if (timelineElement) {
+        timelineObserver.observe(timelineElement);
+    }
+}
+
+// Updated navigation function using Intersection Observer data
+function shouldScrollToTimeline() {
+    return !timelineInView;
 }
 
 // Touch gesture support
@@ -363,16 +440,46 @@ function initTouchGestures() {
     }
 }
 
-// Main initialization function
+// Main initialization function with better error handling
 export function initTimelineComponent() {
     console.log('Initializing timeline component...');
 
-    // Wait a bit for DOM to be ready
+    // Wait for DOM to be ready
     setTimeout(() => {
-        initTimeline();
-        initEventListeners();
-        console.log('Timeline component initialized');
+        try {
+            // Initialize timeline with error checking
+            const timelineInitialized = initTimeline();
+            
+            if (timelineInitialized) {
+                initEventListeners();
+                console.log('Timeline component initialized successfully');
+            } else {
+                console.error('Timeline component failed to initialize');
+            }
+        } catch (error) {
+            console.error('Error initializing timeline component:', error);
+        }
     }, 100);
+}
+
+// State management helpers
+function setState(updates) {
+    const oldState = { activeChapter, isTransitioning, hasNavigated };
+    
+    // Update state variables directly
+    if (updates.activeChapter !== undefined) activeChapter = updates.activeChapter;
+    if (updates.isTransitioning !== undefined) isTransitioning = updates.isTransitioning;
+    if (updates.hasNavigated !== undefined) hasNavigated = updates.hasNavigated;
+    
+    // Trigger updates if needed
+    if (updates.activeChapter !== undefined && updates.activeChapter !== oldState.activeChapter) {
+        updateTimeline();
+        renderContent();
+    }
+}
+
+function getState() {
+    return { activeChapter, isTransitioning, hasNavigated, timelineInView };
 }
 
 // Export function to scroll timeline into view
