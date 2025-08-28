@@ -257,7 +257,7 @@ p, h1, h2, h3, h4, h5, h6 {
 /* About Section - Unified Portfolio Layout */
 .about-section {
   background: var(--bg-color);
-  padding-top: var(--space-xl);
+  padding-top: var(--space-2xl);
 }
 
 .about-content-editorial {

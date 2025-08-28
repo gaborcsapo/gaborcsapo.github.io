@@ -1,22 +1,59 @@
 import { defineConfig } from 'vite'
+import { imagetools } from 'vite-imagetools'
 
 export default defineConfig({
-  // Use index.html as single entry point (Vite default)
-  // No need to specify custom input
+  // Multi-page application support
+  appType: 'mpa',
+  
 
   // Proper base for GitHub Pages
   // Use repository name if deploying to username.github.io/repo-name
   // Use '/' if deploying to custom domain or username.github.io
   base: '/', // Change this to '/' if using custom domain
+  
+  // Image optimization plugin
+  plugins: [
+    imagetools({
+      // Default optimizations for different formats
+      defaultDirectives: (url) => {
+        // Apply WebP conversion and quality optimization to JPEG/PNG images
+        if (url.searchParams.has('optimize') || 
+            /\.(jpe?g|png)$/i.test(url.pathname)) {
+          return new URLSearchParams({
+            format: 'webp',
+            quality: '80'
+          })
+        }
+        return new URLSearchParams()
+      }
+    })
+  ],
 
   build: {
+    target: 'es2020', // Required for import.meta.url support
     outDir: 'dist',
     assetsDir: 'assets',
     emptyOutDir: true,
-    // Remove custom rollupOptions - let Vite handle optimally
+    
+    // Enhanced asset organization for better caching
     rollupOptions: {
-      // Only specify input if you need multiple entry points
-      // For single-page apps, Vite auto-detects index.html
+      output: {
+        // Organize assets by type with content hashing
+        assetFileNames: (assetInfo) => {
+          const extType = assetInfo.name.split('.').at(1)
+          
+          if (/png|jpe?g|svg|gif|webp|avif/i.test(extType)) {
+            return `images/[name]-[hash][extname]`
+          }
+          if (/css/i.test(extType)) {
+            return `css/[name]-[hash][extname]`
+          }
+          if (/woff2?|eot|ttf|otf/i.test(extType)) {
+            return `fonts/[name]-[hash][extname]`
+          }
+          return `assets/[name]-[hash][extname]`
+        }
+      }
     }
   },
 
