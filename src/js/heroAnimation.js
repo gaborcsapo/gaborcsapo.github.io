@@ -12,12 +12,6 @@ const artPalettes = [
         grainTint: [255, 252, 201],
     },
     {
-        name: "Forest Mist",
-        colors: ["#7A8C68", "#99A686", "#BFB7A8", "#333333", "#59404B"],
-        bgColor: "#4B5940",
-        grainTint: [153, 166, 134],
-    },
-    {
         name: "Sunset",
         colors: ["#6B240C", "#48240D", "#E48F45", "#F5CCA0", "#6B240C", "#333333"],
         bgColor: "#994D1C",
@@ -28,6 +22,12 @@ const artPalettes = [
         colors: ["#001219", "#00734D", "#0a9396", "#94d2bd", "#333333"],
         bgColor: "#005f73",
         grainTint: [148, 210, 189],
+    },
+    {
+        name: "Forest Mist",
+        colors: ["#b2bca4", "#c6baa1", "#333333", "#7c5166"],
+        bgColor: "#718561",
+        grainTint: [153, 166, 134],
     },
     {
         name: "Golden Hour",
