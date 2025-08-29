@@ -24,12 +24,6 @@ const artPalettes = [
         grainTint: [148, 210, 189],
     },
     {
-        name: "Forest Mist",
-        colors: ["#b2bca4", "#c6baa1", "#333333", "#7c5166"],
-        bgColor: "#718561",
-        grainTint: [153, 166, 134],
-    },
-    {
         name: "Golden Hour",
         colors: ["#333333", "#E47D6A", "#787D46", "#7D4E25", "#222B1B"],
         bgColor: "#E4BA6A",
