@@ -346,7 +346,7 @@ p, h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   color: var(--interactive-color); /* Use dynamic color system */
   text-decoration: none;
-  font-size: var(--text-lg);
+  font-size: var(--text-2xl);
   font-weight: 500;
   font-optical-sizing: auto;
   position: relative;
@@ -378,7 +378,6 @@ p, h1, h2, h3, h4, h5, h6 {
   color: var(--text-color);
   max-width: 85%;
   letter-spacing: -0.01em;
-  padding-left: 10%;
 }
 
 @media (min-width: 768px) {

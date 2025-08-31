@@ -29,7 +29,7 @@ import robustnessImg from '../assets/img/robustness.png'
 export const chapters = [
   {
     id: 'university',
-    title: 'College in Abu Dhabi',
+    title: 'University in Abu Dhabi',
     years: '2014-18',
     description: 'I earned my Computer Science degree from NYU Abu Dhabi, with semesters at the New York and Shanghai campuses along the way. These years were defined by constant moving, adventure and amazing friendships. I cold-emailed professors for arctic expeditions, built apps in Ghana, and made lasting friendship on desert camping trips. It\'s hard to image who I would be without the NYUAD experience.',
     projects: [
@@ -109,7 +109,7 @@ export const chapters = [
   },
   {
     id: 'london',
-    title: 'First Job in London',
+    title: 'My First Job in London',
     years: '2018-19',
     description: 'London confirmed: I genuinely loved building things with code. Between hunting for affordable flats, learning to budget on a junior salary, and juggling side projects with a demanding day job, I discovered both my technical interests and the reality of adult life.',
     projects: [
@@ -133,7 +133,7 @@ export const chapters = [
   },
   {
     id: 'taipei',
-    title: 'COVID in Taipei',
+    title: 'Taipei during COVID',
     years: '2019-2023',
     description: 'Living in Asia and diving deep into smart home/smart city tech were always very high on my bucket list. Both felt like distant goals until I passed the Google interviews and I was free to pick any team, anywhere in the world. I chose Google Nest in Taiwan, and suddenly my bucket list became my Monday morning. The timing turned out to be perfect in ways I couldn\'t have predicted. While the world locked down during COVID, Taiwan\'s competent response meant I lived normally, just with a face mask. I went for cutting-edge tech. I stayed for the night markets, the mountain trails an MRT ride away, and a culture that restored my faith in how societies can function when people actually trust each other. ',
     projects: [
