@@ -31,7 +31,7 @@ export const chapters = [
     id: 'university',
     title: 'College in Abu Dhabi',
     years: '2014-18',
-    description: 'I earned my Computer Science degree from NYU Abu Dhabi, with semesters at the New York and Shanghai campuses along the way. These years were defined by constant moving, adventure and amazing friendships. I cold-emailed professors for arctic expeditions, built apps in Ghana, and somehow convinced Mozilla to fund my ideas about AI ethics. It\'s hard to image who I would be without the NYUAD experience.',
+    description: 'I earned my Computer Science degree from NYU Abu Dhabi, with semesters at the New York and Shanghai campuses along the way. These years were defined by constant moving, adventure and amazing friendships. I cold-emailed professors for arctic expeditions, built apps in Ghana, and made lasting friendship on desert camping trips. It\'s hard to image who I would be without the NYUAD experience.',
     projects: [
       {
         type: 'Internship',
@@ -46,7 +46,7 @@ export const chapters = [
         title: 'Data Visualization',
         company: 'CSLC',
         year: 'Fall 2016',
-        description: 'What started as hunting for a class project turned into visualizing the Arctic datasets. I approached the Center for Sea Level Change and built the first successful visualization of 300,000 oceanographic data points collected by sensor-tagged seals in Greenland\'s fjords. The D3.js visualization revealed previously hidden patterns in polar water dynamics, earning me a spot on an actual expedition to Greenland where I designed a drone-mounted LiDAR system for 3D glacier mapping.',
+        description: 'What started as hunting for a class project turned into visualizing the Arctic datasets. I approached the Center for Sea Level Change and built the first successful visualization of 300,000 oceanographic data points collected by sensor-tagged seals in Greenland\'s fjords. The D3.js visualization revealed previously hidden patterns in polar water dynamics, earning me a spot on an actual research expedition to Greenland.',
         image: greenlandImg
       },
       {
@@ -189,7 +189,7 @@ export const chapters = [
   },
   {
     id: 'sf',
-    title: 'Now in San Francisco',
+    title: 'San Francisco',
     years: '2023-now',
     description: 'I moved to San Francisco with one goal: work at the intersection of data and cutting-edge ML. What I didn\'t expect was falling in love with a city that everyone warned me about. Yes, SF is a city of extremes... On both ends of the spectrum, meaning the good parts are extraordinary. Where else can you go to an AI conference in the morning, have conversation about human connection with strangers in a community run basement space, then hit H Mart for Korean groceries for your camping trip the next day?',
     projects: [
@@ -198,7 +198,7 @@ export const chapters = [
         title: 'Google Beam',
         company: 'Google Labs',
         year: '2023–Present',
-        description: '<a href="https://beam.google" target="_blank">Beam</a> is a combination of Google\'s latest breakthroughs in AI, 3D imaging, and light field rendering, Beam brings the depth and realism of in-person meetings to remote conversations without headsets or complex setup. I architect the data flywheel for the AI research team, which involves: collection, annotation, curation, and evaluation across multiple multi-year research projects. The computer vision team depends on my infrastructure to iterate quickly and ship breakthrough features.',
+        description: '<a href="https://beam.google" target="_blank">Beam</a> is a combination of Google\'s latest breakthroughs in AI, 3D imaging, and light field rendering, Beam brings the 3 dimensional depth and realism of in-person meetings to remote conversations without headsets or complex setup. It\'s hard to explain the experience: it\'s like the holographic calling in Star Wars or you can image Beam is a window into the other person\'s room. I architect the data flywheel for the AI research team, which involves: collection, annotation, curation, and evaluation across multiple multi-year research projects. The computer vision team depends on my infrastructure to iterate quickly and ship breakthrough features.',
         image: beamImg
       },
       {

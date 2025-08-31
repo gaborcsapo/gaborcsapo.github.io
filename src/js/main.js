@@ -1,5 +1,6 @@
 // Main JavaScript module
-import { initTimelineComponent } from './timelineComponent.js';
+import { initTimelineComponent } from './newTimelineComponent.js';
+import { analytics } from './analytics.js';
 // Animation will be loaded separately since p5 needs to be in global scope
 
 // DOM Content Loaded
@@ -10,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeApp() {
   // Initialize components
   initTimelineComponent();
-  initColorPicker();
   initSmoothScrolling();
   initScrollAnimations();
   initSocialLinkTracking();
@@ -18,8 +18,8 @@ function initializeApp() {
   // Initialize animation after p5 is loaded
   loadP5Animation();
   
-  // Add Google Analytics if needed
-  initAnalytics();
+  // Initialize analytics
+  analytics.init();
 }
 
 async function loadP5Animation() {
@@ -39,11 +39,6 @@ async function loadP5Animation() {
 }
 
 
-function initColorPicker() {
-  // Color picker is now handled directly by the p5.js canvas
-  // The canvas has its own mousePressed handler in heroAnimation.js
-  // No additional setup needed here
-}
 
 function initSmoothScrolling() {
   // Handle navigation clicks
@@ -88,42 +83,15 @@ function initSocialLinkTracking() {
   
   socialLinks.forEach(link => {
     link.addEventListener('click', function(event) {
-      if (typeof gtag !== 'undefined') {
-        const linkText = this.textContent.trim();
-        const linkUrl = this.href;
-        const isExternal = linkUrl.startsWith('http') && !linkUrl.includes(window.location.hostname);
-        
-        gtag('event', 'social_link_click', {
-          event_category: 'Social Links',
-          event_label: linkText,
-          link_url: linkUrl,
-          link_type: isExternal ? 'external' : 'internal',
-          destination: linkText.toLowerCase()
-        });
-        
-        // For external links, add a small delay to ensure tracking
-        if (isExternal && event.target.target === '_blank') {
-          // No delay needed for _blank links as they open in new window
-        }
-      }
+      const linkText = this.textContent.trim();
+      const linkUrl = this.href;
+      const isExternal = linkUrl.startsWith('http') && !linkUrl.includes(window.location.hostname);
+      
+      analytics.trackSocialLinkClick(linkText, linkUrl, isExternal);
     });
   });
 }
 
-function initAnalytics() {
-  // Google Analytics is now loaded via gtag in HTML
-  if (typeof gtag !== 'undefined') {
-    console.log('Google Analytics initialized');
-    
-    // Track page view
-    gtag('event', 'page_view', {
-      page_title: document.title,
-      page_location: window.location.href
-    });
-  } else {
-    console.log('Google Analytics not available');
-  }
-}
 
 // Utility functions
 export function debounce(func, wait) {

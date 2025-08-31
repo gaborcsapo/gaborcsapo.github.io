@@ -1,0 +1,401 @@
+/* New Timeline Component - Gallery-Inspired Journey Visualization */
+/* Scroll-based interaction with responsive desktop/mobile layouts */
+
+/* =============================================================================
+   ROOT VARIABLES & CONFIGURATION
+   ============================================================================= */
+:root {
+  /* Timeline-specific color system */
+  --timeline-accent: var(--interactive-color, #799C49);
+  --timeline-accent-light: color-mix(in srgb, var(--timeline-accent) 60%, white);
+  --timeline-accent-glow: color-mix(in srgb, var(--timeline-accent) 20%, transparent);
+
+  /* Timeline-specific dimensions */
+  --timeline-sidebar-width: 200px;
+  --timeline-mobile-header-height: 4px;
+  --timeline-sticky-offset: 60px;
+
+
+}
+
+/* =============================================================================
+   RESPONSIVE UTILITIES
+   ============================================================================= */
+.desktop-only {
+  display: none;
+}
+
+.mobile-only {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .desktop-only {
+    display: block;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+}
+
+/* =============================================================================
+   MAIN TIMELINE CONTAINER - Match about section alignment
+   ============================================================================= */
+.new-timeline-wrapper {
+  position: relative;
+  background: var(--bg-color);
+  padding: var(--space-2xl) 0 0 0;
+}
+
+.timeline-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+@media (min-width: 1024px) {
+  .timeline-container {
+    /* Desktop: Single column layout */
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
+
+
+/* =============================================================================
+   CHAPTER SECTIONS
+   ============================================================================= */
+.timeline-chapter {
+  position: relative;
+  margin-bottom: var(--space-2xl);
+  padding: 0 var(--space-sm);
+  contain: layout style;
+}
+
+@media (min-width: 768px) {
+  .timeline-chapter {
+    padding: 0 var(--space-md);
+  }
+}
+
+.timeline-chapter:last-child {
+  margin-bottom: 0;
+}
+
+/* Sticky Chapter Headers */
+.chapter-header {
+  position: sticky;
+  top: 0;
+  background: var(--bg-color);
+  padding: var(--space-md) 0;
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 15;
+  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--bg-color) 95%, transparent);
+}
+
+.chapter-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-color);
+  line-height: 1.2;
+  margin: 0 0 var(--space-xs) 0;
+}
+
+@media (min-width: 1024px) {
+  .chapter-title {
+    font-size: var(--text-3xl);
+  }
+}
+
+.chapter-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.chapter-years {
+  font-size: var(--text-sm);
+  color: var(--text-light);
+  font-weight: var(--weight-medium);
+}
+
+/* Chapter Description */
+.chapter-description {
+  margin-bottom: var(--space-lg);
+}
+
+.chapter-description p {
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--text-color);
+  opacity: 0.5;
+  margin: 0;
+}
+
+/* =============================================================================
+   PROJECT CARDS - MUSEUM AESTHETIC
+   ============================================================================= */
+/* Projects Container - Simplified */
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .projects-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg) var(--space-md);
+  }
+}
+
+.project-card {
+  position: relative;
+  background: transparent;
+  /* Remove borders, padding, animations - back to original minimal design */
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+  transition: none;
+
+  /* CSS containment for performance */
+  contain: layout style paint;
+
+  /* Minimal spacing */
+  padding: 0;
+  width: 100%;
+}
+
+/* Remove all hover effects */
+
+/* Project Image - Keep rounded edges but minimal styling */
+.project-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio like original */
+  background: #fafafa;
+  overflow: hidden;
+  border-radius: var(--border-radius); /* Keep rounded edges as requested */
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.project-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #fafafa;
+  filter: contrast(0.92) brightness(1.01);
+  /* Remove hover animations */
+}
+
+/* Project Content - Simplified */
+.project-content {
+  padding: var(--space-sm) 0;
+  position: relative;
+}
+
+
+.project-title {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  color: var(--text-color);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+/* Project Metadata - Simplified */
+.project-metadata {
+  text-align: center;
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  color: var(--text-color);
+  opacity: 0.6;
+  letter-spacing: 0.02em;
+}
+
+.project-company {
+  font-weight: var(--weight-medium);
+  color: var(--text-color);
+}
+
+.project-year {
+  font-weight: var(--weight-medium);
+}
+
+.metadata-divider {
+  margin: 0 var(--space-xs);
+  color: var(--text-color);
+  opacity: 0.4;
+  font-weight: 300;
+}
+
+.project-type {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: capitalize;
+  letter-spacing: 0.01em;
+  color: var(--text-light);
+}
+
+/* Project Description - Simplified */
+.project-description {
+  margin: 0;
+}
+
+.project-description p {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--text-color);
+  line-height: 1.65;
+  font-weight: 400;
+  opacity: 0.9;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+/* Preserve link styling in project descriptions */
+.project-description a {
+  color: var(--timeline-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--timeline-accent-light);
+  text-underline-offset: 2px;
+  transition: all var(--transition-fast);
+}
+
+.project-description a:hover {
+  text-decoration-color: var(--timeline-accent);
+  color: color-mix(in srgb, var(--timeline-accent) 80%, black);
+}
+
+/* =============================================================================
+   SCROLL TO TOP BUTTON
+   ============================================================================= */
+.scroll-to-top {
+  position: fixed;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  width: 48px;
+  height: 48px;
+  background: var(--timeline-accent);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--timeline-accent) 25%, transparent);
+  transition: all var(--transition);
+  z-index: 50;
+
+  /* Initially hidden */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px color-mix(in srgb, var(--timeline-accent) 35%, transparent);
+}
+
+.scroll-to-top svg {
+  width: 20px;
+  height: 20px;
+  color: white;
+}
+
+/* =============================================================================
+   ACCESSIBILITY & MOTION PREFERENCES
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .scroll-to-top {
+    transform: none !important;
+  }
+
+  .project-card:hover {
+    transform: none !important;
+  }
+
+  .project-image {
+    transform: none !important;
+  }
+
+  .project-card:hover .project-image {
+    transform: none !important;
+  }
+}
+
+/* Focus indicators for keyboard navigation */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-to-top:focus {
+    outline: 2px solid var(--timeline-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* =============================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================================================= */
+/* Use hardware acceleration for frequently animated elements */
+.project-card,
+.scroll-to-top {
+  will-change: transform;
+}
+
+/* Remove will-change when not needed */
+.project-card:not(:hover),
+.scroll-to-top:not(.visible) {
+  will-change: auto;
+}
+
+/* Optimize rendering with CSS containment */
+.project-card {
+  contain: layout style paint;
+}
+
+.timeline-chapter {
+  contain: layout style;
+}
+
+/* =============================================================================
+   DARK MODE SUPPORT (if implemented in future)
+   ============================================================================= */
+@media (prefers-color-scheme: dark) {
+  /* Dark mode styles would go here if implementing dark mode */
+}

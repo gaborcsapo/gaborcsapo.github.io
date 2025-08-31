@@ -2,6 +2,7 @@
 // Extracted and adapted from hero.html component
 
 import { SmartResizeHandler } from './smartResizeHandler.js';
+import { analytics } from './analytics.js';
 
 // Enhanced color palette system with artistic themes
 const artPalettes = [
@@ -661,16 +662,13 @@ export function initAnimation() {
                 currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
                 currentPalette = artPalettes[currentPaletteIndex];
 
-                // Track color switching with Google Analytics
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'color_switch', {
-                        event_category: 'Hero Animation',
-                        event_label: currentPalette.name,
-                        palette_index: currentPaletteIndex,
-                        previous_palette: artPalettes[(currentPaletteIndex - 1 + artPalettes.length) % artPalettes.length].name,
-                        interaction_method: 'click'
-                    });
-                }
+                // Track color switching with analytics
+                analytics.trackColorSwitch(
+                    currentPalette.name,
+                    currentPaletteIndex,
+                    artPalettes[(currentPaletteIndex - 1 + artPalettes.length) % artPalettes.length].name,
+                    'click'
+                );
                 // Don't change bgColor or circle colors immediately - wait for texture to be ready
 
                 // Generate new grain texture with updated palette
@@ -830,16 +828,13 @@ export function initAnimation() {
             currentPaletteIndex = (currentPaletteIndex + 1) % artPalettes.length;
             currentPalette = artPalettes[currentPaletteIndex];
 
-            // Track programmatic color switching with Google Analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'color_switch', {
-                    event_category: 'Hero Animation',
-                    event_label: currentPalette.name,
-                    palette_index: currentPaletteIndex,
-                    previous_palette: artPalettes[(currentPaletteIndex - 1 + artPalettes.length) % artPalettes.length].name,
-                    interaction_method: 'programmatic'
-                });
-            }
+            // Track programmatic color switching with analytics
+            analytics.trackColorSwitch(
+                currentPalette.name,
+                currentPaletteIndex,
+                artPalettes[(currentPaletteIndex - 1 + artPalettes.length) % artPalettes.length].name,
+                'programmatic'
+            );
             // Don't change bgColor or circle colors immediately - wait for texture to be ready
 
             // Generate new grain texture with updated palette
