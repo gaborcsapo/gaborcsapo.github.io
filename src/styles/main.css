@@ -254,9 +254,13 @@ p, h1, h2, h3, h4, h5, h6 {
 /* About Section - Simplified Unified System */
 .about-section {
   background: var(--bg-color);
-  padding: var(--space-4xl) 0 var(--space-2xl) 0;
+  padding: var(--space-4xl) 0 var(--space-xl) 0;
 }
 
+.tldr-note {
+  padding-top: var(--space-md);
+  padding-right: var(--space-md);
+}
 
 /* Typography Hierarchy - Editorial Style */
 .intro-large {
